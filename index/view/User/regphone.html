@@ -1,0 +1,68 @@
+﻿{extend name="public/reg" /}
+{block name="regcontent"}
+	<div class="main_tab_line">
+        <a class="W_f22 W_Yahei cur" href="javascript:void(0);">个人注册</a>  
+    </div>
+            <div class="W_reg_info clearfix" id="pl_account_regmobile">
+                <div class="W_reg_form">
+             <div class="info_list clearfix" node-type="mobilesea_wrapper">
+                        <div class="tit"><span class="mobile_ico"></span><i>*</i>手机：</div>
+                        <div class="inp">
+                            <div class="flag_tel clearfix">
+                                <!-- 获得焦点时增加  -->
+                                <input type="hidden" name="zone" value="" node-type="mobilesea_selectvalue"/>
+                                <div class="W_input foreign_tel"><span class="tel_forenum" node-type="mobilesea_txt">+86</span>
+                                <input type="text" node-type="newmobilesea" action-data="text=请输入您的手机号码" action-type="text_copy" name="username" class="tel_num" value="" autocomplete="off" >
+                                </div>
+                            </div>
+                            <div class="attachment">或使用<a node-type="link_regemail" href="{:url('regmail')}">邮箱注册</a></div>
+                        </div>
+                        <div class="tips" node-type="mobilesea_tip"></div>
+                    </div>
+                                        <div class="info_list clearfix">
+                        <div class="tit"><i>*</i>设置密码：</div>
+                        <div class="inp">
+                            <input node-type="password" action-data="" action-type="text_copy" name="passwd" type="password" class="W_input" value="" />
+                        </div>
+                        <div node-type="password_tip" class="tips"></div>
+                    </div>
+
+                                        <input type="hidden" name="9c135ab275a10e31fdc2d6d9c391ac10" value="362a46e7a3d434e470a4b8b4fb70b04c">
+                                        <input type="hidden" name="bc743b2a3e970e7090fe2c34a1a84058" value="761ed2be5a295116d8d5dd0d8c342ae1">
+                                        <input type="hidden" name="b64581f1bd8308cd363334dc77fa07c3" value="d3a9090a0fef6c4bc9830388f07c0d06">
+                                        <input type="hidden" name="81b90269d55db957fcb6951c02177ffb" value="da46fe5e25cd01b81c353a18d3529b11">
+                                        <input type="hidden" name="26badb7f59ba0770310d334c57389d59" value="45f161a07415bab8dcfca4aa12f623a4">
+                                        <input type="hidden" name="b8a3cdbdde5ac2fb1c301883d55c25d6" value="4ce797a3143527cf936ddb60cc89e518">
+                                        <input type="hidden" name="97507e152f9ac84cff45236b92b3c7ab" value="21e4331f3e6d3b13aeb9f6e7be1a38b1">
+                                        <input type="hidden" name="362a46e7a3d434e470a4b8b4fb70b04c" value="4a843cc0ce1e9069683da4ca751b9536">
+                                        <input type="hidden" name="761ed2be5a295116d8d5dd0d8c342ae1" value="b18b310f8bd55cfd5b065d21aaa74121">
+                                        <input type="hidden" name="d3a9090a0fef6c4bc9830388f07c0d06" value="117e8a77e5fcbb94acfec310f4930ebd">
+                                        <input type="hidden" name="da46fe5e25cd01b81c353a18d3529b11" value="60c7cf3c3bc90b4505c8c06791308b5c">
+                                        <input type="hidden" name="45f161a07415bab8dcfca4aa12f623a4" value="0ee66159fac633512de12c9f731e8a53">
+                                        <input type="hidden" name="inviteCode" value=""/>
+                    <input type="hidden" name="from" value=""/>
+                    <input type="hidden" name="callback" value=""/>
+                    <input type="hidden" name="mcode" value=""/>
+                    <input type="hidden" name="mbk" value=""/>
+                    <input type="hidden" name="regtime" value="1508318432"/>
+                    <input type="hidden" name="salttime" value="2ba6158d4d320c7d47f9db067f42ea21"/>
+                    <input type="hidden" name="sinaid" value="ae7847aba659667401f2be4b323df357"/>
+                    <input type="hidden" name="page" value="mobile"/>
+                    <input type="hidden" name="invitesource" value="0"/>
+                    <input type="hidden" name="lang" value="zh-cn"/>
+                    <input type="hidden" name="backurl" value=""/>
+                    <input type="hidden" name="appsrc" value=""/>
+                    <input type="hidden" name="showlogo" value=""/>
+                    <input type="hidden" name="c" value=""/>
+                    <div node-type="activation_wrapper"  class="info_list clearfix">
+                        <div class="tit"><i>*</i>激活码：</div>
+                        <div class="inp active">
+                            <a href="javascript:void(0);" class="W_btn_e" action-type="btn_sms_activation" node-type="btn_sms_activation" action-data="type=sendsms"><span>免费获取短信激活码</span></a>
+                            <a href="javascript:void(0);" class="W_btn_e_disable" style="display:none" node-type="btn_sms_activation_disable"><span><em node-type="sms_timer">180</em>秒后重新获取短信</span></a>
+                            <input node-type="activation" name="pincode" type="text" class="W_input" value="" maxlength="6" />
+                            <div class="attachment"><a href="http://help.weibo.com/faq/q/2375/20136#20136" target="_blank">收不到验证码？</a></div>
+                        </div>
+                        <div class="tips" node-type="activation_tip">
+                        </div>
+                    </div>
+							{/block}	

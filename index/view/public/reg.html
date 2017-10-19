@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--注册登录header-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/frame.css" type="text/css" rel="stylesheet" />
+<link href="__CSS__/layer_login_v5.css" type="text/css" rel="stylesheet" />
+<link href="__CSS__/register.css" type="text/css" rel="stylesheet" />
+<link href="__BOOT__/css/bootstrap.css" type="text/css" rel="stylesheet" />
+<link href="__CSS__/register01.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+var $CONFIG = {};
+$CONFIG['lang'] = "zh-cn";
+</script>
+<!--/注册登录header-->
+<title>微博注册</title>
+</head>
+<body class="B_register B_reg_email ">
+
+{block name="reghead"}<div class="W_nologin">
+		<script type="text/javascript">
+$CONFIG.key = 'BD325CE52FC6BA090AC0C7A2039236587F99C30FA518F601F2AD33019514EE5A4340A964853E1BDF5374AB4AC22F5CFF3288E5DB94E6752B4999972DF4E23DACACAE4E4DCFB6CBAE256F1B19C4BA892D54C7A3E068F93AB47EC50635556FC223F02CB1F520631E2F03E5509B6C1E24DFB7962BCD6DC74159BF0E5AFC03D9A00D';
+$CONFIG.key_plus = '10001';
+$CONFIG.province = '11';
+$CONFIG.city = '';
+$CONFIG.closeSendsms = '';
+$CONFIG.page = 'email';
+</script>
+	    <div class="W_header_line"></div>
+    	<div class="W_reg_header W_logo_wave">
+        	<div class="W_nologin_logo_big"></div>
+        </div>
+        <div class="W_nologin_main main_radius_bg">
+    {/block}
+    {block name="regcontent"}
+   		 da
+    {/block}
+    {block name="regtop"}
+    	<div class="info_submit clearfix">
+    <div class="inp">
+       <button class="btn btn-default">立即注册</button>
+    </div>
+</form>
+</div>
+                    <div class="info_list clearfix">
+                        <div class="inp verify">
+                        	<p class="agreement"><a href="/signup/v5/protocol" target="_blank">微博服务使用协议</a></p>
+                        	<p class="agreement"><a href="/signup/v5/privacy" target="_blank">微博个人信息保护政策</a></p>
+                            <p class="agreement"><a href="http://news.sina.com.cn/c/2012-12-29/051425921660.shtml" target="_blank">全国人大常委会关于加强网络信息保护的决定</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="W_reg_sidebar">
+                	<p class="p1 line">已有帐号，<a href="//weibo.com/login.php">直接登录»</a></p>
+                    <p>微博注册帮助</p>
+                    <div class="reg_help">
+                    	<ul class="help_list">
+                        	<li><i>1</i><a target="_blank" href="http://help.weibo.com/faq/q/76/15955#15955">微博注册操作指南</a></li>
+                            <li><i>2</i><a target="_blank" href="http://help.weibo.com/faq/q/200/13091#13091">手机注册时提示手机号码已被绑定怎么办?</a></li>
+                            <li><i>3</i><a target="_blank" href="http://help.weibo.com/faq/q/200/276#276">注册微博时昵称显示“已经被注册”如何处理?</a></li>
+                            <li><i>4</i><a target="_blank" href="http://help.weibo.com/faq/q/200/13043#13043">注册时提示"你所使用的IP地址异常",该怎么办?</a></li>
+                        </ul>
+                        <a target="_blank" href="http://help.weibo.com/faq/q/201" class="help_more">更多帮助»</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/block}
+    {block name="foot"}
+		<!--注册登录footer-->
+        <div class="nologin_footer clearfix">
+	<div class="left_link">
+		<i class="footer_logo"></i>
+		<em class="company_name">北京微梦创科网络技术有限公司</em>
+        <a href="//weibo.com/aj/static/jww.html">京网文[2011]0398-130号</a>
+        <a href="http://www.miibeian.gov.cn">京ICP备12002058号</a>
+	</div>
+	<div class="copy">
+		<span>Copyright © 2009-2017 WEIBO</span>
+				<select id="pl_content_changeLanguage" action-data="login=0">
+			<option selected="selected" value="zh-cn">中文(简体)</option>
+			<option  value="zh-tw">中文(台湾)</option>
+			<option  value="zh-hk">中文(香港)</option>
+			<option  value="en-us">English</option>
+		</select>
+			</div>
+
+</div>
+
+<!-- SUDA_CODE_START -->
+<noscript> <img width="0" height="0" src="style/images/a.gif" border="0" alt="" /> </noscript>
+<script type='text/javascript' charset="utf-8">
+	$("sub").click(function(){
+	 $.post("{:url('checkreg')}", {code:$('input[name=code]').val()}, function(data){
+	 	return true;
+	} , 'json');
+	return false;
+})
+	$("#email_tip").focus(function(){
+		$("#email_tip").val('');
+	});
+	$("#email_tip").blur(function(){
+		$("#email_tip").val('');
+	});
+(function() {
+    var doc = document,
+        wa = doc.createElement('script'),
+        s = doc.getElementsByTagName('script')[0];
+    wa.type = 'text/javascript';
+    wa.charset = 'utf-8';
+    wa.async = true;
+    wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
+    s.parentNode.insertBefore(wa, s);
+})();
+</script>
+<!-- SUDA_CODE_END -->        <!--/注册登录footer-->
+    </div>
+    <img src="/signup/v5/arrivelog?page=email&invite=" style="height:1px;width:1px;filter:alpha(Opacity=0);-moz-opacity:0;opacity:0;" />
+    {/block}
+</body>
+<script src="__JS__/registerSSO.js" type="text/javascript" ></script>
+<script src="__JS__/email.js" type="text/javascript" ></script>
+</html>
