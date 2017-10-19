@@ -1,26 +1,22 @@
 ﻿	{extend name="public/reg" /}
 	{block name="regcontent"}
-                <div class="main_tab_line">
-					<a class="W_f22 W_Yahei cur" href="javascript:void(0);">个人注册</a>
-				</div>
-				<form action="{:url('checkreg')}" method="post">
-			    <div class="W_reg_info clearfix" id="pl_account_regmail">
-					<div class="W_reg_form">
-					
-           		        <div class="info_list clearfix">
-							<div class="tit"><span class="mail_ico"></span><i>*</i>邮箱：</div>
-							<div class="inp">
-								<input node-type="email"  action-type="text_copy" id="email_tip" name="username" type="text" class="W_input" value="请输入您的常用邮箱" autocomplete="off" />
-								<div class="attachment">或使用<a href="{:url('regphone')}">手机注册</a></div>
-							</div>
-							<div id="email_tip1" class="tips">请输入您的常用邮箱</div>
-						</div>
-                    <div class="info_list clearfix">
+	
+			                        <div class="W_reg_info clearfix" id="pl_account_regmail">
+            	<div class="W_reg_form">
+                        		                	                	<div class="info_list clearfix">
+                    	<div class="tit"><span class="mail_ico"></span><i>*</i>邮箱：</div>
+                    	<div class="inp">
+                    		<input node-type="email" action-data="text=请输入您的常用邮箱" action-type="text_copy" name="username" type="text" class="W_input" value="" autocomplete="off" />
+                        	<div class="attachment">或使用<a href="{:url('regphone')}">手机注册</a></div>
+                    	</div>
+                    	<div node-type="email_tip" class="tips"></div>
+                    </div>
+                                        <div class="info_list clearfix">
                     	<div class="tit"><i>*</i>设置密码：</div>
                         <div class="inp">
-                        	<input node-type="password" id="password_tip" action-type="text_copy" name="passwd" type="password" class="W_input" value="" />
+                        	<input node-type="password" action-data="" action-type="text_copy" name="passwd" type="password" class="W_input" value="" />
                         </div>
-                        <div id="password_tip1" class="tips">请输入您的密码</div>
+                        <div node-type="password_tip" class="tips"></div>
                     </div>
                     <input type="hidden" name="from" value=""/>
                     <input type="hidden" name="callback" value=""/>
@@ -39,11 +35,10 @@
                     <div class="info_list clearfix verify_bar">
                     	<div class="tit"><i>*</i>验证码：</div>
                     	<div class="inp">
-                        	<input node-type="verifycodereg" name="code" type="text" class="W_input" id="verifycodereg_tip" value="" maxlength="4" />
-							<img src="{:captcha_src()}" onclick="this.src = this.src" alt="captcha" />
+                        	<input node-type="verifycodereg" name="pincode" type="text" class="W_input" value="" maxlength="4" />
+                            <img src="{:captcha_src()}" id="img" onclick="this.src = this.src" alt="captcha" />	
                         </div>
-                        <div class="tips verify_code_tip" id="verifycodereg1_tip1">
+                        <div class="tips verify_code_tip" node-type="verifycodereg_tip">
                         </div>
-                    </div>                    
-                    
+                    </div>                         
 		{/block}			
