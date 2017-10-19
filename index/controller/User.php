@@ -18,7 +18,7 @@ class User extends Controller
 	//检查验证码
 	public function checkreg()
 	{
-		爱仕达多
+		
 		$arr = $this->request->param('code');
 		$validate = new Validate([
 			'captcha|验证码'=>'require|captcha'

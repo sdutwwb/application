@@ -9,6 +9,6 @@ class Index extends Controller
 {
 	public function index()
 	{
-		$this->success('sad', 'user/regmail');
+		return $this->fetch();
 	}
 }
