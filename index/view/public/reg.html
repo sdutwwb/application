@@ -29,20 +29,22 @@ $CONFIG.page = 'email';
 </script>
 	    <div class="W_header_line"></div>
     	<div class="W_reg_header W_logo_wave">
-        	<div class="W_nologin_logo_big"></div>
         </div>
         <div class="W_nologin_main main_radius_bg">
+            <div class="main_tab_line">
+                    <a class="W_f22 W_Yahei cur" href="javascript:void(0);">个人注册</a>
+            </div>
     {/block}
     {block name="regcontent"}
    		 da
     {/block}
     {block name="regtop"}
-    	<div class="info_submit clearfix">
+<div class="info_submit clearfix">
     <div class="inp">
-       <button class="btn btn-default">立即注册</button>
+        <button action-type="btn_submit" class="W_btn_big btn btn-default" suda-uatrack="key=tblog_register_page&value=register_now_button" href="javascript:void(0);" refake-type="submit" node-type="btn_submit">立即注册</button>
     </div>
-</form>
 </div>
+</form>
                     <div class="info_list clearfix">
                         <div class="inp verify">
                         	<p class="agreement"><a href="/signup/v5/protocol" target="_blank">微博服务使用协议</a></p>
@@ -91,17 +93,9 @@ $CONFIG.page = 'email';
 <!-- SUDA_CODE_START -->
 <noscript> <img width="0" height="0" src="style/images/a.gif" border="0" alt="" /> </noscript>
 <script type='text/javascript' charset="utf-8">
-	$("sub").click(function(){
-	 $.post("{:url('checkreg')}", {code:$('input[name=code]').val()}, function(data){
-	 	return true;
-	} , 'json');
-	return false;
-})
-	$("#email_tip").focus(function(){
-		$("#email_tip").val('');
-	});
-	$("#email_tip").blur(function(){
-		$("#email_tip").val('');
+		/*$.post("{:url('checkreg')}", {code:$('input[name=email]').val()}, function(data){
+        
+    } , 'json');*/
 	});
 (function() {
     var doc = document,
@@ -121,4 +115,5 @@ $CONFIG.page = 'email';
 </body>
 <script src="__JS__/registerSSO.js" type="text/javascript" ></script>
 <script src="__JS__/email.js" type="text/javascript" ></script>
+<script src="__JS__/mobile.js" type="text/javascript" ></script>
 </html>
