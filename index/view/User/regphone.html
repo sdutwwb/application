@@ -56,3 +56,37 @@
                         </div>
                     </div>
 {/block}
+{block name="boots"}
+<script type='text/javascript' charset="utf-8">
+	
+(function() {
+    var doc = document,
+        wa = doc.createElement('script'),
+        s = doc.getElementsByTagName('script')[0];
+    wa.type = 'text/javascript';
+    wa.charset = 'utf-8';
+    wa.async = true;
+    wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
+    s.parentNode.insertBefore(wa, s);
+})();
+$("#username").blur(function(){
+        if ($("#username").val() == '') {
+            $('#id_1').text('亲，邮箱不能为空哦!').css('color', '#E64141');
+        } else {
+            $.post("{:url('checkemail')}", {email:$("#username").val()}, function(data){
+                if (data.code==0) {
+                    $('#id_1').text(data.message).css('color', '#218781');
+                } else {
+                    $('#id_1').text(data.message).css('color', '#E64141');
+                }
+            } , 'json');
+        }
+       
+        // $.post("{:url('info')}", {cap:$('input[name=cap]').val()}, function(data){
+        //  console.log(data);
+        // } , 'json');
+        //return false;
+    })
+</script>
+<!-- SUDA_CODE_END -->        <!--/注册登录footer-->
+{/block}
