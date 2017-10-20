@@ -1,8 +1,8 @@
 ﻿	{extend name="public/reg" /}
 	{block name="regcontent"}
+	<form action="{:url('checkreg')}" onsubmit="return demo();">
 		<div class="W_reg_info clearfix" id="pl_account_regmail">
             <div class="W_reg_form">
-			<form action="{:url('checkreg')}" method="post">
                 <div class="info_list clearfix">
                     <div class="tit"><span class="mail_ico"></span><i>*</i>邮箱：</div>
 					
@@ -24,8 +24,8 @@
                     <div class="tit"><i>*</i>验证码：</div>
                     <div class="inp">
                         <input node-type="verifycodereg" name="code" id="code" type="text" class="W_input" value="" maxlength="4" />
-                        <img src="{:captcha_src()}" id="img" onclick="this.src = this.src" alt="captcha" />	
+                        <img src="{:captcha_src()}" id="img" onclick="this.src = this.src" style="margin-right:20px" alt="captcha" />	
+						<span id="id_2" ></span>
                     </div>
-                <div class="tips verify_code_tip" node-type="verifycodereg_tip"></div>
                 </div>                         
 		{/block}			

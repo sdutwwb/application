@@ -56,7 +56,8 @@ class User extends Controller
 	//插入数据
 	public function checkreg()
 	{
-
+		$this->success('注册成功', 'index/index');
+		//dump($this->request->param());
 	}
 	public function regphone()
 	{
