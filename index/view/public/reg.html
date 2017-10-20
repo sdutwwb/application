@@ -41,10 +41,11 @@ $CONFIG.page = 'email';
     {block name="regtop"}
 <div class="info_submit clearfix">
     <div class="inp">
-        <button action-type="btn_submit" class="W_btn_big btn btn-default" suda-uatrack="key=tblog_register_page&value=register_now_button" href="javascript:void(0);" refake-type="submit" node-type="btn_submit">立即注册</button>
+        <button  class="W_btn_big btn btn-default" node-type="btn_submit">立即注册</button>
     </div>
 </div>
 </form>
+
                     <div class="info_list clearfix">
                         <div class="inp verify">
                         	<p class="agreement"><a href="/signup/v5/protocol" target="_blank">微博服务使用协议</a></p>
@@ -93,10 +94,7 @@ $CONFIG.page = 'email';
 <!-- SUDA_CODE_START -->
 <noscript> <img width="0" height="0" src="style/images/a.gif" border="0" alt="" /> </noscript>
 <script type='text/javascript' charset="utf-8">
-		/*$.post("{:url('checkreg')}", {code:$('input[name=email]').val()}, function(data){
-        
-    } , 'json');*/
-	});
+	
 (function() {
     var doc = document,
         wa = doc.createElement('script'),
@@ -107,10 +105,39 @@ $CONFIG.page = 'email';
     wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
     s.parentNode.insertBefore(wa, s);
 })();
+$("#email").blur(function(){
+        if ($("#email").val() == '') {
+            $('#id_1').text('亲，邮箱不能为空哦').css('color', '#E64141');
+            return false;
+        } else {
+            $.post("{:url('checkemail')}", {email:$("#email").val()}, function(data){
+                if (data.code==0) {
+                    $('#id_1').text(data.message).css('color', '#808080');
+                } else {
+                    $('#id_1').text(data.message).css('color', '#E64141');
+                    return false;
+                }
+            } , 'json');
+        }
+    })
+$("#code").blur(function(){
+        if ($("#code").val() == '') {
+            $('#id_1').text('亲，验证码不能为空哦').css('color', '#E64141');
+            return false;
+        } else {
+            $.post("{:url('checkecode')}", {code:$("#code").val()}, function(data){
+                if (data.code==0) {
+                    $('#id_1').text(data.message).css('color', '#808080');
+                } else {
+                    $('#id_1').text(data.message).css('color', '#E64141');
+                    return false;
+                }
+            } , 'json');
+        }
+    })
 </script>
 <!-- SUDA_CODE_END -->        <!--/注册登录footer-->
     </div>
-    <img src="/signup/v5/arrivelog?page=email&invite=" style="height:1px;width:1px;filter:alpha(Opacity=0);-moz-opacity:0;opacity:0;" />
     {/block}
 </body>
 <script src="__JS__/registerSSO.js" type="text/javascript" ></script>
