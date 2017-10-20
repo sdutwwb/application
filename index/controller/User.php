@@ -4,6 +4,7 @@ namespace app\index\controller;
 use  \think\Controller;
 use app\index\model\User as UserModel;
 use \think\Validate;
+use \think\Session;
 class User extends Controller
 {
 	protected $user;
@@ -69,11 +70,14 @@ class User extends Controller
 	public function checkpricode()
 	{
 		$pricode = $this->request->param('pricode');
-		dump($pricode);
-		if (!$) {
-			echo json_encode(['code'=>3 , 'message' => '亲，验证码错了哟']);
+		if (Session::has('yzm')) {
+			if (Session::get('yzm') == $pricode) {
+				echo json_encode(['code'=>0 , 'message' => '快点点击注册吧']);
+			} else {
+				echo json_encode(['code'=>3 , 'message' => '亲，验证码错了哟']);
+			}
 		} else {
-			echo json_encode(['code'=>0 , 'message' => '快点点击注册吧']);
+			echo json_encode(['code'=>1 , 'message' => '还没点击获取手机验证码按钮哦']);
 		}
 	}
 	//插入数据
