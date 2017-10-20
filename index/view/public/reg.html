@@ -32,7 +32,7 @@ $CONFIG.page = 'email';
         </div>
         <div class="W_nologin_main main_radius_bg">
             <div class="main_tab_line">
-                    <a class="W_f22 W_Yahei cur" href="javascript:void(0);">个人注册</a>
+                    <a class="W_f22 W_Yahei cur" href="javascript:void(0);" id="submit">个人注册</a>
             </div>
     {/block}
     {block name="regcontent"}
@@ -41,7 +41,7 @@ $CONFIG.page = 'email';
     {block name="regtop"}
 <div class="info_submit clearfix">
     <div class="inp">
-        <button  class="W_btn_big btn btn-default" node-type="btn_submit">立即注册</button>
+        <button  class="W_btn_big btn btn-default" id="submit_1" node-type="btn_submit">立即注册</button>
     </div>
 </div>
 </form>
@@ -94,47 +94,105 @@ $CONFIG.page = 'email';
 <!-- SUDA_CODE_START -->
 <noscript> <img width="0" height="0" src="style/images/a.gif" border="0" alt="" /> </noscript>
 <script type='text/javascript' charset="utf-8">
-	
-(function() {
-    var doc = document,
-        wa = doc.createElement('script'),
-        s = doc.getElementsByTagName('script')[0];
-    wa.type = 'text/javascript';
-    wa.charset = 'utf-8';
-    wa.async = true;
-    wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
-    s.parentNode.insertBefore(wa, s);
-})();
-$("#email").blur(function(){
+	var checkAll = [0, 0];
+    (function() {
+        var doc = document,
+            wa = doc.createElement('script'),
+            s = doc.getElementsByTagName('script')[0];
+        wa.type = 'text/javascript';
+        wa.charset = 'utf-8';
+        wa.async = true;
+        wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
+        s.parentNode.insertBefore(wa, s);
+    })();
+    $("#get").click(function(){
+        var phone = $("#phone").val();
+        $.post('{:url('ucpaas')}',{phone:phone},
+            function(obj){
+            alert(obj.send);
+            },'json');
+        });
+    $("#email").blur(function(){
         if ($("#email").val() == '') {
             $('#id_1').text('亲，邮箱不能为空哦').css('color', '#E64141');
-            return false;
+            checkAll[0] = 0;
         } else {
             $.post("{:url('checkemail')}", {email:$("#email").val()}, function(data){
                 if (data.code==0) {
                     $('#id_1').text(data.message).css('color', '#808080');
+                    checkAll[0] = $("#email").val();
                 } else {
                     $('#id_1').text(data.message).css('color', '#E64141');
-                    return false;
+                   checkAll[0] = 0;
                 }
             } , 'json');
         }
     })
-$("#code").blur(function(){
-        if ($("#code").val() == '') {
-            $('#id_1').text('亲，验证码不能为空哦').css('color', '#E64141');
-            return false;
+    $("#phone").blur(function(){
+        if ($("#phone").val() == '') {
+            $('#id_11').text('亲，手机号不能为空哦').css('color', '#E64141');
+            checkAll[0] = 0;
         } else {
-            $.post("{:url('checkecode')}", {code:$("#code").val()}, function(data){
+            if(!(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/.test($("#phone").val()))) {
+                $('#id_11').text('亲，手机号格式不正确哦').css('color', '#E64141');
+                 checkAll[0] = 0;
+            } else {
+                $.post("{:url('checkphone')}", {phone:$("#phone").val()}, function(data){
+                    if (data.code==0) {
+                        $('#id_11').text(data.message).css('color', '#808080');
+                        checkAll[0] = $("#phone").val();
+                    } else {
+                        $('#id_11').text(data.message).css('color', '#E64141');
+                        checkAll[0] = 0;
+                    }
+                } , 'json');
+            }
+        }
+    })
+    $("#code").blur(function(){
+        if ($("#code").val() == '') {
+            $('#id_2').text('亲，验证码不能为空哦').css('color', '#E64141');
+            checkAll[1] = 0;
+        } else {
+            $.post("{:url('checkcode')}", {code:$("#code").val()}, function(data){
                 if (data.code==0) {
-                    $('#id_1').text(data.message).css('color', '#808080');
+                    $('#id_2').text(data.message).css('color', '#808080');
+                    checkAll[1] = 1;
                 } else {
-                    $('#id_1').text(data.message).css('color', '#E64141');
-                    return false;
+                    $('#id_2').text(data.message).css('color', '#E64141');
+                    checkAll[1] = 0;
                 }
             } , 'json');
         }
     })
+    $("#pricode").blur(function(){
+        if ($("#pricode").val() == '') {
+            $('#id_22').text('亲，验证码不能为空哦').css('color', '#E64141');
+            checkAll[1] = 0;
+        } else {
+            $.post("{:url('checkpricode')}", {pricode:$("#pricode").val()}, function(data){
+                if (data.code==0) {
+                    $('#id_22').text(data.message).css('color', '#808080');
+                    checkAll[1] = 1;
+                } else {
+                    $('#id_22').text(data.message).css('color', '#E64141');
+                    checkAll[1] = 0;
+                }
+            } , 'json');
+        }
+    })
+    function demo()
+    {
+        if (checkAll[0]!=0 && checkAll[1]!=0) {
+            if ($('#password').val() =='') {
+                return false;
+            } else {
+                 return true;
+            }
+        }else {
+            return false;
+        }
+    }
 </script>
 <!-- SUDA_CODE_END -->        <!--/注册登录footer-->
     </div>
