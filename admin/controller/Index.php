@@ -3,7 +3,7 @@ namespace app\admin\controller;
 
 use app\admin\controller\Auth;
 
-class Admin extends Auth
+class Index extends Auth
 {
 	protected $is_login = ['*'];
 	
