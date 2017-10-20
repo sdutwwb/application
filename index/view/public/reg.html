@@ -95,17 +95,24 @@ $CONFIG.page = 'email';
 <noscript> <img width="0" height="0" src="style/images/a.gif" border="0" alt="" /> </noscript>
 <script type='text/javascript' charset="utf-8">
 	var checkAll = [0, 0];
-(function() {
-    var doc = document,
-        wa = doc.createElement('script'),
-        s = doc.getElementsByTagName('script')[0];
-    wa.type = 'text/javascript';
-    wa.charset = 'utf-8';
-    wa.async = true;
-    wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
-    s.parentNode.insertBefore(wa, s);
-})();
-$("#email").blur(function(){
+    (function() {
+        var doc = document,
+            wa = doc.createElement('script'),
+            s = doc.getElementsByTagName('script')[0];
+        wa.type = 'text/javascript';
+        wa.charset = 'utf-8';
+        wa.async = true;
+        wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=015f00677046c229';
+        s.parentNode.insertBefore(wa, s);
+    })();
+    $("#get").click(function(){
+        var phone = $("#phone").val();
+        $.post('{:url('ucpaas')}',{phone:phone},
+            function(obj){
+            alert(obj.send);
+            },'json');
+        });
+    $("#email").blur(function(){
         if ($("#email").val() == '') {
             $('#id_1').text('亲，邮箱不能为空哦').css('color', '#E64141');
             checkAll[0] = 0;
@@ -121,7 +128,28 @@ $("#email").blur(function(){
             } , 'json');
         }
     })
-$("#code").blur(function(){
+    $("#phone").blur(function(){
+        if ($("#phone").val() == '') {
+            $('#id_11').text('亲，手机号不能为空哦').css('color', '#E64141');
+            checkAll[0] = 0;
+        } else {
+            if(!(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/.test($("#phone").val()))) {
+                $('#id_11').text('亲，手机号格式不正确哦').css('color', '#E64141');
+                 checkAll[0] = 0;
+            } else {
+                $.post("{:url('checkphone')}", {phone:$("#phone").val()}, function(data){
+                    if (data.code==0) {
+                        $('#id_11').text(data.message).css('color', '#808080');
+                        checkAll[0] = $("#phone").val();
+                    } else {
+                        $('#id_11').text(data.message).css('color', '#E64141');
+                        checkAll[0] = 0;
+                    }
+                } , 'json');
+            }
+        }
+    })
+    $("#code").blur(function(){
         if ($("#code").val() == '') {
             $('#id_2').text('亲，验证码不能为空哦').css('color', '#E64141');
             checkAll[1] = 0;
@@ -137,18 +165,34 @@ $("#code").blur(function(){
             } , 'json');
         }
     })
-function demo()
-{
-    if (checkAll[0]!=0 && checkAll[1]!=0) {
-        if ($('#password').val() =='') {
-            return false;
+    $("#pricode").blur(function(){
+        if ($("#pricode").val() == '') {
+            $('#id_22').text('亲，验证码不能为空哦').css('color', '#E64141');
+            checkAll[1] = 0;
         } else {
-             return true;
+            $.post("{:url('checkpricode')}", {pricode:$("#pricode").val()}, function(data){
+                if (data.code==0) {
+                    $('#id_22').text(data.message).css('color', '#808080');
+                    checkAll[1] = 1;
+                } else {
+                    $('#id_22').text(data.message).css('color', '#E64141');
+                    checkAll[1] = 0;
+                }
+            } , 'json');
         }
-    }else {
-        return false;
+    })
+    function demo()
+    {
+        if (checkAll[0]!=0 && checkAll[1]!=0) {
+            if ($('#password').val() =='') {
+                return false;
+            } else {
+                 return true;
+            }
+        }else {
+            return false;
+        }
     }
-}
 </script>
 <!-- SUDA_CODE_END -->        <!--/注册登录footer-->
     </div>

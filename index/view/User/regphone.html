@@ -1,6 +1,6 @@
 ﻿	{extend name="public/reg" /}
 	{block name="regcontent"}
-	
+	<form action="{:url('checkreg')}" onsubmit="return demo();">
 			                        <div class="W_reg_info clearfix" id="pl_account_regmobile">
             	<div class="W_reg_form">
                         		                	                    <div class="info_list clearfix" node-type="mobilesea_wrapper">
@@ -10,49 +10,33 @@
                                 <!-- 获得焦点时增加  -->
                                
                                 <input type="hidden" name="zone" value="" node-type="mobilesea_selectvalue"/>
-                                <div class="W_input foreign_tel"><span class="tel_forenum" node-type="mobilesea_txt">+86</span>
-                                <input type="text" node-type="newmobilesea" action-data="text=请输入您的手机号码" action-type="text_copy" name="username" class="tel_num" value="" autocomplete="off" >
-                                <div style="position:absolute; top:320px; left:100px; z-index:99;display:none;" class="layer_menu_list msg_set_select layer_set_country" node-type="mobilesea_selectlayer">
-						            <!-- 选中态 select, a内增加 em -->
-						           
+                                <div class="W_input foreign_tel" style="margin-right:20px;"><span class="tel_forenum" node-type="mobilesea_txt">+86</span>
+                                <input type="text" node-type="newmobilesea" action-data="text=请输入您的手机号码" action-type="text_copy" name="phone" id="phone"  placeholder="手机号" class="tel_num" value="" autocomplete="off" >
+									<div style="position:absolute; top:320px; left:100px; z-index:99;display:none;" class="layer_menu_list msg_set_select layer_set_country" node-type="mobilesea_selectlayer">
+										<!-- 选中态 select, a内增加 em -->
+									</div>
 						        </div>
-						        </div>
+								<span id="id_11" style="color:#808080">亲,请填写你的手机号</span>
                             </div>
                             <div class="attachment">或使用<a node-type="link_regemail" href="{:url('regmail')}">邮箱注册</a></div>
                         </div>
-                        <div class="tips" node-type="mobilesea_tip"></div>
+                       
                     </div>
                                         <div class="info_list clearfix">
                     	<div class="tit"><i>*</i>设置密码：</div>
                         <div class="inp">
-                        	<input node-type="password" action-data="" action-type="text_copy" name="passwd" type="password" class="W_input" value="" />
-                        </div>
+							<input node-type="password" action-data="" id="password" action-type="text_copy" name="password" id="password" type="password" class="W_input" value="" />
+						</div>
                         <div node-type="password_tip" class="tips"></div>
                     </div>
-
-                    <input type="hidden" name="from" value=""/>
-                    <input type="hidden" name="callback" value=""/>
-                    <input type="hidden" name="mcode" value=""/>
-                    <input type="hidden" name="mbk" value=""/>
-                    <input type="hidden" name="regtime" value="1508318432"/>
-                    <input type="hidden" name="salttime" value="2ba6158d4d320c7d47f9db067f42ea21"/>
-                    <input type="hidden" name="sinaid" value="ae7847aba659667401f2be4b323df357"/>
-                    <input type="hidden" name="page" value="mobile"/>
-                    <input type="hidden" name="invitesource" value="0"/>
-                    <input type="hidden" name="lang" value="zh-cn"/>
-                    <input type="hidden" name="backurl" value=""/>
-                    <input type="hidden" name="appsrc" value=""/>
-                    <input type="hidden" name="showlogo" value=""/>
-                    <input type="hidden" name="c" value=""/>
-                                        <div node-type="activation_wrapper"  class="info_list clearfix">
+                    <div node-type="activation_wrapper"  class="info_list clearfix">
                     	<div class="tit"><i>*</i>激活码：</div>
                     	<div class="inp active">
-                        	<a href="javascript:void(0);" class="W_btn_e" action-type="btn_sms_activation" node-type="btn_sms_activation" action-data="type=sendsms"><span>免费获取短信激活码</span></a>
+                        	<a href="javascript:void(0);" id="get" class="W_btn_e" action-data="type=sendsms">免费获取短信激活码</a>
                         	<a href="javascript:void(0);" class="W_btn_e_disable" style="display:none" node-type="btn_sms_activation_disable"><span><em node-type="sms_timer">180</em>秒后重新获取短信</span></a>
-                        	<input node-type="activation" name="pincode" type="text" class="W_input" value="" maxlength="6" />
+                        	<input node-type="activation" name="pricode" type="text" id="pricode" class="W_input" value="" maxlength="6" />
+							 <span id="id_22" style="color:#808080"></span>
                             <div class="attachment"><a href="http://help.weibo.com/faq/q/2375/20136#20136" target="_blank">收不到验证码？</a></div>
-                        </div>
-                        <div class="tips" node-type="activation_tip">
                         </div>
                     </div>
 {/block}
