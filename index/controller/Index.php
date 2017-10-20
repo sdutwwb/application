@@ -9,6 +9,7 @@ class Index extends Controller
 {
 	public function index()
 	{
+		// $this->success('haha','index/index');
 		return $this->fetch();
 	}
 }
