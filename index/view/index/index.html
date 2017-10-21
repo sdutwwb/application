@@ -41,18 +41,18 @@
     	<!-- Top Section Left Links -->
         <div class="toplinks">
         	<ul>
-            	<li class="first"><a href="{url:('index')}">首页</a></li>
-                <li><a href="#">music</a></li>
-                <li><a href="#">登陆</a></li>
-                <li><a href="#">注册</a></li>
+            	<li class="first"></li>
+                <li></li>
+                <li></li>
             </ul>
         </div>
         <!-- Top Section right Links -->
         <div class="links_icons">
         	<ul>
-            	<li><a href="#" class="browse">Browse</a></li>
-                <li><a href="#" class="upload">Upload</a></li>
-                <li class="last lang">语言: <a href="#"><img src="" alt="" /></a></li>
+            	<li><a href="{:url('index')}" class="browse">首页</a></li>
+                <li><a href="{:url('log')}" class="upload">登录</a></li>
+                <li class="last lang"><a href="{:url('user/regmail')}">注册</a></li>
+                <li><a href="{:url('mmzh')}" class="upload">找回密码</a></li>
             </ul>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <div id="masthead">
     	<!-- Logo -->
         <div class="logo">
-        	<a href="{url:('index')}"><img src="__IMG__/logo.png" alt="" /></a>
+        	<a href="{url:('index')}"><img src="__IMG__/aixie.png" style="height: 60px"/></a>
         </div>
         <!-- Navigation -->
         <div class="navigation">
@@ -69,8 +69,8 @@
                 <ul>
                     <li><a href="{:url('index')}" class="staticlinks">首页</a></li>
                     <li><a href="{:url('listing')}" class="staticlinks">发现</a></li>
-                    <li><a href="{:url('news')}" class="staticlinks">关心国家</a></li>
-                    <li><a href="{:url('blog')}">个人</a>
+                    <li><a href="{:url('news')}" class="staticlinks">最新新闻</a></li>
+                    <li><a href="{:url('blog')}">新鲜事</a>
                     </li>
                     <li><a href="#">话题</a>
                     	<ul>
@@ -392,7 +392,6 @@
                 </div>
                 <div id="idTab2" class="tabssection">
                     <div class="css-scrollbar simple">
-						<span style="color:red">便利模块2</span>
                         <a href="#" class="toc">
                             <span class="thumb"><img src="__IMG__/video_small4.gif" alt="" /></span>
                             <span class="desc">
@@ -405,7 +404,6 @@
                 </div>
                 <div id="idTab3" class="tabssection">
                     <div class="css-scrollbar simple">
-					<span style="color:red">便利模块3</span>
                         <a href="#" class="toc">
                             <span class="thumb"><img src="__IMG__/video_small3.gif" alt="" /></span>
                             <span class="desc">
@@ -430,17 +428,6 @@
         
             <!-- Recent Videos -->
             <div class="recent_videos">
-            	<div class="recent_head">
-                    <div class="recent_buttons">
-                    	<ul>
-                        	<li class="gridbutn"><a href="#" class="switch_thumb">&nbsp;</a></li>
-                            <li>
-                            	<a href="#" class="previousbtn">&nbsp;</a>
-                                <a href="#" class="nextbtn">&nbsp;</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="clear"></div>
                 <ul class="display">
                 	<li>
@@ -482,11 +469,11 @@
                             <p class="date">3 days ago</p>
                             <div class="clear"></div>
                             <div class="rating">
-                            	<a href="#" class="colrd">&nbsp;</a>
-                                <a href="#" class="colrd">&nbsp;</a>
-                                <a href="#" class="colrd">&nbsp;</a>
-                                <a href="#" class="colrd">&nbsp;</a>
-                                <a href="#" class="greyscal">&nbsp;</a>
+                            	<a href="#" class="colrd">1</a>
+                                <a href="#" class="colrd">2</a>
+                                <a href="#" class="colrd">3</a>
+                                <a href="#" class="colrd">4</a>
+                                <a href="#" class="greyscal">5</a>
                                 <p class="views">800 Views</p>
                             </div>
                             <div class="clear"></div>
@@ -499,7 +486,7 @@
         <div class="col2">
         	<!-- Advertisment -->
         	<div class="adv">
-				<a>推荐的内容推荐的内容推荐的内容推荐的内容推荐的内容推荐的内容推荐的内容推荐的内容</a>
+				<a style="color:red">小广告</a>
             	
             </div>
             <div class="clear"></div>

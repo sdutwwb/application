@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录-有点</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/public.css" />
+<link rel="stylesheet" type="text/css" href="__CSS__/page.css" />
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+
+	<!-- 登录页面头部 -->
+	<!-- 登录页面头部结束 -->
+
+	<!-- 登录body -->
+	<div class="logDiv">
+		<img class="logBanner" src="__IMG__/logBanners.png" />
+		<div class="logGet">
+			<!-- 头部提示信息 -->
+			<div class="logD logDtip">
+				<p class="p1">登录</p>
+			</div>
+			<form action="{:url('checkx')}" onsubmit="return demo();">
+			<!-- 输入框 -->
+			<div class="lgD">
+				<img class="img1" src="__IMG__/logName.png" />
+				<input type="text" id="username" placeholder="输入用户名" />
+			</div>
+			<div class="lgD">
+				<img class="img1" src="__IMG__/logPwd.png" />
+				<input type="password"  id="password" placeholder="输入用户密码" />
+			</div>
+			<div class="lgD logD2">
+				<input class="getYZM" id="code" type="text" />
+				<div class="logYZM">
+					<img class="yzm" onclick="this.src = this.src" cursor="pointer" src="{:captcha_src()}" />
+				</div>
+			</div>
+			<div class="logC">
+				<button>登 录</button>
+			</div>
+		</form>
+		</div>
+	</div>
+	<!-- 登录body  end -->
+
+	<!-- 登录页面底部 -->
+	<div class="logFoot">
+		<p class="p1">捱写微博&emsp;一句话的微博，一篇文章的事情</p>
+		<p class="p2">北京捱写微博创业工作室 登记序号：苏ICP备11003578号-2</p>
+	</div>
+	<!-- 登录页面底部end -->
+	<script type="text/javascript">
+		var checkAll = [0,0];
+		$("#username").blur(function(){
+	        if ($("#username").val() == '') {
+	            checkAll[0] = 0;
+	        } else {
+	        	 checkAll[0] = 1;
+	        }
+    })
+		$("#code").blur(function(){
+        if ($("#code").val() == '') {
+            checkAll[1] = 0;
+        } else {
+            $.post("{:url('checkcode')}", {code:$("#code").val()}, function(data){
+                if (data.code==0) {
+                    checkAll[1] = 1;
+                } else {
+                    checkAll[1] = 0;
+                }
+            } , 'json');
+        }
+    })
+		function demo()
+		{
+			if (checkAll[1]==1 && checkAll[0]==1) {
+				if ($("#password").val()!='') {
+					$.post("{:url('checkuser')}", {username:$("#username").val(),password:$("#password").val()}, function(data){
+               			return false;
+            		} , 'json');
+				} else {
+					return false;
+				}	
+			} else {
+				return false;
+			}
+			return false;
+			
+		}
+	</script>
+</body>
+</html>
