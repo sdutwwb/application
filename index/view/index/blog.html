@@ -1,5 +1,5 @@
     {extend name="public/header" /}
-    {block name="content"}
+    {block name="content_left"}
     	<!-- Column 1 -->
         <div class="col1">
             <div class="blog">
@@ -159,7 +159,9 @@
             </div>
             <div class="clear"></div>
         </div>
+        {/block}
         <!-- Column 2 -->
+        {block name="content_right"}
         <div class="col2">
         	<!-- Categories -->
             <div class="categories">
