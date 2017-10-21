@@ -2,7 +2,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
-use app\index\model\User;
+use app\admin\model\Admin;
 class Auth extends Controller
 {
 	protected $is_login = [''];
@@ -18,16 +18,31 @@ class Auth extends Controller
 	}
 	public function checklogin()
 	{
-		return session('?id');
+		return session('?adminid');
 	}
 	public function dologin()
 	{
-		$info = User::where('nickname', $this->request->param('name'))->find();
-		if ($info) {
-			session('id', $info->id);
-			$this->success('登录成功', url('admin/admin/index'));
-		} else {
-			$this->error('登录失败', url('admin/auth/login'));
-		}
+		session('adminid', 3);
+		$this->success('登录成功', url('index/index'));
+		/*$admin = Admin::where('adminname', $this->request->param('adminname'))->find();//账号登陆
+		$email = Admin::where('adminemail', $this->request->param('adminname'))->find();//邮箱登陆
+		$password = $this->request->param('password');
+		if($admin){
+			if($admin['password'] == $password){
+				session('adminid', $admin['adminid']);
+				$this->success('登录成功', url('admin/index/index'));
+			}else{
+				$this->error('登录失败', url('auth/login'));
+			}
+		}elseif($email){
+			if($email['password'] == $password){
+				session('adminid', $email['adminid']);
+				$this->success('登录成功', url('admin/index/index'));
+			}else{
+				$this->error('登录失败', url('auth/login'));
+			}
+		}else{
+			$this->error('登录失败', url('auth/login'));	
+		}*/
 	}
 }
