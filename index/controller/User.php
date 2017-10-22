@@ -30,7 +30,7 @@ class User extends Controller
 		if (!$validate->check($data)) {
 			echo json_encode(['code'=>1 , 'message' => '亲，你输入的邮箱格式不正确哦']);
 		} else {
-			$data = $this->user->where('user_name', $email)->find();
+			$data = $this->user->where('uname', $email)->find();
 			if ($data) {
 				echo json_encode(['code'=>2 , 'message' => '亲，您输入的邮箱已被注册了哟']);
 			} else {
@@ -42,7 +42,7 @@ class User extends Controller
 	public function checkphone()
 	{
 		$phone = $this->request->param('phone');
-		$data = $this->user->where('user_name', $phone)->find();
+		$data = $this->user->where('uname', $phone)->find();
 			if ($data) {
 				echo json_encode(['code'=>2 , 'message' => '亲,您输入的手机号已被注册了哟']);
 			} else {
