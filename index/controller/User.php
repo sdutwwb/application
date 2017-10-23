@@ -30,7 +30,7 @@ class User extends Controller
 		if (!$validate->check($data)) {
 			echo json_encode(['code'=>1 , 'message' => '亲，你输入的邮箱格式不正确哦']);
 		} else {
-			$data = $this->user->where('uname', $email)->find();
+			$data = $this->user->where('email', $email)->find();
 			if ($data) {
 				echo json_encode(['code'=>2 , 'message' => '亲，您输入的邮箱已被注册了哟']);
 			} else {
@@ -83,7 +83,12 @@ class User extends Controller
 	//插入数据
 	public function checkreg()
 	{
-		$this->success('注册成功', 'index/index');
+		$this->user->data([
+		'name' => 'thinkphp',
+		'email' => 'thinkphp@qq.com'
+		]);
+		$this->user->save();
+		//$this->success('注册成功', 'index/index');
 		//dump($this->request->param());
 	}
 	public function regphone()
