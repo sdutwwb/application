@@ -82,9 +82,9 @@
    <dd>
       <!-- Operation -->
 	  <div class="BatchOperation">
-		<a class="btnStyle">通过</a>
-		<a class="btnStyle">禁止通过</a>
-		<a class="btnStyle">通过并推荐</a>
+		<a class="btnStyle" href="{:url('articleStatus')}?status=0&aid={$simplearticle['aid']} ">通过</a>
+		<a class="btnStyle" href="{:url('articleStatus')}?status=2&aid={$simplearticle['aid']}">禁止通过</a>
+		<a class="btnStyle" href="{:url('articleStatus')}?status=3&aid={$simplearticle['aid']}">通过并推荐</a>
 	  </div>
    </dd>
   </dl>

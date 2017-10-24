@@ -36,4 +36,10 @@ class Allarticle extends Auth
 	
 		return $this->fetch();
 	}
+	public function articleStatus()
+	{
+		$data = $this->request->param();
+		$this->article->setArticleStatus($data);
+		$this->success('执行成功','allarticle/order_list');
+	}
 }
