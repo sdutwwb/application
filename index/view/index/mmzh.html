@@ -1,38 +1,12 @@
-﻿<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatibl" content="IE=edge,chrome=1"/>
-
-    <title>找回帐号密码</title>
-    <link href="__CSS__/iforgot_index.css" type="text/css" rel="stylesheet">
-    <link href="__CSS__/skins.css" type="text/css" rel="stylesheet">
-	<link href="__BOOT__/css/bootstrap.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="__JS__/jQuery1.7.1.js"></script>
-</head>
-<style>
-    .hid{
-        display:none;
-    }
-</style>
-<body>
-<div class="WB_miniblog">
-    <!-- 首页 -->
-    <div class="iforgot_bd">
-        <div class="iforgot_header clearfix">
-                        <img src="__IMG__/aixie.png" style="width:300px"/>
-                        <div class="name_mod W_fr">
-                <a href="{:url('index/index')}" class="S_txt1" style="font-size:12px">捱写首页</a>
-                <a href="{:url('user/regmail')}" class="S_txt1" style="font-size:12px">点击注册</a>
-            </div>
-        </div><div class="iforgot_cont">
+﻿{extend name="public/mm" /}
+{block name="sy"}
     <div class="i_top">
         <h3 class="title">找回帐号密码</h3>
     </div>
     <div class="i_mod">
         <div class="form_mod">
             <ul class="form_list">
-                <form action="{:url('zhmm')}" onsubmit="return demo();">
+                <form action="{:url('setmm')}" onsubmit="return demo();">
                 <li class="item">
                     <span class="tit">登录名：</span>
                     <input type="text" id="phone" style="margin-right: 10px" name="phone" class="fInput w200" value="" placeholder="请输入注册时的手机">
@@ -56,15 +30,8 @@
     </div>
 </div>
 </div>
-</div>
-<div class="WB_footer S_bg2">
-        <div class="other_link S_bg1 clearfix T_add_ser" style="text-align:center;font-size:12px">
-        <p class="copy" style="padding-top:12px"><a href="http://help.weibo.com/?refer=didao&amp;bottomnav=1&amp;wvr=6" class="footBg">关于微博</a>　<a class="footBg" href="http://help.weibo.com/?refer=didao&amp;bottomnav=1&amp;wvr=6">微博帮助</a>　<a class="footBg" href="http://help.weibo.com/newtopic/suggest?bottomnav=1&amp;wvr=6">意见反馈</a>　<a class="footBg" href="http://open.weibo.com/?bottomnav=1&amp;wvr=6">开放平台</a>　<a class="footBg" href="http://hr.weibo.com?bottomnav=1&amp;wvr=6">微博招聘</a>　<a class="footBg" href="http://news.sina.com.cn/guide/?bottomnav=1&amp;wvr=6">新浪网导航</a>　<a class="footBg" href="http://service.account.weibo.com/?bottomnav=1&amp;wvr=6" target="__blank">社区管理中心</a>　<a class="footBg" href="http://service.account.weibo.com/roles/gongyue?bottomnav=1&amp;wvr=6" target="__blank">微博社区公约</a></p>
-        <div class="copy"><a href="javascript:;" class="S_txt2"> 客服电话：4000 960 960(个人) 4000 980 980(企业) (按当地市话标准计算)</a></div>
-        <p class="company" style="padding-bottom:12px"><span class="copy S_txt2">Copyright © 1996-2017 SINA 北京微梦创科网络技术有限公司 </span><span><a class="S_txt2" href="">京网文[2014]2046-296号</a> <a class="S_txt2" href="">京ICP证100780号</a> 
-              </span></p>
-    </div>
-    </div>
+{/block}
+{block name="js"}
 <script type="text/javascript">
     var checkAll = [0, 0];
     //手机激活码
@@ -119,8 +86,8 @@
         if (checkAll[0]!=0 && checkAll[1]!=0) {
                 return true;
         }else {
-            console.log(checkAll);
             return false;
         }
     }
 </script>
+{/block}
