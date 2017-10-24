@@ -135,7 +135,7 @@ $CONFIG.page = 'email';
             $('#id_11').text('亲，手机号不能为空哦').css('color', '#E64141');
             checkAll[0] = 0;
         } else {
-            if(!(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/.test($("#phone").val()))) {
+            if(!(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(178)|(18[0,5-9]))\d{8}$/.test($("#phone").val()))) {
                 $('#id_11').text('亲，手机号格式不正确哦').css('color', '#E64141');
                  checkAll[0] = 0;
             } else {
@@ -169,7 +169,7 @@ $CONFIG.page = 'email';
     })
     $("#pricode").blur(function(){
         if ($("#pricode").val() == '') {
-            $('#id_22').text('亲，验证码不能为空哦').css('color', '#E64141');
+            $('#id_22').text('亲，激活码不能为空哦').css('color', '#E64141');
             checkAll[1] = 0;
         } else {
             $.post("{:url('checkpricode')}", {pricode:$("#pricode").val()}, function(data){
@@ -189,7 +189,7 @@ $CONFIG.page = 'email';
             if ($('#password').val() =='') {
                 return false;
             } else {
-                 return true;
+                return true;
             }
         }else {
             return false;

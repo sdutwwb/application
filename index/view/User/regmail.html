@@ -5,13 +5,31 @@
             <div class="W_reg_form">
                 <div class="info_list clearfix">
                     <div class="tit"><span class="mail_ico"></span><i>*</i>邮箱：</div>
-					
                     <div class="inp">
                     	<input node-type="email" action-data="text=请输入您的常用邮箱" id="email" action-type="text_copy" name="email" type="text" class="W_input" style="margin-right:20px" value="" autocomplete="off" />
                         <span id="id_1" style="color:#808080">亲,填写的邮箱将作为用户名哟</span>
-						<div class="attachment">或使用<a href="{:url('regphone')}">手机注册</a></div>
+						<!-- <div class="attachment">或使用<a href="{:url('regphone')}">手机注册</a></div> -->
                     </div>
                 </div>
+                 <div class="info_list clearfix" node-type="mobilesea_wrapper">
+                        <div class="tit"><span class="mobile_ico"></span><i>*</i>手机：</div>
+                        <div class="inp">
+                            <div class="flag_tel clearfix">
+                                <!-- 获得焦点时增加  -->
+                               
+                                <input type="hidden" name="rtime" value="{:time()}" node-type="mobilesea_selectvalue"/>
+                                  <input type="hidden" name="datetime" value="{:time()}" node-type="mobilesea_selectvalue"/>
+                                <div class="W_input foreign_tel" style="margin-right:20px;"><span class="tel_forenum" node-type="mobilesea_txt">+86</span>
+                                <input type="text" node-type="newmobilesea" action-data="text=请输入您的手机号码" action-type="text_copy" name="phone" id="phone" class="tel_num" value="" autocomplete="off" >
+                                    <div style="position:absolute; top:320px; left:100px; z-index:99;display:none;" class="layer_menu_list msg_set_select layer_set_country" node-type="mobilesea_selectlayer">
+                                        <!-- 选中态 select, a内增加 em -->
+                                    </div>
+                                </div>
+                                <span id="id_11" style="color:#808080">亲,请填写你的手机号</span>
+                            </div>
+                        </div>
+                       
+                    </div>
                 <div class="info_list clearfix">
                     <div class="tit"><i>*</i>设置密码：</div>
                     <div class="inp">
@@ -24,8 +42,18 @@
                     <div class="tit"><i>*</i>验证码：</div>
                     <div class="inp">
                         <input node-type="verifycodereg" name="code" id="code" type="text" class="W_input" value="" maxlength="4" />
-                        <img src="{:captcha_src()}" id="img" onclick="this.src = this.src" style="margin-right:20px" alt="captcha" />	
+                        <img src="{:captcha_src()}" id="img" style="cursor:pointer" onclick="this.src = this.src" style="margin-right:20px" alt="captcha" />	
 						<span id="id_2" ></span>
                     </div>
-                </div>                         
+                </div>
+                <div node-type="activation_wrapper"  class="info_list clearfix">
+                        <div class="tit"><i>*</i>激活码：</div>
+                        <div class="inp active">
+                            <a href="javascript:void(0);" id="get" class="W_btn_e" action-data="type=sendsms">免费获取短信验证码</a>
+                            <a href="javascript:void(0);" class="W_btn_e_disable" style="display:none" node-type="btn_sms_activation_disable"><span><em node-type="sms_timer">180</em>秒后重新获取短信</span></a>
+                            <input node-type="activation" name="pricode" type="text" id="pricode" style="margin-right:20px;" class="W_input" value="" maxlength="4" />
+                            <span id="id_22" style="color:#808080"></span>
+                            <div class="attachment"><a href="http://help.weibo.com/faq/q/2375/20136#20136" target="_blank">收不到验证码？</a></div>
+                        </div>
+                    </div>                         
 		{/block}			

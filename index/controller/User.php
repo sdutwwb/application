@@ -42,13 +42,12 @@ class User extends Controller
 	public function checkphone()
 	{
 		$phone = $this->request->param('phone');
-		$data = $this->user->where('uname', $phone)->find();
+		$data = $this->user->where('phone', $phone)->find();
 			if ($data) {
 				echo json_encode(['code'=>2 , 'message' => '亲,您输入的手机号已被注册了哟']);
 			} else {
 				echo json_encode(['code'=>0 , 'message' => '亲,您输入的手机号可用了哟']);
 			}
-
 	}
 	//验证码验证
 	public function checkcode()
@@ -83,13 +82,18 @@ class User extends Controller
 	//插入数据
 	public function checkreg()
 	{
+		$data = $this->request->param();
 		$this->user->data([
-		'name' => 'thinkphp',
-		'email' => 'thinkphp@qq.com'
+		'uname' => $data['email'],
+		'email' => $data['email'],
+		'rtime' => $data['rtime'],
+		'datetime' => $data['datetime'],
+		'phone' => $data['phone'],
+		'password' => md5($data['password']),
 		]);
 		$this->user->save();
-		//$this->success('注册成功', 'index/index');
-		//dump($this->request->param());
+		Session::clear();
+		$this->success('恭喜你注册成功', 'index/log');
 	}
 	public function regphone()
 	{
