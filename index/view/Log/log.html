@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="__CSS__/public.css" />
 <link rel="stylesheet" type="text/css" href="__CSS__/page.css" />
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>
-<script type="text/javascript" src="__JS__/public.js"></script>
+<script type="text/javascript" src="__JS__/publics.js"></script>
 </head>
 <body>
 
@@ -20,17 +20,17 @@
 			<!-- 头部提示信息 -->
 			<div class="logD logDtip">
 				<p class="p1">登录</p>
-				<a href="{:url('mmzh/mmzh')}">忘记密码？</a>
+				<a href="{:url('mmzh/mmzh')}" class="forget">忘记密码?</a>
 			</div>
 			<form action="{:url('checklog')}" onsubmit="return demo();">
 			<!-- 输入框 -->
 			<div class="lgD">
 				<img class="img1" src="__IMG__/logName.png" />
-				<input type="text" id="username" placeholder="输入邮箱/手机号" />
+				<input type="text" id="username" name="username" placeholder="输入邮箱/手机号" />
 			</div>
 			<div class="lgD">
 				<img class="img1" src="__IMG__/logPwd.png" />
-				<input type="password"  id="password" placeholder="输入密码" />
+				<input type="password"  id="password" name="password" placeholder="输入密码" />
 			</div>
 			<div class="lgD logD2">
 				<input class="getYZM" id="code" placeholder="输入验证码" type="text" />
@@ -87,8 +87,6 @@
 			} else {
 				return false;
 			}
-			return false;
-			
 		}
 	</script>
 </body>

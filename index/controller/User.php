@@ -86,7 +86,6 @@ class User extends Controller
 		$this->user->data([
 		'uname' => $data['email'],
 		'email' => $data['email'],
-		'rtime' => $data['rtime'],
 		'datetime' => $data['datetime'],
 		'phone' => $data['phone'],
 		'password' => md5($data['password']),

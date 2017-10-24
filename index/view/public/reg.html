@@ -116,15 +116,15 @@ $CONFIG.page = 'email';
         });
     $("#email").blur(function(){
         if ($("#email").val() == '') {
-            $('#id_1').text('亲，邮箱不能为空哦').css('color', '#E64141');
+            $('#id_1').text('* 亲，邮箱不能为空哦').css('color', '#E64141');
             checkAll[0] = 0;
         } else {
             $.post("{:url('checkemail')}", {email:$("#email").val()}, function(data){
                 if (data.code==0) {
-                    $('#id_1').text(data.message).css('color', '#808080');
+                    $('#id_1').text('* '+data.message).css('color', '#22B14C');
                     checkAll[0] = $("#email").val();
                 } else {
-                    $('#id_1').text(data.message).css('color', '#E64141');
+                    $('#id_1').text('* '+data.message).css('color', '#E64141');
                    checkAll[0] = 0;
                 }
             } , 'json');
@@ -132,19 +132,19 @@ $CONFIG.page = 'email';
     })
     $("#phone").blur(function(){
         if ($("#phone").val() == '') {
-            $('#id_11').text('亲，手机号不能为空哦').css('color', '#E64141');
+            $('#id_11').text('* 亲，手机号不能为空哦').css('color', '#E64141');
             checkAll[0] = 0;
         } else {
             if(!(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(178)|(18[0,5-9]))\d{8}$/.test($("#phone").val()))) {
-                $('#id_11').text('亲，手机号格式不正确哦').css('color', '#E64141');
+                $('#id_11').text('* 亲，手机号格式不正确哦').css('color', '#E64141');
                  checkAll[0] = 0;
             } else {
                 $.post("{:url('checkphone')}", {phone:$("#phone").val()}, function(data){
                     if (data.code==0) {
-                        $('#id_11').text(data.message).css('color', '#808080');
+                        $('#id_11').text('* '+data.message).css('color', '#22B14C');
                         checkAll[0] = $("#phone").val();
                     } else {
-                        $('#id_11').text(data.message).css('color', '#E64141');
+                        $('#id_11').text('* '+data.message).css('color', '#E64141');
                         checkAll[0] = 0;
                     }
                 } , 'json');
@@ -153,15 +153,15 @@ $CONFIG.page = 'email';
     })
     $("#code").blur(function(){
         if ($("#code").val() == '') {
-            $('#id_2').text('亲，验证码不能为空哦').css('color', '#E64141');
+            $('#id_2').text('* 亲，验证码不能为空哦').css('color', '#E64141');
             checkAll[1] = 0;
         } else {
             $.post("{:url('checkcode')}", {code:$("#code").val()}, function(data){
                 if (data.code==0) {
-                    $('#id_2').text(data.message).css('color', '#808080');
+                    $('#id_2').text('* '+data.message).css('color', '#22B14C');
                     checkAll[1] = 1;
                 } else {
-                    $('#id_2').text(data.message).css('color', '#E64141');
+                    $('#id_2').text('* '+data.message).css('color', '#E64141');
                     checkAll[1] = 0;
                 }
             } , 'json');
@@ -169,15 +169,15 @@ $CONFIG.page = 'email';
     })
     $("#pricode").blur(function(){
         if ($("#pricode").val() == '') {
-            $('#id_22').text('亲，激活码不能为空哦').css('color', '#E64141');
+            $('#id_22').text('* 亲，激活码不能为空哦').css('color', '#E64141');
             checkAll[1] = 0;
         } else {
             $.post("{:url('checkpricode')}", {pricode:$("#pricode").val()}, function(data){
                 if (data.code==0) {
-                    $('#id_22').text(data.message).css('color', '#808080');
+                    $('#id_22').text('* '+data.message).css('color', '#22B14C');
                     checkAll[1] = 1;
                 } else {
-                    $('#id_22').text(data.message).css('color', '#E64141');
+                    $('#id_22').text('* '+data.message).css('color', '#E64141');
                     checkAll[1] = 0;
                 }
             } , 'json');

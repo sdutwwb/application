@@ -15,6 +15,13 @@ class Contact extends Controller
 	}
 	public function contact()
 	{
+		if (session('?uid')) {
+			$uid = Session::get('uid');
+			$data = $this->user->where('uid', $uid)->find();
+			$this->assign(['islog'=>1, 'data'=>$data]);
+		} else {
+			$this->assign('islog', 0);
+		}
 		return $this->fetch();
 	}
 }

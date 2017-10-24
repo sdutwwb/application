@@ -6,16 +6,16 @@
     <div class="i_mod">
         <div class="form_mod">
             <ul class="form_list">
-                <form action="{:url('setmm')}" onsubmit="return demo();">
+                <form action="{:url('czmm')}" onsubmit="return demo();">
                 <li class="item">
                     <span class="tit">新密码：</span>
-                    <input type="hidden" name="text" value="{$phone}">
-                    <input type="password" id="pwd" style="margin-right: 10px" name="password" class="fInput w200" value="" placeholder="请输入你的新密码">
+                    <input type="hidden" name="phone" value="{$phone}">
+                    <input type="password" id="password" style="margin-right: 10px" name="password" class="fInput w200" value="" >
                     <span id="id_11"></span>
                 </li>
                 <li class="item">
                     <span class="tit">再次输入新密码：</span>
-                    <input type="password" id="rpwd" style="margin-right: 10px" name="rpassword" class="fInput w200" value="" placeholder="请再次输入你的新密码">
+                    <input type="password" id="rpassword" style="margin-right: 10px" name="rpassword" class="fInput w200" value="">
                     <span id="id_22"></span>
                 </li>
                 <li class="item">
@@ -39,33 +39,34 @@
             $('#id_11').text('亲，密码不能为空哦').css('color', '#E64141');
             checkAll[0] = 0;
         } else {
-        	$password = $("#password").val();
-            if(preg_match('/^([0-9]{6,16})$/',$password)){
-	        	$('#id_11').text('低，你的密码具有风险咯').css('color', '#E64141');
-		    }else if(preg_match('/^[0-9 a-z]{6,16}$/',$password)){
-		    	 checkAll[0] = 1;
-		        $('#id_11').text('中，你的密码可以再复杂点').css('color', '#FFA00A');
-		    }else if(preg_match('/^[0-9 a-z A-Z !@#$%^&*]{6,16}$/',$password)){
-		    	 checkAll[0] = 1;
-		        $('#id_11').text('高，你的密码很安全').css('color', '#22B14C');
+        	var password = $("#password").val();
+            if($("#password").val().length<6){
+                checkAll[0] = 0;
+	        	$('#id_11').text('* 密码长度不能低于6位').css('color', '#E64141');
+		    }else if($("#password").val().length<10){
+		    	checkAll[0] = 1;
+		        $('#id_11').text('* 中：你的密码可以再复杂点').css('color', '#FFA00A');
+		    }else {
+		    	checkAll[0] = 1;
+		        $('#id_11').text('* 你的密码很安全').css('color', '#22B14C');
 		    }
         }
     })
     //激活码
-     $("#rpassword").blur(function(){
+    $("#rpassword").blur(function(){
      	 if ($("#rpassword").val() == '') {
-            $('#id_22').text('密码不能为空哦').css('color', '#E64141');
-            checkAll[0] = 0;
+            $('#id_22').text('* 密码不能为空哦').css('color', '#E64141');
+            checkAll[1] = 0;
         } else {
 	        	if ($("#rpassword").val() != $("#password").val()) {
-	        		$('#id_22').text('两次密码不一致').css('color', '#E64141');
-            		checkAll[0] = 0;
+	        		$('#id_22').text('* 两次密码不一致').css('color', '#E64141');
+            		checkAll[1] = 0;
         		}else {
-        			$('#id_22').text('快点点击注册吧').css('color', '#808080 ');
-            		checkAll[0] = 0;
+        			$('#id_22').text('* 快点点击注册吧').css('color', '#22B14C');
+            		checkAll[1] = 1;
         		}
         }
-     })
+    })
   function demo()
     {
         if (checkAll[0]!=0 && checkAll[1]!=0) {
