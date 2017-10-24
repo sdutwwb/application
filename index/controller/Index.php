@@ -17,42 +17,6 @@ class Index extends Controller
 	{
 		return $this->fetch();
 	}
-	public function blog()
-	{
-		return $this->fetch();
-	}
-	public function blog_post()
-	{
-		return $this->fetch();
-	}
-	public function contact()
-	{
-		return $this->fetch();
-	}
-	public function detail()
-	{
-		return $this->fetch();
-	}
-	public function listing()
-	{
-		return $this->fetch();
-	}
-	public function news()
-	{
-		return $this->fetch();
-	}
-	public function about()
-	{
-		return $this->fetch();
-	}
-	public function mmzh()
-	{
-		return $this->fetch();
-	}
-	public function log()
-	{
-		return $this->fetch();
-	}
 	//验证码验证
 	public function checkcode()
 	{
@@ -76,18 +40,7 @@ class Index extends Controller
 		dump($data);
 		echo 1;
 	}
-	//重置密码
-	public function setmm()
-	{
-		$data = $this->request->param();
-		if ($data) {
-			$this->assign('phone', $data['phone']);
-			return $this->fetch();
-		}else {
-			$this->error('抱歉，页面跳转错误', 'index/mmzh');
-		}
-		
-	}
+	
 	//检测手机号
 	public function checkphone()
 	{
