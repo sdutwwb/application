@@ -59,7 +59,8 @@ class User extends Controller
 		$this->assign('ucontent',$ucontent);//用户留言
 		$this->assign('simpleuser',$simpleuser);//用户的用户名
 		//查找留言的回复
-		
+		$allReply = $this->replyuser->getReplyuser($data);
+		$this->assign('allReply',$allReply);
 		return $this->fetch();
 	}
 	public function adminWritereply()
