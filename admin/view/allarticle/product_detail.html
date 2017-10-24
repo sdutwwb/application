@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>文章详情</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="order"></i><em>文章序号</em></span>
+  </div>
+  <dl class="orderDetail">
+   <dt class="order-h">文章详情</dt>
+   <dd>
+    <ul>
+     <li>
+      <span class="h-cont h-right">发表人：</span>
+      <span class="h-cont h-left">{$simpleuesr['uname']}</span>
+     </li>
+	  <li>
+      <span class="h-cont h-right">性别：</span>
+      <span class="h-cont h-left">{$simpleuesr['sex']}</span>
+     </li>
+	  <li>
+      <span class="h-cont h-right">用户级别：</span>
+      <span class="h-cont h-left">{$simpleuesr['score']}</span>
+     </li>
+	  <li>
+      <span class="h-cont h-right">会员状态：</span>
+      <span class="h-cont h-left">{$simpleuesr['member']}</span>
+     </li>
+     <li>
+      <span class="h-cont h-right">文章审核状态：</span>
+      <span class="h-cont h-left">{$simplearticle['status']}</span>
+     </li>
+    </ul>
+   </dd>
+   <dd style="padding:1em 0;">
+    <span><b>文章标题：</b></span>
+    <span>{$simplearticle['atitle']}</span>
+   </dd>
+   <dd>
+	 <table class="noborder">
+     <tr>
+      <td style="text-align:left;"><b>文章内容：</b></td>
+      <td>
+       <textarea class="block" style="width:80%;height:40px;outline:none;">{$simplearticle['acontent']}</textarea>
+      </td>
+     </tr>
+    </table>
+    <table class="list-style">
+     <tr>
+      <th>上传的图片缩略图</th>
+      <th>收藏数</th>
+      <th>转发数</th>
+      <th>点赞数</th>
+      <th>浏览数</th>
+     </tr>
+     <tr>
+	
+	  <td>
+		{foreach name="allimage" item="vo"}
+			<img src="{$vo}" class="thumbnail"/>
+		{/foreach}
+	  </td>
+      <td style="text-align:center">{$simplearticle['fav']}</td>
+      <td style="text-align:center">{$simplearticle['copy']}</td>
+      <td style="text-align:center">{$simplearticle['favour']}</td>
+      <td style="text-align:center">{$simplearticle['readcount']}</td>
+     </tr>
+     <tr>
+      <td colspan="5">
+
+      </td>
+     </tr>
+    </table>
+   </dd>
+   <dd>
+   
+   </dd>
+   <dd>
+      <!-- Operation -->
+   </dd>
+  </dl>
+ </div>
+</body>
+</html>

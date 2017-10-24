@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>用户列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>用户列表</em></span>
+  </div>
+  <div class="operate">
+   <form action="{:url('user_list')}" method="post">
+    <input type="text"  name="like" class="textBox length-long" placeholder="输入用户昵称或手机号码"/>
+    <input type="submit" value="查询" class="tdBtn"/>
+   </form>
+  </div>
+  <table class="list-style Interlaced">
+   <tr>
+     <th>编号</th>
+     <th>头像</th>
+     <th>用户昵称</th>
+     <th>手机号码</th>
+     <th>邮箱</th>
+     <th>性别</th>
+     <th>等级</th>
+     <th>注册日期</th>
+     <th>最近登陆时间</th>
+     <th>锁定状态</th>
+   </tr>
+   {foreach $list as $vo}
+	   <tr>
+		<td>{$vo.uid}
+		</td>
+		<td class="center">
+			<img src="{$vo.uimage}" class="thumbnail"/>
+		</td>
+		<td class="center">{$vo.uname}</td>
+		<td class="center">{$vo.tel}</td>
+		<td class="center">{$vo.email}</td>
+		<td class="center">{$vo.sex}</td>
+		<td class="center">{$vo.score}</td>
+		<td class="center">{$vo.rtime}</td>
+		<td class="center">{$vo.datetime}</td>
+		<td class="center">{$vo.islock}</td>
+	   </tr>
+	{/foreach}
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+	  {$page|default="只有一页用户哦"}
+	  </div>
+  </div>
+ </div>
+</body>
+</html>

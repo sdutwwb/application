@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新增产品分类</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i></i><em>添加话题</em></span>
+  </div>
+  <form action="{:url('add_category')}">
+  <table class="list-style">
+   <tr>
+    <td style="text-align:right;width:15%;">添加话题名称：</td>
+    <td>
+     <input type="text" name="tname" class="textBox"/>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">是否显示：</td>
+     <td>
+     <input type="radio" name="display" checked="1" id="yes" value="1"/>
+     <label for="yes">是</label>
+     <input type="radio" name="display" id="no" value="0"/>
+     <label for="no">否</label>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">添加话题描述：</td>
+    <td>
+     <textarea class="textarea" name="tcontent"></textarea>
+    </td>
+   </tr>
+   <tr>
+	<td style="text-align:right;"></td>
+		<td><input type="submit" value="添加" class="tdBtn"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>

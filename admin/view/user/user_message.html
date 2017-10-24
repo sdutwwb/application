@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>会员留言</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>用户留言</em></span>
+  </div>
+   <div class="operate">
+   <form action="{:url('user_message')}" method="post">
+    <input type="text"  name="like" class="textBox length-long" placeholder="输入用户昵称"/>
+    <input type="submit" value="查询" class="tdBtn"/>
+   </form>
+  <table class="list-style Interlaced">
+   <tr>
+     <th>用户的id</th>
+     <th>留言时间</th>
+     <th>处理状态</th>
+     <th>留言内容</th>
+     <th>操作</th>
+   </tr>
+   {foreach $list as $vo}
+	   <tr>
+		<td class="center">{$vo.uid}</td>
+		<td class="center">{$vo.sendtime}</td>
+		<td class="center">{$vo.mstatus}</td>
+		<td width="300">
+		 <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
+		  {$vo.ucontent}
+		 </div>
+		</td>
+		<td class="center">
+		 <a href="{:url('reply_message')}?umid={$vo.umid}&uid={$vo.uid}&ucontent={$vo.ucontent}" class="inline-block" title="回复">处理</a>
+		</td>
+	   </tr>
+	{/foreach}
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+	   {$page|default="就一页数据哦"}
+	  </div>
+  </div>
+ </div>
+</body>
+</html>

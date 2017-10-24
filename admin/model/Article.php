@@ -42,4 +42,5 @@ class Article extends Model
 		$aid = $data['aid'];
 		return $this->save(['status'=>"$status"],['aid'=>"$aid"]);
 	}
+	
 }

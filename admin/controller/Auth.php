@@ -22,20 +22,20 @@ class Auth extends Controller
 	}
 	public function dologin()
 	{
-		session('adminid', 3);
-		$this->success('登录成功', url('index/index'));
-		/*$admin = Admin::where('adminname', $this->request->param('adminname'))->find();//账号登陆
+		/*session('adminid', 3);
+		$this->success('登录成功', url('index/index'));*/
+		$admin = Admin::where('adminname', $this->request->param('adminname'))->find();//账号登陆
 		$email = Admin::where('adminemail', $this->request->param('adminname'))->find();//邮箱登陆
 		$password = $this->request->param('password');
 		if($admin){
-			if($admin['password'] == $password){
+			if($admin['adminpassword'] == $password){
 				session('adminid', $admin['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
 				$this->error('登录失败', url('auth/login'));
 			}
 		}elseif($email){
-			if($email['password'] == $password){
+			if($email['adminpassword'] == $password){
 				session('adminid', $email['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
@@ -43,6 +43,6 @@ class Auth extends Controller
 			}
 		}else{
 			$this->error('登录失败', url('auth/login'));	
-		}*/
+		}
 	}
 }

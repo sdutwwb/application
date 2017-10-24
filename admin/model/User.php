@@ -24,4 +24,35 @@ class User extends Model
 		$sex = [0 => '保密', 2=>'女',1=>'男'];
 		return $sex[$value];
 	}
+	public function getIslockAttr($value)
+	{
+		$islock = ['1'=>'已锁定','0'=>'未锁定用户'];
+		return $islock[$value];
+	}
+
+
+
+
+
+	//得到所有用户信息
+	public function getAlluser($like)//模糊查询用户详情
+	{
+		
+		if(empty($like['like'])){
+			$list = $this->where('member','0')->paginate(10);
+		}else{
+			$like = $like['like'];
+			$where1['uname'] = ['like',"$like"."%"]; 
+			$where2['tel'] = ['like',"$like"."%"];
+			$where3['uid'] = ['like', "$like"]; 
+			$list = $this->where('member','0')->where($where1)->whereOr($where2)->whereOr($where3)->paginate(10);
+		}
+		 // 获取分页显示
+		 $page = $list->render();
+		 if(is_null($page)){
+		 	return ['list'=>$list];
+		 }else{
+		 	return ['list'=>$list,'page'=>$page];
+		 } 
+	}
 }

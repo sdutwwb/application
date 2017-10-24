@@ -14,10 +14,12 @@ class Allarticle extends Auth
 	}
 	public function order_list()//所有文章列表
 	{
-		//所有文章列表
-		$allArticle = $this->article->getallArticle();
-		$this->assign('allArticle',$allArticle);
-		
+		//所有文章列表分页显示
+		 $list = $this->article->paginate(10);
+		 // 获取分页显示
+		 $page = $list->render();
+		 $this->assign('list', $list);
+		 $this->assign('page', $page);
 		return $this->fetch();
 	}
 	public function order_detail()
@@ -36,10 +38,25 @@ class Allarticle extends Auth
 	
 		return $this->fetch();
 	}
-	public function articleStatus()
+	public function articleStatus()//处理文章状态
 	{
 		$data = $this->request->param();
 		$this->article->setArticleStatus($data);
 		$this->success('执行成功','allarticle/order_list');
 	}
+	public function product_list()
+	{
+		$status = $this->request->param('status');
+		if(empty($status)){
+			$status = 0;
+		}
+		$list = $this->article->where('status',$status)->paginate(10);
+		//dump($this->article->getlastsql());
+		 // 获取分页显示
+		 $page = $list->render();
+		 $this->assign('list', $list);
+		 $this->assign('page', $page);
+		return $this->fetch();
+	}
+
 }

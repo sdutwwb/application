@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>文章列表</title>
@@ -13,13 +14,17 @@
   <div class="page-title">
     <span class="modular fl"><i class="order"></i><em>文章列表</em></span>
   </div>
-  <!-- <div class="operate"> -->
-   <!-- <form action=""> -->
-    <!-- <img src="__IMG__/icon_search.gif"/> -->
-    <!-- <input type="text" name="souxun" class="textBox length-long" placeholder="输入你要找的内容"/> -->
-    <!-- <input type="submit" value="查询" class="tdBtn"/> -->
-   <!-- </form> -->
-  <!-- </div> -->
+  <div class="operate">
+    <form action="{:url('product_list')}" method="post">
+		 <select class="inline-select" name="status">
+			<option value="0">通过的文章</option>
+			<option value="2">未通过的文章</option>
+			<option value="3">通过并推荐的文章</option>
+		</select>
+    <img src="__IMG__/icon_search.gif"/>
+    <input type="submit" value="查询" class="tdBtn"/> 
+   </form>
+  </div> 
   <table class="list-style Interlaced">
    <tr>
     <th>文章序号</th>
@@ -43,7 +48,7 @@
      <span>{$vo.status}</span>
     </td>
     <td class="center">
-     <a href="{:url('order_detail')}?uid={$vo.uid}&aid={$vo.aid}" class="inline-block" title="查看订单"><img src="__IMG__/icon_view.gif"/></a>
+     <a href="{:url('product_detail')}?uid={$vo.uid}&aid={$vo.aid}" class="inline-block" title="查看订单"><img src="__IMG__/icon_view.gif"/></a>
     </td>
    </tr>
    {/foreach}

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>话题分类</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i></i><em>话题分类</em></span>
+    <span class="modular fr"><a href="{:url('add_category')}" class="pt-link-btn">+添加新话题</a></span>
+  </div>
+  
+  <table class="list-style">
+   <tr>
+	<th>话题id</th>
+    <th>话题名称</th>
+    <th>创建时间</th>
+    <th>是否显示</th>
+	 <th>文章数</th>
+    <th>操作</th>
+   </tr>
+   {foreach $list as $vo}
+   <tr>
+    <td class="center">{$vo.tid}</td>
+    <td class="center">{$vo.tname}</td>
+    <td class="center">{$vo.altertime}</td>
+    <td class="center">{$vo.display}</td>
+    <td class="center">{$vo.artcount}</td>
+    <td class="center"><a href="{:url('operate_category')}?tid={$vo.tid} " class="block" title="移除"><img src="__IMG__/icon_view.gif"/></a></td>
+   </tr>
+   {/foreach}
+  </table>
+  
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+	  {$page|default="只有一页数据哦"}
+	  </div>
+  </div>
+ </div>
+</body>
+</html>
