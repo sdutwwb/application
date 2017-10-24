@@ -9,4 +9,12 @@ class Replyuser extends Model
 		$data['adminid'] = $adminid;
 		return $this->isupdate(false)->save($data);
 	}
+
+	public function getReplyuser($data)
+	{
+		$umid = $data['umid'];
+		$uid = $data['uid'];
+		$result = $this->where('uid',$uid)->where('umid',$umid)->order('replytime','desc')->select();
+		return $result;
+	}
 }

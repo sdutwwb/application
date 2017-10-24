@@ -15,8 +15,10 @@
   <dl>
    <dt class="R-userTitle">用户：{$simpleuser.uname}</dt>
    <dd class="R-userCont">留言：{$ucontent}</dd>
-   <dt class="R-adminTitle">管理员</dt>
-   <dd class="R-adminCont">huifunreiron</dd>
+  {foreach $allReply as $vo}
+   <dt class="R-adminTitle">管理员{$vo.adminid}--时间：{$vo.replytime}</dt>
+   <dd class="R-adminCont"></dd>
+   {/foreach}
   </dl>
   <hr/>
    <form action="{:url('adminWritereply')}">
