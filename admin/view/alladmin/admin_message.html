@@ -13,7 +13,7 @@
     <span class="modular fl"><i class="user"></i><em>用户留言</em></span>
   </div>
    <div class="operate">
-   <form action="{:url('user_message')}?member={$member}" method="post">
+   <form action="{:url('user_message')}" method="post">
     <input type="text"  name="like" class="textBox length-long" placeholder="输入用户id"/>
     <input type="submit" value="查询" class="tdBtn"/>
    </form>
@@ -25,21 +25,20 @@
      <th>留言内容</th>
      <th>操作</th>
    </tr>
-   {foreach $list as $vo}
 	   <tr>
-		<td class="center">{$vo.uid}</td>
-		<td class="center">{$vo.sendtime}</td>
-		<td class="center">{$vo.mstatus}</td>
+		<td class="center"></td>
+		<td class="center"></td>
+		<td class="center"></td>
 		<td width="300">
 		 <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
-		  {$vo.ucontent}
+		
 		 </div>
 		</td>
 		<td class="center">
-		 <a href="{:url('reply_message')}?umid={$vo.umid}&uid={$vo.uid}&ucontent={$vo.ucontent}" class="inline-block" title="回复">处理</a>
+		 <a href="{:url('reply_message')}" class="inline-block" title="回复">处理</a>
 		</td>
 	   </tr>
-	{/foreach}
+	
   </table>
   <!-- BatchOperation -->
   <div style="overflow:hidden;">

@@ -37,15 +37,15 @@ class User extends Model
 	//得到所有用户信息
 	public function getAlluser($like)//模糊查询用户详情
 	{
-		
+		$member = $like['member'];//区别是普通用户还是管理员
 		if(empty($like['like'])){
-			$list = $this->where('member','0')->paginate(10);
+			$list = $this->where('member',$member)->paginate(10);
 		}else{
 			$like = $like['like'];
 			$where1['uname'] = ['like',"$like"."%"]; 
 			$where2['tel'] = ['like',"$like"."%"];
 			$where3['uid'] = ['like', "$like"]; 
-			$list = $this->where('member','0')->where($where1)->whereOr($where2)->whereOr($where3)->paginate(10);
+			$list = $this->where('member',$member)->where($where1)->whereOr($where2)->whereOr($where3)->paginate(10);
 		}
 		 // 获取分页显示
 		 $page = $list->render();

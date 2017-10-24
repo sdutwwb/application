@@ -26,6 +26,7 @@ class Auth extends Controller
 		$this->success('登录成功', url('index/index'));*/
 		$admin = Admin::where('adminname', $this->request->param('adminname'))->find();//账号登陆
 		$email = Admin::where('adminemail', $this->request->param('adminname'))->find();//邮箱登陆
+		$admintel = Admin::where('admintel', $this->request->param('adminname'))->find();//手机号登陆
 		$password = $this->request->param('password');
 		if($admin){
 			if($admin['adminpassword'] == $password){
@@ -41,6 +42,13 @@ class Auth extends Controller
 			}else{
 				$this->error('登录失败', url('auth/login'));
 			}
+		}elseif($admintel){
+			if($admintel['adminpassword'] == $password){
+				session('adminid', $admintel['adminid']);
+				$this->success('登录成功', url('admin/index/index'));
+			}else{
+				$this->error('登录失败', url('auth/login'));
+			}	
 		}else{
 			$this->error('登录失败', url('auth/login'));	
 		}

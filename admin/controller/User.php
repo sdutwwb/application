@@ -34,6 +34,8 @@ class User extends Controller
 			$page = $data['page'];
 			$this->assign('page',$page);
 		}
+		$member = $like['member'];
+		$this->assign('member',$member);
 		$this->assign('list', $list);
 		return $this->fetch();
 	}
@@ -46,6 +48,8 @@ class User extends Controller
 			$page = $data['page'];
 			$this->assign('page',$page);
 		}
+		$member = $like['member'];
+		$this->assign('member',$member);
 		$this->assign('list', $list);
 		return $this->fetch();
 	}

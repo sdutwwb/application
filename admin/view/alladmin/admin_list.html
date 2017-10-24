@@ -10,10 +10,10 @@
 <body>
  <div class="wrap">
   <div class="page-title">
-    <span class="modular fl"><i class="user"></i><em>用户列表</em></span>
+    <span class="modular fl"><i class="user"></i><em>管理员列表</em></span>
   </div>
   <div class="operate">
-   <form action="{:url('user_list')}?member={$member}" method="post">
+   <form action="{:url('user_list')}" method="post">
     <input type="text"  name="like" class="textBox length-long" placeholder="输入用户昵称或手机号码或者id"/>
     <input type="submit" value="查询" class="tdBtn"/>
    </form>
@@ -22,32 +22,24 @@
    <tr>
      <th>编号</th>
      <th>头像</th>
-     <th>用户昵称</th>
+     <th>管理员昵称</th>
      <th>手机号码</th>
      <th>邮箱</th>
-     <th>性别</th>
-     <th>等级</th>
-     <th>注册日期</th>
+     <th>添加日期</th>
      <th>最近登陆时间</th>
-     <th>锁定状态</th>
    </tr>
-   {foreach $list as $vo}
+  
 	   <tr>
-		<td>{$vo.uid}
+		<td>
 		</td>
 		<td class="center">
-			<img src="{$vo.uimage}" class="thumbnail"/>
+			<img src="" class="thumbnail"/>
 		</td>
-		<td class="center">{$vo.uname}</td>
-		<td class="center">{$vo.tel}</td>
-		<td class="center">{$vo.email}</td>
-		<td class="center">{$vo.sex}</td>
-		<td class="center">{$vo.score}</td>
-		<td class="center">{$vo.rtime}</td>
-		<td class="center">{$vo.datetime}</td>
-		<td class="center">{$vo.islock}</td>
+		<td class="center"></td>
+		<td class="center"></td>
+		<td class="center"><td>
+		<td class="center"></td>
 	   </tr>
-	{/foreach}
   </table>
   <!-- BatchOperation -->
   <div style="overflow:hidden;">
