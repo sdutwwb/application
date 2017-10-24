@@ -52,7 +52,7 @@
                 $('#id_11').text('亲，手机号格式不正确哦').css('color', '#E64141');
                  checkAll[0] = 0;
             } else {
-                $.post("{:url('index/checkphone')}", {phone:$("#phone").val()}, function(data){
+                $.post("{:url('mmzh/checkphone')}", {phone:$("#phone").val()}, function(data){
                     if (data.code==0) {
                         $('#id_11').text(data.message).css('color', '#808080');
                         checkAll[0] = 1;

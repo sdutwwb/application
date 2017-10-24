@@ -25,17 +25,29 @@
 <script type="text/javascript" src="__JS__/cufon-yui.js"></script>
 <script type="text/javascript" src="__JS__/cufon.js"></script>
 <script type="text/javascript" src="__JS__/font.js"></script>
-<!--[if lte IE 7]><style>.comments .commentlinks{margin-left:250px;}
-.comments .singlebtn{margin-left:380px;}
-.comments ul li:hover .commentlinks{display:inline-block;}
-.comments ul li.level2:hover .commentlinks{margin-left:210px;}
-.comments ul li.level2:hover .singlebtn{margin-left:340px;}
-</style><![endif]--><!-- that's IT-->
+<script type="text/javascript">
+        window.onload = function(){
+            var oXi = document.getElementById('xiding');
+            oXioffsetTop = oXi.offsetTop;//当前元素距离顶部的偏移量
+            console.log(oXioffsetTop);
+            window.onscroll = function() {
+                console.log(document.body.scrollTop);
+                if (oXioffsetTop <= document.body.scrollTop) {
+                    oXi.style.position = 'fixed';
+                } else {
+                    oXi.style.position = '';
+                }
+                
+            }
+        }
+</script>
 </head>
 <body>
-<span class="biglines">&nbsp;</span>
 <!-- Wrapper -->
 <div id="wrapper_sec">
+<!-- 吸顶条头部 -->
+<div style="height: 89px;border-bottom:1px solid #373D41;">
+<div id="xiding" style="height:89px;background-color: #DCDCF0;border-bottom:1px solid #373D41;z-index: 999;">
 	<!-- Top Section -->
     <div class="top_sec">
     	<!-- Top Section Left Links -->
@@ -49,10 +61,17 @@
         <!-- Top Section right Links -->
         <div class="links_icons">
         	<ul>
-            	<li><a href="{:url('index')}" class="browse">首页</a></li>
-                <li><a href="{:url('log/log')}" class="upload">登录</a></li>
-                <li class="last lang"><a href="{:url('user/regmail')}">注册</a></li>
-                <li><a href="{:url('mmzh/mmzh')}" class="upload">找回密码</a></li>
+            	{if $islog ==0}
+                    <li><a href="{:url('index/index')}" class="index">首页</a></li>
+                    <li><a href="{:url('log/log')}" class="user">登录</a></li>
+                    <li><a href="{:url('user/regmail')}" class="message">注册</a></li>
+                    <li><a href="{:url('mmzh/mmzh')}" class="exit">找回密码</a></li>
+                {else}
+                    <li><a href="{:url('index/index')}" class="index">首页</a></li>
+                    <li><a href="{:url('blog/blog')}" class="user">{$data['uname']}</a></li>
+                    <li><a href="{:url('user/regmail')}" class="message">消息</a></li>
+                    <li><a href="{:url('index/exit')}" class="exit">退出登录</a></li>
+                {/if}
             </ul>
         </div>
     </div>
@@ -70,7 +89,9 @@
                     <li><a href="{:url('index')}" class="staticlinks">首页</a></li>
                     <li><a href="{:url('listing/listing')}" class="staticlinks">发现</a></li>
                     <li><a href="{:url('news/news')}" class="staticlinks">最新新闻</a></li>
-                    <li><a href="{:url('blog/blog')}">新鲜事</a>
+                    {if $islog ==1}
+                    <li><a href="{:url('blog/blog')}">个人中心</a>
+                    {/if}
                     </li>
                     <li><a href="#">话题</a>
                     	<ul>
@@ -88,12 +109,14 @@
             	<div class="clear"></div>
             </div>
         </div>
-        <!-- Search -->
         <div class="search">
         	<input type="text" value="输入你要搜素的内容" id="searchBox" name="s" onblur="if(this.value == '') { this.value = '输入你要搜素的内容'; }" onfocus="if(this.value == '输入你要搜素的内容') { this.value = ''; }" class="bar" />
             <a href="#" class="go">&nbsp;</a>
         </div>
     </div>
+</div>
+   <!--  吸顶条尾部 -->
+</div>
     <div class="clear"></div>
     <!-- Banner -->
     <div id="banner">
