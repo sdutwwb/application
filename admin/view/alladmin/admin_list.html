@@ -12,41 +12,37 @@
   <div class="page-title">
     <span class="modular fl"><i class="user"></i><em>管理员列表</em></span>
   </div>
-  <div class="operate">
-   <form action="{:url('user_list')}" method="post">
-    <input type="text"  name="like" class="textBox length-long" placeholder="输入用户昵称或手机号码或者id"/>
-    <input type="submit" value="查询" class="tdBtn"/>
-   </form>
-  </div>
   <table class="list-style Interlaced">
    <tr>
      <th>编号</th>
-     <th>头像</th>
      <th>管理员昵称</th>
      <th>手机号码</th>
      <th>邮箱</th>
      <th>添加日期</th>
      <th>最近登陆时间</th>
+	 <th>权限详情</th>
    </tr>
-  
+  {foreach $list as $vo}
 	   <tr>
-		<td>
-		</td>
-		<td class="center">
-			<img src="" class="thumbnail"/>
-		</td>
-		<td class="center"></td>
-		<td class="center"></td>
-		<td class="center"><td>
-		<td class="center"></td>
+		<td class="center">{$vo.adminid}</td>
+		<td class="center">{$vo.adminname}</td>
+		<td class="center">{$vo.admintel}</td>
+		<td class="center">{$vo.adminemail}</td>
+		<td class="center">{$vo.addtime}</td>
+		<td class="center">{$vo.lasttime|date="y-m-d h:i:s",###}</td>
+		 <td class="center">
+     <a href="{:url('alladmin/admin_rank')}?adminid={$vo.adminid}&adminname={$vo.adminname}" class="block">
+      <img src="__IMG__/icon_drop.gif"/>
+     </a>
+    </td>
 	   </tr>
+  {/foreach}
   </table>
   <!-- BatchOperation -->
   <div style="overflow:hidden;">
       <!-- Operation -->
 	  <!-- turn page -->
 	  <div class="turnPage center fr">
-	  {$page|default="只有一页用户哦"}
 	  </div>
   </div>
  </div>

@@ -8,8 +8,9 @@ use app\admin\model\Usermessage;
 use app\admin\model\Replyuser;
 use \think\Validate;
 use \think\Session;
-class User extends Controller
+class User extends Auth
 {
+	protected $is_login = ['*'];
 	protected $user;
 	protected $usermessage;
 	protected $replyuser;

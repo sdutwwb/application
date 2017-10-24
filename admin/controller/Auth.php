@@ -6,11 +6,13 @@ use app\admin\model\Admin;
 class Auth extends Controller
 {
 	protected $is_login = [''];
+	protected $admin;
 	public function _initialize()
 	{
 		if (!$this->checklogin() && in_array('*', $this->is_login)) {
 			$this->error('没有登录请登录', url('admin/auth/login'));
 		}
+		$this->admin = new Admin;
 	}
 	public function login()
 	{
@@ -31,6 +33,7 @@ class Auth extends Controller
 		if($admin){
 			if($admin['adminpassword'] == $password){
 				session('adminid', $admin['adminid']);
+				$this->admin->updateLastTime($admin['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
 				$this->error('登录失败', url('auth/login'));
@@ -38,6 +41,7 @@ class Auth extends Controller
 		}elseif($email){
 			if($email['adminpassword'] == $password){
 				session('adminid', $email['adminid']);
+				$this->admin-updateLastTime($email['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
 				$this->error('登录失败', url('auth/login'));
@@ -45,6 +49,7 @@ class Auth extends Controller
 		}elseif($admintel){
 			if($admintel['adminpassword'] == $password){
 				session('adminid', $admintel['adminid']);
+				$this->admin->updateLastTime($admintel['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
 				$this->error('登录失败', url('auth/login'));
