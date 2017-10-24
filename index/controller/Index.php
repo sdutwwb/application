@@ -76,14 +76,19 @@ class Index extends Controller
 		dump($data);
 		echo 1;
 	}
-	public function zhmm()
+	//重置密码
+	public function setmm()
 	{
-		$this->success('恭喜你注册成功', 'index/log');
-		/*$data = $this->request->param();
-		$data = $this->user->where()->find();
-		dump($data);*/
+		$data = $this->request->param();
+		if ($data) {
+			$this->assign('phone', $data['phone']);
+			return $this->fetch();
+		}else {
+			$this->error('抱歉，页面跳转错误', 'index/mmzh');
+		}
+		
 	}
-	//
+	//检测手机号
 	public function checkphone()
 	{
 		$phone = $this->request->param('phone');
@@ -93,6 +98,13 @@ class Index extends Controller
 			} else {
 				echo json_encode(['code'=>2, 'message' => '亲,绑定手机号不存在']);
 			}
+	}
+	//重置密码成功
+	public function czmm()
+	{
+		$data = $this->request->param();
+		dump($data);
+
 	}
 	//手机激活码验证
 	public function checkpricode()
