@@ -43,10 +43,20 @@ class User extends Model
 		}else{
 			$like = $like['like'];
 			$where1['uname'] = ['like',"$like"."%"]; 
-			$where2['tel'] = ['like',"$like"."%"];
-			$where3['uid'] = ['like', "$like"]; 
-			$list = $this->where('member',$member)->where($where1)->whereOr($where2)->whereOr($where3)->paginate(10);
+			$where2['phone'] = ['like',"$like"."%"];
+			//$where3['uid'] = ['like', "$like"]; 
+			$list = $this->where('member',$member)->where('uid',$like)->paginate(10);
+			$arr = $list->toArray();
+			if($arr['total']==0){
+				$list = $this->where('member',$member)->where($where2)->paginate(10);
+				$arr = $list->toArray();
+				if($arr['total']==0){
+					$list = $this->where('member',$member)->where($where1)->paginate(10);
+				}
+			}
+		
 		}
+		//->whereOr($where2)->whereOr($where3)
 		 // 获取分页显示
 		 $page = $list->render();
 		 if(is_null($page)){

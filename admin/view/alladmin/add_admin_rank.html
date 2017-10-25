@@ -12,16 +12,17 @@
     <span class="modular fr"><a href="{:url('alladmin/admin_rank')}?adminid={$adminid}&adminname={$adminname}" class="pt-link-btn">返回权限列表</a></span>
   </div>
   <table class="noborder">
-  <form action="{:url('product_list')}" method="post">
+  <form action="{:url('add_adminRole')}" method="post">
+  <input type="hidden" name="adminid" value="{$adminid}">
    <tr>
     <td style="width:15%;text-align:right;">未拥有的权限</td>
     <td>
 		<div class="operate">
-		 <select class="inline-select" name="pname">
+		 <select class="inline-select" name="rid">
 				
-						
-				<option value=""></option>
-			
+				{foreach $nonRolePer as $vo}		
+				<option value="{$vo.rid}">{$vo.rolename}</option>
+				{/foreach}
 		</select>
 		<img src="__IMG__/icon_search.gif"/>
    
@@ -42,15 +43,17 @@
     <span class="modular fl"><i class="user"></i><em>删除管理员权限</em></span>
   </div>
   <table class="noborder">
+  <form action="{:url('reduce_adminRole')}" method="post">
+  <input type="hidden" name="adminid" value="{$adminid}">
    <tr>
     <td style="width:15%;text-align:right;">已拥有的权限</td>
     <td>
 		<div class="operate">
-			<select class="inline-select" name="pname">
+			<select class="inline-select" name="rid">
 				{foreach $rolePer as $vo}
 					
 						
-				<option value="{$vo.rolename}">{$vo.rolename}</option>
+				<option value="{$vo.rid}">{$vo.rolename}</option>
 					
 				{/foreach}
 			
@@ -67,6 +70,7 @@
      <input type="submit" value="删除" class="tdBtn"/>
     </td>
    </tr>
+  </form>
   </table>
  </div>
 </body>

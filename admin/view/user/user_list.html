@@ -15,6 +15,7 @@
   <div class="operate">
    <form action="{:url('user_list')}?member={$member}" method="post">
     <input type="text"  name="like" class="textBox length-long" placeholder="输入用户昵称或手机号码或者id"/>
+	<input type="hidden" name="member" value="{$member}">
     <input type="submit" value="查询" class="tdBtn"/>
    </form>
   </div>

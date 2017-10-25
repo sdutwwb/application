@@ -1,16 +1,21 @@
 <?php
 namespace app\admin\model;
 
+
 use think\Model;
 class Admin extends Model
 {
 	
-	protected $auto = ['ip'];
+	protected $auto = ['lastip'];
 	protected $update = [];
-	protected function setIpAttr()
+	protected function setLastipAttr()
 	{
 		return request()->ip();
 	}
+	/*public function setAdminpasswordAttr($value)//密码加密
+	{
+		return md5($value);
+	} */
 	public function updateLastTime($adminid)//跟新登录时间和ip
 	{
 		$ip = $_SERVER['REMOTE_ADDR'];
@@ -43,5 +48,17 @@ class Admin extends Model
 	public function adminTorole()//多对多查询
 	{
 		return $this->belongsToMany('Role','admin_role','rid','adminid');
+	}
+	public function updatePassword($data)
+	{
+		$result = $this->where('adminname',$data['adminname'])->where('adminemail',$data['adminemail'])
+		->where('adminpassword',$data['adminpassword'])->find();
+		if(is_null($result)){
+			return false;
+		}else{
+			$password = $data['newpassword'];
+			$this->where('adminname',$data['adminname'])->update(['adminpassword'=>$password]);
+			return true;
+		}
 	}
 }

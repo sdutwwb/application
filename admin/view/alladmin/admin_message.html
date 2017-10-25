@@ -10,35 +10,34 @@
 <body>
  <div class="wrap">
   <div class="page-title">
-    <span class="modular fl"><i class="user"></i><em>用户留言</em></span>
+    <span class="modular fl"><i class="user"></i><em>管理留言</em></span>
+	 <span class="modular fr"><a href="{:url('alladmin/add_message')}" class="pt-link-btn">+添加新留言</a></span>
   </div>
    <div class="operate">
-   <form action="{:url('user_message')}" method="post">
-    <input type="text"  name="like" class="textBox length-long" placeholder="输入用户id"/>
+   <form action="{:url('alladmin/admin_message')}" method="post">
+    <input type="text"  name="like" class="textBox length-long" placeholder="输入管理员id"/>
     <input type="submit" value="查询" class="tdBtn"/>
    </form>
+ </div>
+</div>
   <table class="list-style Interlaced">
    <tr>
      <th>用户的id</th>
      <th>留言时间</th>
-     <th>处理状态</th>
      <th>留言内容</th>
-     <th>操作</th>
    </tr>
+   {foreach $list as $vo}
 	   <tr>
-		<td class="center"></td>
-		<td class="center"></td>
-		<td class="center"></td>
-		<td width="300">
-		 <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
-		
-		 </div>
+		<td class="center">{$vo.adminid}</td>
+		<td class="center">{$vo.senttime}</td>
+		<td width="600">
+		 {$vo.messcontent}
 		</td>
-		<td class="center">
-		 <a href="{:url('reply_message')}" class="inline-block" title="回复">处理</a>
-		</td>
+		<!-- <td class="center"> -->
+		 <!-- <a href="" class="inline-block" title="回复">处理</a> -->
+		<!-- </td> -->
 	   </tr>
-	
+	{/foreach}
   </table>
   <!-- BatchOperation -->
   <div style="overflow:hidden;">

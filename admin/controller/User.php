@@ -29,6 +29,7 @@ class User extends Auth
 	public function user_list()//拿到用户的信息
 	{
 		$like = $this->request->param();
+		//dump($like);
 		$data = $this->user->getAlluser($like);
 		$list = $data['list'];
 		if(isset($data['page'])){//文章太少不需要分页
@@ -36,6 +37,7 @@ class User extends Auth
 			$this->assign('page',$page);
 		}
 		$member = $like['member'];
+		//dump($member);
 		$this->assign('member',$member);
 		$this->assign('list', $list);
 		return $this->fetch();

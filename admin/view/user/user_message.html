@@ -13,8 +13,9 @@
     <span class="modular fl"><i class="user"></i><em>用户留言</em></span>
   </div>
    <div class="operate">
-   <form action="{:url('user_message')}?member={$member}" method="post">
+   <form action="{:url('user_message')}" method="post">
     <input type="text"  name="like" class="textBox length-long" placeholder="输入用户id"/>
+	<input type="hidden" name="member" value="{$member}">
     <input type="submit" value="查询" class="tdBtn"/>
    </form>
   <table class="list-style Interlaced">
