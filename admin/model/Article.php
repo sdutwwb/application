@@ -22,6 +22,11 @@ class Article extends Model
 
 
 	//封装的方法
+	public function getArtCount($status)
+	{
+		return $this->where('status',$status)->count();
+		//dump($this->getlastsql());
+	}
 	public function getallArticle()//得到所有未处理的文章
 	{
 		return $this->where('status', '1')->select();

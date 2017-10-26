@@ -1,39 +1,125 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>添加新会员</title>
+<title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
 </head>
 <body>
  <div class="wrap">
   <div class="page-title">
-    <span class="modular fl"><i class="add_user"></i><em>添加新会员</em></span>
+    <span class="modular fl"><i class="add_user"></i><em>添加管理员</em></span>
   </div>
-  <form action="user_list.html">
+  <form action="{:url('alladmin/add_admin_insert')}" onsubmit="return demo()">
   <table class="list-style">
    <tr>
-    <td style="width:15%;text-align:right;">会员昵称：</td>
-    <td><input type="text" class="textBox length-middle"/></td>
+    <td style="width:15%;text-align:right;">管理员昵称：</td>
+    <td><input id="adminname" type="text" name="adminname" class="textBox length-middle"/></td>
+    <td><span class="adminname" style="color:red"></span></td>
    </tr>
    <tr>
-    <td style="text-align:right;">会员邮箱：</td>
-    <td><input type="text" class="textBox length-middle"/></td>
+    <td style="text-align:right;">管理员邮箱：</td>
+    <td><input type="text" id="adminemail" name="adminemail" class="textBox length-middle"/></td>
+    <td><span class="adminemail" style="color:red"></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">设置密码：</td>
-    <td><input type="password" class="textBox length-middle"/></td>
+    <td><input type="password" id="password" name="adminpassword" class="textBox length-middle"/></td>
+    <td><span class="password" style="color:red"></span></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">确认密码：</td>
+    <td><input type="password" id="repassword" name="readminpassword" class="textBox length-middle"/></td>
+    <td><span class="repassword" style="color:red"></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">手机号码：</td>
-    <td><input type="text" class="textBox length-middle"/></td>
+    <td><input type="text" id="admintel" name="admintel" class="textBox length-middle"/></td>
+    <td><span class="admintel" style="color:red"></span></td>
    </tr>
    <tr>
     <td style="text-align:right;"></td>
-    <td><input type="submit" class="tdBtn" value="添加新用户"/></td>
+    <td><input type="submit" class="tdBtn" value="添加管理员"/></td>
    </tr>
   </table>
   </form>
  </div>
 </body>
 </html>
+<script type="text/javascript">
+
+//验证昵称
+var nameflag = false;
+var emailflag = false;
+var passwordflag = false;
+var telflag = false;
+$('#adminname').blur(function(){
+    $.post("{:url('add_admin_ajaxname')}",{adminname:$('#adminname').val()},function(data){
+        if(data.code == 0){
+          $('.adminname').text(data.message);
+        }else if(data.code == 1){
+           $('.adminname').text(data.message);
+           
+        }else{
+           $('.adminname').text(data.message);
+           nameflag = true;
+        }
+    },'json');
+});
+//验证邮箱
+$('#adminemail').blur(function(){
+    $.post("{:url('add_admin_ajaxemail')}",{adminemail:$('#adminemail').val()},function(data){
+        if(data.code == 1){
+          $('.adminemail').text(data.message);
+        }else if(data.code == 2){
+           $('.adminemail').text(data.message);
+        }else{
+           $('.adminemail').text(data.message);
+          emailflag = true;
+        }    
+      },'json');
+});
+//验证密码是否一致
+$('#password').blur(function(){
+    if($('#password').val() == ''){
+      $('.password').text('密码不能为空');
+    }else{
+      $('.password').text('');
+    }
+});
+ $('#repassword').blur(function(){
+        if($('#repassword').val() == ''){
+          $('.repassword').text('密码不能为空');
+        }else{
+          if($('#password').val() != $('#repassword').val()){
+               $('.repassword').text('二次密码不相同');
+          }else{
+              passwordflag = true;
+               $('.repassword').text('二次密码相同请继续添加');
+          }
+        }
+      });
+ //
+ $('#admintel').blur(function(){
+    $.post("{:url('add_admin_ajaxtel')}",{admintel:$('#admintel').val()},function(data){
+        if(data.code == 0){
+          $('.admintel').text(data.message);
+        }else if(data.code == 1){
+           $('.admintel').text(data.message);
+           
+        }else{
+           $('.admintel').text(data.message);
+           telflag = true;
+        }
+    },'json');
+});
+ function demo()
+{
+  if(nameflag == true && emailflag == true && passwordflag == true && telflag == true){
+    return true;
+  }else{
+    return false;
+  }
+}
+</script>

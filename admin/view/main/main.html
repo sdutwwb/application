@@ -18,95 +18,89 @@
    <ul>
     <li>
      <span>已通过博文数：</span>
-     <span>539</span>
+     <span>{$status0}</span>
     </li>
     <li>
      <span>未通过博文数：</span>
-     <span>23</span>
+     <span>{$status1}</span>
     </li>
     <li>
-     <span>审核中博文数</span>
-     <span>1282</span>
+     <span>审核中博文数:</span>
+     <span>{$status2}</span>
     </li>
 	 <li>
-     <span>通过并推荐博文数</span>
-     <span>1282</span>
+     <span>通过并推荐博文数:</span>
+     <span>{$status3}</span>
     </li>
    </ul>
   </dd>
  </dl>
  
  <dl>
-  <dt>话题信息</dt>
+  <dt>话题对应的文章数</dt>
+  <dd>
+   <ul>
+   {foreach $topicCount as $vo}
+    <li>
+     <span>{$vo.tname}：</span>
+     <span>{$vo.artcount}</span>
+    </li>
+	{/foreach}
+   </ul>
+  </dd>
+ </dl>
+ 
+ <dl>
+  <dt>会员和普通用户信息</dt>
   <dd>
    <ul>
     <li>
-     <span>明星类数量：</span>
-     <span>128家</span>
+     <span>会员总数：</span>
+     <span>{$member1}</span>
     </li>
 	 <li>
-     <span>段子类类数量：</span>
-     <span>128家</span>
+     <span>普通用户总数：</span>
+     <span>{$member0}</span>
     </li>
     <li>
-     <span>搞笑类数量</span>
-     <span>1252</span>
+     <span>今日新增会员数：</span>
+     <span>{$newmember1['Daymember']}</span>
     </li>
-    <li>
-     <span>美女类数量：</span>
-     <span>13252</span>
+	    <li>
+     <span>当前月新增会员数：</span>
+     <span>{$newmember1['Monthmember']}</span>
     </li>
-    <li>
-     <span>情感类数量：</span>
-     <span>1282.00元</span>
+	 <li>
+     <span>今日新增普通用户数：</span>
+     <span>{$newmember0['Daymember']}</span>
     </li>
-    <li>
-     <span>社会正能量类数量：</span>
-     <span>128家</span>
-    </li>
-    <li>
-     <span>军事类数量</span>
-     <span>300家</span>
-    </li>
-    <li>
-     <span>体育类数量</span>
-     <span>458家</span>
+	<li>
+     <span>当前月新增普通用户数：</span>
+     <span>{$newmember0['Monthmember']}</span>
     </li>
    </ul>
   </dd>
  </dl>
  
  <dl>
-  <dt>会员统计信息</dt>
+  <dt>留言统计</dt>
   <dd>
    <ul>
+    <!-- <li> -->
+     <!-- <span>今日访问：</span> -->
+     <!-- <span>1356</span> -->
+    <!-- </li> -->
+    <!-- <li> -->
+     <!-- <span>当前在线人数：</span> -->
+     <!-- <span>98</span> -->
+    <!-- </li> -->
     <li>
-     <span>所有会员：</span>
-     <span>356</span>
+     <span>普通用户留言：</span>
+     <span>{$message0}</span>
     </li>
-    <li>
-     <span>今日新增会员：</span>
-     <span>432</span>
-    </li>
-   </ul>
-  </dd>
- </dl>
- 
- <dl>
-  <dt>访问统计</dt>
-  <dd>
-   <ul>
-    <li>
-     <span>今日访问：</span>
-     <span>1356</span>
-    </li>
-    <li>
-     <span>当前在线人数：</span>
-     <span>98</span>
-    </li>
-    <li>
-     <span>今日留言：</span>
-     <span>1</span>
+	 <li>
+     <span>会员留言：</span>
+     <span>{$message1}</span>
     </li>
    </ul>
   </dd>

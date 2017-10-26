@@ -12,7 +12,7 @@ class Topic extends Model
 	}
 	public function getAllTopic()
 	{
-		$list = $this->paginate(10);
+		$list = $this->paginate(3);
 		 // 获取分页显示
 		 $page = $list->render();
 		 if(is_null($page)){
@@ -32,5 +32,9 @@ class Topic extends Model
 	public function setUpdatecate($data)//修改话题
 	{
 		$this->isupdate(true)->save($data);
+	}
+	public function getTopiccount()
+	{
+		return $this->where('display',1)->select();
 	}
 }

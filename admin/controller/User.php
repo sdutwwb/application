@@ -8,8 +8,9 @@ use app\admin\model\Usermessage;
 use app\admin\model\Replyuser;
 use \think\Validate;
 use \think\Session;
-class User extends Controller
+class User extends Auth
 {
+	protected $is_login = ['*'];
 	protected $user;
 	protected $usermessage;
 	protected $replyuser;
@@ -28,6 +29,7 @@ class User extends Controller
 	public function user_list()//拿到用户的信息
 	{
 		$like = $this->request->param();
+		//dump($like);
 		$data = $this->user->getAlluser($like);
 		$list = $data['list'];
 		if(isset($data['page'])){//文章太少不需要分页
@@ -35,6 +37,7 @@ class User extends Controller
 			$this->assign('page',$page);
 		}
 		$member = $like['member'];
+		//dump($member);
 		$this->assign('member',$member);
 		$this->assign('list', $list);
 		return $this->fetch();

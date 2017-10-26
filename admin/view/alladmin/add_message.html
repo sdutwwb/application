@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理员回复</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>管理员</em></span>
+  </div>
+  <dl>
+   <dd class="R-adminCont">填写的留言内容：</dd>
+  </dl>
+  <hr/>
+   <form action="{:url('add_message')}">
+	  <div>
+	   <textarea class="textarea block" name="messcontent" style="padding:1em;"></textarea>
+	   <input type="submit" value="留言" class="tdBtn" style="margin:8px 0;"/>
+	  </div>
+   </form>
+ </div>
+</body>
+</html>

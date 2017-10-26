@@ -11,7 +11,7 @@ class Usermessage extends Model
 	}
 
 
-	public function getAllusermess($like)
+	public function getAllusermess($like)//得到用户所有留言
 	{
 		$member = $like['member'];
 		if(empty($like['like'])){
@@ -38,8 +38,12 @@ class Usermessage extends Model
 
 
 
-	public function onetoUser()
+	public function onetoUser()//yidui 1
 	{
 		return $this->hasOne('user', 'uid');
 	} 
+	public function getMessage($member)
+	{
+		return $this->where('member',$member)->count();
+	}
 }
