@@ -8,6 +8,7 @@ use app\admin\model\Usermessage;
 use app\admin\model\Admin;
 use \think\Validate;
 use \think\Session;
+use \think\Cache;
 class Website extends Auth
 {
 	protected $is_login = ['*'];
@@ -74,4 +75,33 @@ class Website extends Auth
 		}
 		
 	}
+	public function deleteCache()
+	{
+		//php think clear --path C:\wamp\www\adovcate\tp5\runtime\temp\;
+	}
+	/*public function clearDir()//清除缓存
+	{
+		$dir = 'runtime/temp';
+		$dir = rtrim($dir,'/') . '/';
+		$dp = opendir($dir);
+		while ($file = readdir($dp)) {
+
+			if ($file == '.' || $file == '..') {
+				continue;
+			}
+			$fileName = $dir . $file; 
+			//echo $fileName;
+			if (is_dir($fileName)) {
+				$this->clearDir($fileName);
+			} else {
+				unlink($fileName);
+			}
+		}
+		closedir($dp);
+		if(rmdir($dir)){
+			$this->success('清除缓存成功');
+		}
+	}*/
+
+
 }

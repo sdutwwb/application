@@ -11,10 +11,7 @@ class Index extends Auth
 	{
 		return $this->fetch();
 	}
-	public function main()
-	{
-		return $this->fetch();
-	}
+	
 	public function menu()
 	{
 		return $this->fetch();

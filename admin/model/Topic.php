@@ -33,4 +33,8 @@ class Topic extends Model
 	{
 		$this->isupdate(true)->save($data);
 	}
+	public function getTopiccount()
+	{
+		return $this->where('display',1)->select();
+	}
 }

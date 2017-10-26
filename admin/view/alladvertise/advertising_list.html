@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>广告列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i></i><em>会员广告列表</em></span>
+    <span class="modular fr"><a href="{:url('alladvertise/advertising')}" class="pt-link-btn">+添加赞助商广告</a></span>
+  </div>
+   <form action="{:url('alladvertise/advertising_list')}" method="post">
+		 <select class="inline-select" name="status">
+			<option value="0">会员的广告</option>
+			<option value="1">赞助商的广告</option>
+		</select>
+    <img src="__IMG__/icon_search.gif"/>
+    <input type="submit" value="查询" class="tdBtn"/> 
+   </form>
+  <table class="list-style Interlaced">
+   <tr>
+    <th>广告名称</th>
+    <th>广告内容</th>
+    <th>添加的时间</th>
+	<th>广告类型</th>
+    <th>删除操作</th>
+   </tr>
+  {foreach $list as $vo}
+   <tr>
+    <td class="center">{$vo.advername}</td>
+    <td class="center">{$vo.advercontent}</td>
+    <td class="center">{$vo.adveraddtime}</td>
+    <td class="center">{$vo.adverstatus}</td>
+    <td class="center">
+     <a href="{:url('alladvertise/reduce_adver')}?adverid={$vo.adverid}" title="删除"><img src="__IMG__/icon_drop.gif"/></a>
+    </td>
+   </tr>
+  {/foreach}
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+		{$page|default="只有一页广告哦"}
+	  </div>
+  </div>
+ </div>
+</body>
+</html>
