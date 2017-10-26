@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use \think\Controller;
 use app\index\model\User as UserModel;
+use app\index\model\Topic as TopicModel;
 use \think\Validate;
 use \think\Session;
 
@@ -12,15 +13,18 @@ class Index extends Controller
 	public function _initialize()
 	{
 		$this->user = new UserModel();
+		$this->topic = new TopicModel();
 	}
 	public function index()
 	{
+		$topic = $this->topic->getAlltopic();
+		$this->assign(['topic'=>$topic, 'location'=>'最新新闻']);
 		if (session('?uid')) {
 			$uid = Session::get('uid');
 			$data = $this->user->where('uid', $uid)->find();
 			$this->assign(['islog'=>1, 'data'=>$data]);
 		} else {
-			$this->assign('islog', 0);
+			$this->assign(['islog'=> 0]);
 		}
 		return $this->fetch();
 	}
@@ -49,8 +53,8 @@ class Index extends Controller
 	}
 	//退出登录
 	public function exit()
-	{
-		Session::clear();
+	{	
+		Session::clear('think');
 		$this->success('退出登录成功', 'index/index');
 	}
 }

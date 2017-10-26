@@ -11,6 +11,7 @@ class User extends Controller
 	public function _initialize()
 	{
 		$this->user = new UserModel();
+
 	}
 	public function regmail()
 	{

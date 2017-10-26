@@ -14,6 +14,7 @@ class User extends Model
 	{
 		return request()->ip();
 	}
+	//通过手机号更改密码
 	public function updatePwd($data)
 	{
 		$password = md5($data['password']);
@@ -29,5 +30,14 @@ class User extends Model
 	{
 		return $this->where('uid',$uid)->update(['datetime'=>time()]);
 	}
-
+	//通过用户id查询单条数据
+	public function selectSingle($uid)
+	{
+		return $this->where('uid', $uid)->find();
+	}
+	//发博加积分
+	public function scoreSelf($uid)
+	{
+		return $this->where('uid', $uid)->setInc('score', 2);
+	}
 }

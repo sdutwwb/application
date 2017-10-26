@@ -20,7 +20,7 @@ class Mmzh extends Controller
 			$data = $this->user->where('uid', $uid)->find();
 			$this->assign(['islog'=>1, 'data'=>$data]);
 		} else {
-			$this->assign('islog', 0);
+			$this->assign(['islog'=> 0]);
 		}
 		return $this->fetch();
 	}

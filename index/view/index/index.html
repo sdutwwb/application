@@ -95,14 +95,11 @@
                     </li>
                     <li><a href="#">话题</a>
                     	<ul>
-                            <li><a href="">明星</a></li>
-                            <li><a href="">段子</a></li>
-                            <li><a href="">视频</a></li>
-                            <li><a href="">新鲜事</a></li>
-                            <li><a href="">搞笑</a></li>
-                            <li><a href="">社会正能量</a></li>
-                            <li><a href="">情感</a></li>
-                            <li><a href="">美女</a></li>
+                            {if !empty($topic)}
+                            {foreach $topic as $value}
+                            <li><a href="">{$value['tname']}</a></li>
+                            {/foreach}
+                            {/if}
                       	</ul>
                     </li>
                 </ul>

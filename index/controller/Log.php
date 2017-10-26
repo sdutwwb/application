@@ -3,7 +3,6 @@ namespace app\index\controller;
 
 use \think\Controller;
 use app\index\model\User as UserModel;
-use app\index\model\Topic as TopicModel;
 use \think\Validate;
 use \think\Session;
 
@@ -13,7 +12,7 @@ class Log extends Controller
 	public function _initialize()
 	{
 		$this->user = new UserModel();
-		$this->topic = new UserTopic();
+		
 	}
 	public function log()
 	{
@@ -21,9 +20,9 @@ class Log extends Controller
 			$uid = Session::get('uid');
 			$data = $this->user->where('uid', $uid)->find();
 			$topic = $this->topic->getAlltopic();
-			$this->assign(['islog'=>1, 'data'=>$data], 'topic'=>$topic);
+			$this->assign(['islog'=>1, 'data'=>$data]);
 		} else {
-			$this->assign('islog', 0);
+			$this->assign(['islog'=> 0]);
 		}
 		return $this->fetch();
 	}

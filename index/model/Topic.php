@@ -8,4 +8,12 @@ class Topic extends Model
 	{
 		return $this->where('display', 1)->select();
 	}
+	public function topicname($tid)
+	{
+		return $this->where('tid', $tid)->find()['tname'];
+	}
+	public function addSelf($tid)
+	{
+		return $this->where('tid', $tid)->setInc('artcount');
+	}
 }

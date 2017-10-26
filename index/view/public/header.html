@@ -22,6 +22,8 @@
 <script type="text/javascript" src="__JS__/cufon-yui.js"></script>
 <script type="text/javascript" src="__JS__/cufon.js"></script>
 <script type="text/javascript" src="__JS__/font.js"></script>
+<script type="text/javascript" src="__EDITOR__/ueditor.config.js"></script>
+<script type="text/javascript" src="__EDITOR__/ueditor.all.js"></script>
 <script type="text/javascript">
         window.onload = function(){
             var oXi = document.getElementById('xiding');
@@ -46,7 +48,7 @@
 <div id="wrapper_sec">
     <!-- 吸顶条头部 -->
 <div style="height: 89px;border-bottom:1px solid #373D41;">
-<div id="xiding" style="height:89px;background-color: #DCDCF0;border-bottom:1px solid #373D41;z-index: 999;">
+<div id="xiding" style="height:89px;background-color: #DCDCF0;border-bottom:1px solid #373D41;z-index: 1000;">
 	<!-- Top Section -->
     <div class="top_sec">
     	<!-- Top Section Left Links -->
@@ -54,16 +56,16 @@
         <!-- Top Section right Links -->
         <div class="links_icons">
         	<ul>
-               {if $islog ==0}
-                    <li><a href="{:url('index/index')}" class="browse">首页</a></li>
-                    <li><a href="{:url('log/log')}" class="upload">登录</a></li>
-                    <li><a href="{:url('user/regmail')}">注册</a></li>
-                    <li><a href="{:url('mmzh/mmzh')}" class="upload">找回密码</a></li>
+              {if $islog ==0}
+                    <li><a href="{:url('index/index')}" class="index">首页</a></li>
+                    <li><a href="{:url('log/log')}" class="user">登录</a></li>
+                    <li><a href="{:url('user/regmail')}" class="message">注册</a></li>
+                    <li><a href="{:url('mmzh/mmzh')}" class="exit">找回密码</a></li>
                 {else}
-                    <li><a href="{:url('index/index')}" class="browse">首页</a></li>
-                    <li><a href="{:url('blog/blog')}" class="upload">{$data['uname']}</a></li>
-                    <li><a href="{:url('user/regmail')}">消息</a></li>
-                    <li><a href="{:url('index/exit')}" class="upload">退出登录</a></li>
+                    <li><a href="{:url('index/index')}" class="index">首页</a></li>
+                    <li><a href="{:url('blog/blog')}" class="user">{$data['uname']}</a></li>
+                    <li><a href="{:url('user/regmail')}" class="message">消息</a></li>
+                    <li><a href="{:url('index/exit')}" class="exit">退出登录</a></li>
                 {/if}
             </ul>
         </div>
@@ -86,16 +88,13 @@
                     <li><a href="{:url('blog/blog')}">个人中心</a>
                     {/if}
                     </li>
-                     <li><a href="#">话题</a>
+                    <li><a href="#">话题</a>
                         <ul>
-                            <li><a href="">明星</a></li>
-                            <li><a href="">段子</a></li>
-                            <li><a href="">视频</a></li>
-                            <li><a href="">新鲜事</a></li>
-                            <li><a href="">搞笑</a></li>
-                            <li><a href="">社会正能量</a></li>
-                            <li><a href="">情感</a></li>
-                            <li><a href="">美女</a></li>
+                            {if !empty($topic)}
+                            {foreach $topic as $value}
+                            <li><a href="">{$value['tname']}</a></li>
+                            {/foreach}
+                            {/if}
                         </ul>
                     </li>
                 </ul>
@@ -104,7 +103,7 @@
         </div>
         <!-- Search -->
         <div class="search">
-        	<input type="text" value="Enter keyword to search" id="searchBox" name="s" onblur="if(this.value == '') { this.value = 'Enter keyword to search'; }" onfocus="if(this.value == 'Enter keyword to search') { this.value = ''; }" class="bar" />
+        	<input type="text" value="搜索" id="searchBox" name="s" onblur="if(this.value == '') { this.value = '搜索'; }" onfocus="if(this.value == '搜索') { this.value = ''; }" class="bar" />
             <a href="#" class="go">&nbsp;</a>
         </div>
     </div>
@@ -115,12 +114,23 @@
     <div id="content_sec">
     	<!-- Bread Crumb -->
         <div id="crumb">
-        	<h5>You are here:</h5>
-            <ul>
-                <li><a href="#">首页</a></li>
-                <li><a href="#">About Us </a></li>
-            	<li class="last"><a href="#">Information</a></li>
-            </ul>
+        	<h5>You are here!</h5>
+            <ul style="height: 25px;">
+                <li><a href="{:url('index/index')}">首页</a></li>
+                <li>
+                    <a href="#">{$location}</a>
+                </li>
+                    {if $location == '个人中心'}
+                        <li class="xiangq"><a href="#">{$data['uname']}</a></li>
+                            <div class="private">
+                            <a href="#">我的微博</a>
+                            <a href="#">我的收藏</a>
+                            <a href="#">朋友圈</a>
+                            <a href="#">私信</a>
+                          </div>
+                            </ul>
+                    {/if}
+                </ul>
         </div>
 {/block}
 {block name="content_left"}
@@ -489,3 +499,10 @@ asd
 {/block}
 </body>
 </html>
+<!-- <script type="text/javascript">
+    $(function(){
+        $('.xiangq').children('a').click(function(){
+            $('private').slideToggle();
+        })
+    })
+</script> -->
