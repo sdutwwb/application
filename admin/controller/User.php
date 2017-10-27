@@ -36,7 +36,10 @@ class User extends Auth
 			$page = $data['page'];
 			$this->assign('page',$page);
 		}
-		$member = $like['member'];
+		if(isset($like['member'])){
+			$member = $like['member'];
+		}
+		
 		//dump($member);
 		$this->assign('member',$member);
 		$this->assign('list', $list);
@@ -78,5 +81,19 @@ class User extends Auth
 			$this->usermessage->where('umid',$data['umid'])->update(['mstatus'=>0]);
 			$this->success('回复成功');
 		}
+	}
+	public function lockUser()//锁定用户   解锁用户
+	{
+		$islock = $this->request->param('islock');
+		$uid = $this->request->param('uid');
+		$member = $this->request->param('member');
+		if($member == "非会员"){
+			$member = 0;
+		}else{
+			$member = 1;
+		}
+		//dump($member);
+		$this->user->where('uid',$uid)->update(['islock'=>$islock]);
+		$this->success('修改成功',url('user/user_list',array('member'=>$member)),'',1);
 	}
 }
