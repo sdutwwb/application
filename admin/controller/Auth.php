@@ -33,6 +33,7 @@ class Auth extends Controller
 		if($admin){
 			if($admin['adminpassword'] == $password){
 				session('adminid', $admin['adminid']);
+				session('adminname', $admin['adminname']);
 				$this->admin->updateLastTime($admin['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
@@ -41,6 +42,7 @@ class Auth extends Controller
 		}elseif($email){
 			if($email['adminpassword'] == $password){
 				session('adminid', $email['adminid']);
+				session('adminname', $admin['adminname']);
 				$this->admin-updateLastTime($email['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{
@@ -49,6 +51,7 @@ class Auth extends Controller
 		}elseif($admintel){
 			if($admintel['adminpassword'] == $password){
 				session('adminid', $admintel['adminid']);
+				session('adminname', $admin['adminname']);
 				$this->admin->updateLastTime($admintel['adminid']);
 				$this->success('登录成功', url('admin/index/index'));
 			}else{

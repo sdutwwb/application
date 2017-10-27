@@ -42,8 +42,8 @@ class User extends Model
 			$list = $this->where('member',$member)->paginate(10);
 		}else{
 			$like = $like['like'];
-			$where1['uname'] = ['like',"$like"."%"]; 
-			$where2['phone'] = ['like',"$like"."%"];
+			$where1['uname'] = ['like',"%"."$like"."%"]; 
+			$where2['phone'] = ['like',"%"."$like"."%"];
 			//$where3['uid'] = ['like', "$like"]; 
 			$list = $this->where('member',$member)->where('uid',$like)->paginate(10);
 			$arr = $list->toArray();
