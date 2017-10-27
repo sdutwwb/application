@@ -18,6 +18,11 @@ class Article extends Model
 		$page = $list->render();
 		return ['list'=>$list, 'page'=>$page];	
 	}
+	//遍历出微博的详情
+	public function getDetails($aid)
+	{
+		return $this->where('aid', $aid)->find();
+	}
 	//删除数据
 	public function deleteArt($aid)
 	{
@@ -32,5 +37,10 @@ class Article extends Model
 	public function articleCount($uid)
 	{
 		return $this->where('uid', $uid)->count();
+	}
+	//微博阅读量自增
+	public function addSelf($aid)
+	{
+		return $this->where('aid', $aid)->setInc('readcount');
 	}
 }

@@ -17,14 +17,26 @@ class Details extends Controller
 		$this->topic = new TopicModel();
 		$this->article = new  ArticleModel();
 	}
+	//文章详情
 	public function details()
 	{
 		$topic = $this->topic->getAlltopic();
-		$this->assign(['topic'=>$topic, 'location'=>'最新新闻']);
+		$this->assign(['topic'=>$topic]);
+		$aid = $this->request->param()['aid'];
+		$this->article->addSelf($aid);//增加微博的阅读量一次
 		if (session('?uid')) {
 			$uid = Session::get('uid');
 			$data = $this->user->where('uid', $uid)->find();
-			$this->assign(['islog'=>1, 'data'=>$data, 'location'=>'详情', 'private'=>1]);
+			$details = $this->article->getDetails($aid);//得到微博的详情
+			$topicname = $this->topic->topicname($details['tid']);//得到微博所属话题名字
+			$this->assign([
+				'islog'    =>1,
+				'data'     =>$data,
+				'location' =>'详情',
+				'private'  =>1,
+				'details'  =>$details,
+				'topicname'=>$topicname,
+		]);
 		} else {
 			$this->assign(['islog'=> 0]);
 		}

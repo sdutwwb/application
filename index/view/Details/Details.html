@@ -3,25 +3,19 @@
     	<!-- Column 1 -->
         <div class="col1">
             <div class="blog">
-            	<h2 class="heading">Vestibulum a augue Fusce nisi tellus</h2>
+            	<p class="heading">{$topicname}</p>
                 <ul class="bloglisting">
                 	<li>
-                    	<div class="thumb">
-                        	<a href="blog_post.html"><img src="images/blog1.gif" alt="" /></a>
-                        </div>
                         <div class="desc">
-                        	<a class="comments_bubble" href="#">1300</a>
-                        	<h3 class="colr">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
-                            <p class="time">January 15, 2011</p>
-                            <p class="postedby">Posted By: RayWilliams</p>
+                        	<a class="comments_bubble" href="#">{$details['readcount']}</a>
+                        	<p class="biaoti">{$details['atitle']}</p>
+                            <p class="time">{$details['pubtime']}</p>
+                            <p class="postedby"><img src="{$data['uimage']}" style="width: 18px;height: 18px;">{$data['uname']}<script type="text/javascript">$.post</script></p>
                             <div class="clear"></div>
-                            <p class="txt">
-                            	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulu volutpat eget, dapibus ac, lectus. Curabitur dolor sapien, hendrerit non Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus...
-                            </p>
                         </div>
                         <br />
                         <p class="txt">
-                        	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien, hendrerit non, suscipit bibendum, auctor ac, arcu. Vestibulum dapibus. Sed pede lacus, pretium in, condimentum sit amet, mollis dapibus, magna. Ut bibendum dolor nec augue. Ut tempus luctus metus. Sed a velit. Pellentesque at libero elementum ante condimentum sollicitudin. Pellentesque lorem ipsum, semper quis, interdum et, sollicitudin eu, purus. Vivamus fringilla ipsum vel orci. Phasellus vitae massa at massa pulvinar pellentesque. Fusce tincidunt libero vitae odio. Donec malesuada diam nec mi. Integer hendrerit pulvinar ante. Donec eleifend, nisl eget aliquam congue, justo metus venenatis neque, vel tincidunt elit augue sit amet velit. Nulla facilisi. Aenean suscipit. 
+                        	{$details['acontent']}
                         </p>
                         <br />
                         <p class="txt">
