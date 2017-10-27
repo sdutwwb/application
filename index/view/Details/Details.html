@@ -6,17 +6,17 @@
             	<p class="heading">{$topicname}</p>
                 <ul class="bloglisting">
                 	<li>
+                        
                         <div class="desc" style="width: 675px;">
+                            <img src="{$data['uimage']}" style="width: 55px;height: 55px;float: left;">
                         	<a class="comments_bubble" href="#">阅读{$details['readcount']}</a>
-                        	<p class="biaoti">{$details['atitle']}</p>
+                        	<p class="biaoti" style="width: 620px;float: right;">{$details['atitle']}</p>
                             <p class="time">{$details['pubtime']}</p>
-                            <p class="postedby"><img src="{$data['uimage']}" style="width: 18px;height: 18px;">{$data['uname']}<script type="text/javascript">$.post</script></p>
+                            <p class="postedby">{$data['uname']}<script type="text/javascript">$.post</script></p>
                             <div class="clear"></div>
                         </div>
                         <br />
-                        <p class="txt">
                         	{$details['acontent']}
-                        </p>
                         <ul class="xiaogongneng">
                             <li style="width: 65px;">
                                 <a href="{:url('details/details',['aid'=>$details['aid']])}" class="zhuanfa">{$details['copy']}</a>
@@ -34,12 +34,13 @@
                     <ul class="commentslist">
                         {foreach $list as $value}
                         <li class="level1">
+                            <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
                             <div class="desc">
                             	<div class="commentlinks singlebtn">
                                     <a href="#" class="reply">回复</a>
                                 </div>
-                            	<h5><a href="#" class="colr">{$value['uname']}</a></h5>
-                                <p class="time">{$value['comtime']}</p>
+                            	<a href="#" class="colr">{$value['uname']}</a>
+                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['comtime']}</p>
                                 <div class="clear"></div>
                                 <p class="txt">
                                 	{$value['ccontent']}
