@@ -41,7 +41,7 @@ class User extends Model
 	{
 		return $this->where('uid', $uid)->setInc('score', 2);
 	}
-	//将用户头像和用户名放到评论人信息中去
+	//将用户头像和用户名放到用户信息中去
 	public function getUserAll($list)
 	{
 		if (!empty($list)) {
