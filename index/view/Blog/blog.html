@@ -12,19 +12,18 @@
                     {else}
                     {foreach $list as $value}
                 	<li>
-                        {if empty($value['aimage'])}
                     	 <div class="desc">
-                            <a href="" style="display: block;float: left;"><img src="{$data['uimage']}" style="width: 35px"></a>
-                            <a href="" class="articleuser">{$data['uname']}</a>
-                            <a href="{:url('details/details')}" class="biaoti">{$value['atitle']}</a> 
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="display: block;float: left;"><img src="{$data['uimage']}" style="width: 35px"></a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="articleuser">{$data['uname']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="biaoti">{$value['atitle']}</a> 
                             {if $value['public']==1}
-                            <a href="" class="articlepower">所有人可见</a>
+                            <a href="javascript：void(0);" class="articlepower">所有人可见</a>
                             {else}
-                            <a href="" class="articlepower">尽自己可见</a>
+                            <a href="javascript：void(0);" class="articlepower">尽自己可见</a>
                             {/if}
                             <p class="time">{$value['pubtime']}</p>
                             <p class="postedby">{$value['tname']}</p>
-                            <a class="comments_bubble" href="#">阅读{$value['readcount']}</a>
+                            <a class="comments_bubble" href="{:url('details/details',['aid'=>$value['aid']])}">阅读{$value['readcount']}</a>
                             <p class="txt">
                                 {$value['acontent']}
                             </p>
@@ -38,25 +37,8 @@
                                 编辑
                             </a>
                         </div>
-                        {else}
-                        <div class="thumb">
-                            <a href="{:url('details/details')}"><img src="__IMG__/blog1.gif" alt="" /></a>
-                        </div>
-                        <div class="desc">
-                        	<a class="comments_bubble" href="#">1300</a>
-                        	<h3><a href="{:url('details/details')}" class="colr">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></h3>
-                            <p class="time">January 15, 2011</p>
-                            <p class="postedby">Posted By: RayWilliams</p>
-                            <div class="clear"></div>
-                            <p class="txt">
-                            	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulu volutpat eget, dapibus ac, lectus. Curabitur dolor sapien, hendrerit non Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus...
-                            </p>
-                            <a href="{:url('details/details')}" class="colr readmore">Read More</a>
-                        </div>
-                        {/if}
                     </li>
                     {/foreach}
-
                     {/if}
 
                 </ul>
@@ -164,23 +146,15 @@
                        <a>{$articlecount}</a> 
                     </li>
                     {if $dataintro}
-                    <li class="intro"><a href="#">ArtAnimation</a></li>
+                        {foreach $dataintro as $k => $value}
+                            {if !empty($value)&&$k!='uid'}
+                            <li class="intro"><a href="#">{$value}</a></li> 
+                            {/if}
+                        {/foreach} 
                     {else}
-                    <li class="intro"><a href="#">该用户太懒了，什么都没留下</a></li>
+                    <li class="intro"><a href="#">博主太懒，什么都没留下~</a></li>
                     {/if}
                 </ul>
-                <!-- <ul>
-                    <li><a href="#" class="colr">Animals</a></li>
-                    <li><a href="#" class="colr">Commercials</a></li>
-                    <li><a href="#" class="colr">Family</a></li>
-                    <li><a href="#" class="colr">Funny Videos</a></li>
-                    <li><a href="#" class="colr">Health &amp; Beauty</a></li>
-                    <li><a href="#" class="colr">Movies &amp; Shorts</a></li>
-                    <li><a href="#" class="colr">News &amp; Politics</a></li>
-                    <li><a href="#" class="colr">Products &amp; Tech</a></li>
-                    <li><a href="#" class="colr">Sports</a></li>
-                    <li><a href="#" class="colr">Travel</a></li>
-                </ul> -->
             </div>
             <div class="clear"></div>
         	<!-- Tabs -->
