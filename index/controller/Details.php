@@ -25,10 +25,14 @@ class Details extends Controller
 		$aid = $this->request->param()['aid'];
 		$this->article->addSelf($aid);//增加微博的阅读量一次
 		if (session('?uid')) {
-			$uid = Session::get('uid');
-			$data = $this->user->where('uid', $uid)->find();
-			$details = $this->article->getDetails($aid);//得到微博的详情
+			$uid       = Session::get('uid');
+			$data      = $this->user->where('uid', $uid)->find();
+			$details   = $this->article->getDetails($aid);//得到微博的详情
 			$topicname = $this->topic->topicname($details['tid']);//得到微博所属话题名字
+			$comments  = $this->article->comment($aid);//得到微博的所有评论(分页形式)
+			$list      = $comments['list'];
+			$list      = $this->user->getUserAll($list);//将评论人昵称和头像拿到
+			$page      = $comments['page'];
 			$this->assign([
 				'islog'    =>1,
 				'data'     =>$data,
@@ -36,6 +40,8 @@ class Details extends Controller
 				'private'  =>1,
 				'details'  =>$details,
 				'topicname'=>$topicname,
+				'list'     =>$list,
+				'page'     =>$page,
 		]);
 		} else {
 			$this->assign(['islog'=> 0]);

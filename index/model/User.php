@@ -26,7 +26,8 @@ class User extends Model
 		}
 		
 	}
-	public function updateDateTime($uid)//跟新登录时间和ip
+	//跟新登录时间和ip
+	public function updateDateTime($uid)
 	{
 		return $this->where('uid',$uid)->update(['datetime'=>time()]);
 	}
@@ -39,5 +40,18 @@ class User extends Model
 	public function scoreSelf($uid)
 	{
 		return $this->where('uid', $uid)->setInc('score', 2);
+	}
+	//将用户头像和用户名放到评论人信息中去
+	public function getUserAll($list)
+	{
+		if (!empty($list)) {
+			foreach ($list as $key => $value) {
+
+				$data = $this->where('uid', $value['uid'])->find();
+				$list[$key]['uname'] = $data['uname'];
+				$list[$key]['uimage'] = $data['uimage'];
+			}
+		}
+		return $list;
 	}
 }
