@@ -6,8 +6,8 @@
             	<p class="heading">{$topicname}</p>
                 <ul class="bloglisting">
                 	<li>
-                        <div class="desc">
-                        	<a class="comments_bubble" href="#">{$details['readcount']}</a>
+                        <div class="desc" style="width: 675px;">
+                        	<a class="comments_bubble" href="#">阅读{$details['readcount']}</a>
                         	<p class="biaoti">{$details['atitle']}</p>
                             <p class="time">{$details['pubtime']}</p>
                             <p class="postedby"><img src="{$data['uimage']}" style="width: 18px;height: 18px;">{$data['uname']}<script type="text/javascript">$.post</script></p>
@@ -17,72 +17,40 @@
                         <p class="txt">
                         	{$details['acontent']}
                         </p>
-                        <br />
-                        <p class="txt">
-                        	cNam sapien. Maecenas mattis blandit lacus. Cras non pede. Phasellus consectetuer. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse ut augue. Mauris non magna. Nunc in enim. In hendrerit lorem sit amet mi. Aliquam rutrum, turpis id tempor ullamcorper, sem risus molestie tortor, eget placerat ante tortor at tortor. Mauris odio.  
-                        </p>
-                    </li>
-                </ul>
+                        <ul class="xiaogongneng">
+                            <li style="width: 65px;">
+                                <a href="{:url('details/details',['aid'=>$details['aid']])}" class="zhuanfa">{$details['copy']}</a>
+                            </li>
+                            <li style="width: 65px;"><a href="{:url('details/details',['aid'=>$details['aid']])}" class="pinglun">{$details['reply']}</a></li>
+                            <li style="width: 65px;"> <a href="{:url('details/details',['aid'=>$details['aid']])}" class="zan">{$details['favour']}</a></li>
+                            <li style="width: 30px;"><a href="{:url('details/delete',['aid'=>$details['aid']])}" style="width: 26px;">
+                                删除
+                            </a></li>
+                            <li style="width: 30px;"><a href="{:url('details/details',['aid'=>$details['aid']])}" style="width: 26px;">编辑 </a> </li>
+                        </ul>        
                 <div class="clear"></div>
-                <!-- Comments -->
+                <!-- 评论区 -->
                 <div class="comments">
-                	<h2 class="heading">477 comments</h2>
                     <ul class="commentslist">
-                    	<li class="level1">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments1.gif" alt="" /></a>
-                            </div>
+                        {foreach $list as $value}
+                        <li class="level1">
                             <div class="desc">
                             	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
+                                    <a href="#" class="reply">回复</a>
                                 </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
+                            	<h5><a href="#" class="colr">{$value['uname']}</a></h5>
+                                <p class="time">{$value['comtime']}</p>
                                 <div class="clear"></div>
                                 <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
+                                	{$value['ccontent']}
                                 </p>
                             </div>
                         </li>
-                        <li class="level1">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments2.gif" alt="" /></a>
-                            </div>
+                        {/foreach}
+                        <li class="level2">
                             <div class="desc">
                             	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
-                                </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="level1">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments3.gif" alt="" /></a>
-                            </div>
-                            <div class="desc">
-                            	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
-                                </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="level1">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments4.gif" alt="" /></a>
-                            </div>
-                            <div class="desc">
-                            	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
+                                    <a href="#" class="reply">回复</a>
                                 </div>
                             	<h5><a href="#" class="colr">By MySebbb:</a></h5>
                                 <p class="time">7 months ago</p>
@@ -93,44 +61,9 @@
                             </div>
                         </li>
                         <li class="level2">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments5.gif" alt="" /></a>
-                            </div>
                             <div class="desc">
                             	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
-                                </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="level2">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments6.gif" alt="" /></a>
-                            </div>
-                            <div class="desc">
-                            	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
-                                </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="level1">
-                        	<div class="thumb">
-                            	<a href="#"><img src="images/comments7.gif" alt="" /></a>
-                            </div>
-                            <div class="desc">
-                            	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">Reply</a>
+                                    <a href="#" class="reply">回复</a>
                                 </div>
                             	<h5><a href="#" class="colr">By MySebbb:</a></h5>
                                 <p class="time">7 months ago</p>
@@ -141,37 +74,12 @@
                             </div>
                         </li>
                     </ul>
-                    <textarea name="" cols="" rows=""></textarea>
-                    <p class="characters">500 characters remaining</p>
-                    <ul class="textareasubmission">
-                    	<li class="txt"><a href="#">Cancel</a> or</li>
-                        <li><a href="#" class="post">Post</a></li>
-                        <li class="txt"><a href="#" class="attachment">Attach a video </a></li>
-                    </ul>
+                    
                 </div>
                 <div class="clear"></div>
                 <br /><br />
                 <!-- Pagination -->
-                <div class="paginations">
-                	<h5 class="pagehead">PAGE</h5>
-                    <ul>
-                    	<li class="leftpage"><a href="#">&nbsp;</a></li>
-                        <li class="pages"><a href="#">1</a></li>
-                        <li class="pages"><a href="#">2</a></li>
-                        <li class="pages"><a href="#">3</a></li>
-                        <li class="pages"><a href="#">4</a></li>
-                        <li class="pages"><a href="#" class="selected">5</a></li>
-                        <li class="pages"><a href="#">6</a></li>
-                        <li class="pages"><a href="#">7</a></li>
-                        <li class="pages"><a href="#">8</a></li>
-                        <li class="pages"><a href="#">9</a></li>
-                        <li class="pages"><a href="#">10</a></li>
-                        <li class="dots">...</li>
-                        <li class="pages"><a href="#">103</a></li>
-                        <li class="pages"><a href="#">104</a></li>
-                        <li class="nextpage"><a href="#">&nbsp;</a></li>
-                    </ul>
-                </div>
+               
             </div>
             <div class="clear"></div>
         </div>

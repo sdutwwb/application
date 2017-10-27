@@ -43,4 +43,11 @@ class Article extends Model
 	{
 		return $this->where('aid', $aid)->setInc('readcount');
 	}
+	//一对多关系(微博对多条评论)
+	public function comment()
+	{
+		$list = $this->hasMany('Comment', 'aid')->order('comtime', 'desc')->paginate(6);
+		$page = $list->render();
+		return ['list'=>$list, 'page'=>$page];
+	}
 }
