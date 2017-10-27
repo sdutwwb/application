@@ -1,0 +1,33 @@
+
+<div class="blog">
+                <h2 class="heading">Blog</h2>
+                <ul class="bloglisting">
+                    {if empty($list)}
+                        <div class="desc">
+                            <a class="comments_bubble" href="#">暂无信息</a>
+                        </div>
+                    {else}
+                    {foreach $list as $value}
+                    <li>
+                         <div class="desc">
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="display: block;float: left;"><img src="" style="width: 35px"></a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="articleuser"></a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="biaoti">{$value['atitle']}</a> 
+                            
+                            
+                            <p class="time">{$value['pubtime']}</p>
+                            <a class="comments_bubble" href="{:url('details/details',['aid'=>$value['aid']])}">阅读{$value['readcount']}</a>
+                            <p class="txt">
+                                {$value['acontent']}
+                            </p>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore zhuanfa">{$value['copy']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore pinglun">{$value['reply']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore zan">{$value['favour']}</a>
+                        </div>
+                    </li>
+                    {/foreach}
+                    {/if}
+
+                </ul>
+                <!-- Pagination -->
+</div>

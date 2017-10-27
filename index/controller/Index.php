@@ -4,16 +4,20 @@ namespace app\index\controller;
 use \think\Controller;
 use app\index\model\User as UserModel;
 use app\index\model\Topic as TopicModel;
+use app\index\model\Article;
 use \think\Validate;
 use \think\Session;
 
 class Index extends Controller
 {
 	protected $user;
+	protected $topic;
+	protected $article;
 	public function _initialize()
 	{
 		$this->user = new UserModel();
 		$this->topic = new TopicModel();
+		$this->article = new Article();
 	}
 	public function index()
 	{
@@ -56,5 +60,12 @@ class Index extends Controller
 	{	
 		Session::clear('think');
 		$this->success('退出登录成功', 'index/index');
+	}
+	public function status0Art()//通过ajax拿通过审核的博文进行瀑布流展示
+	{
+		$limit = $this->request->param('limit');
+		$list = $this->article->order('pubtime','desc')->where('public',1)->limit($limit)->select();
+		$this->assign('list',$list);
+		return $this->fetch('artlist');
 	}
 }
