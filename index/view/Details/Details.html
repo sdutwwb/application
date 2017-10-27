@@ -47,33 +47,27 @@
                                 </p>
                             </div>
                         </li>
+                            {if !empty($value['reply'])}
+                                {foreach $value['reply'] as $v}
+                        <li class="level2">
+                            <img src="{$v['uimage']}" style="width: 55px;height: 55px;float: left;">
+                            <div class="desc">
+                                <div class="commentlinks singlebtn">
+                                    <a href="#" class="reply">回复</a>
+                                </div>
+                               <a href="#" class="colr">{$v['uname']}</a>
+                                <p class="time" style="margin-top: 0px;height: 16px;">{$v['replytime']}</p>
+                                <div class="clear"></div>
+                                <p class="txt">
+                                   {$v['replycontent']}
+                                </p>
+                            </div>
+                        </li>
+                                {/foreach}
+                            {/if}
                         {/foreach}
-                        <li class="level2">
-                            <div class="desc">
-                            	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">回复</a>
-                                </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="level2">
-                            <div class="desc">
-                            	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">回复</a>
-                                </div>
-                            	<h5><a href="#" class="colr">By MySebbb:</a></h5>
-                                <p class="time">7 months ago</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed elit. Nulla sem risus, vestibulum in, volutpat eget, dapibus ac, lectus. Curabitur dolor sapien.
-                                </p>
-                            </div>
-                        </li>
+                        
+                       
                     </ul>
                     
                 </div>

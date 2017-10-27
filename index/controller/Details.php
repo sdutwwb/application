@@ -4,6 +4,8 @@ namespace app\index\controller;
 use \think\Controller;
 use app\index\model\User as UserModel;
 use app\index\model\Topic as TopicModel;
+use app\index\model\Reply as ReplyModel;
+use app\index\model\Comment as CommentModel;
 use app\index\model\Article as ArticleModel;
 use \think\Validate;
 use \think\Session;
@@ -15,7 +17,9 @@ class Details extends Controller
 	{
 		$this->user = new UserModel();
 		$this->topic = new TopicModel();
+		$this->reply = new ReplyModel();
 		$this->article = new  ArticleModel();
+		$this->comment = new CommentModel();
 	}
 	//文章详情
 	public function details()
@@ -32,6 +36,12 @@ class Details extends Controller
 			$comments  = $this->article->comment($aid);//得到微博的所有评论(分页形式)
 			$list      = $comments['list'];
 			$list      = $this->user->getUserAll($list);//将评论人昵称和头像拿到
+			if (!empty($list)) {
+				foreach ($list as $key => $value) {
+					$list[$key]['reply'] = $this->user->getUserAll($this->reply->getReply($value['pid']));
+					
+				}
+			}
 			$page      = $comments['page'];
 			$this->assign([
 				'islog'    =>1,

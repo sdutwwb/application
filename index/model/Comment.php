@@ -9,4 +9,9 @@ class Comment extends Model
 	{
 		return $this->belongsTo('article');
 	}
+	//一对多关系(一条评论对应多条回复)
+	public function reply()
+	{
+			return $this->hasMany('Reply', 'pid')->order('replytime', 'desc');
+	}
 }
