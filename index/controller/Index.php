@@ -67,5 +67,6 @@ class Index extends Controller
 		$list = $this->article->order('pubtime','desc')->where('public',1)->limit($limit)->select();
 		$this->assign('list',$list);
 		return $this->fetch('artlist');
+		echo 1;
 	}
 }
