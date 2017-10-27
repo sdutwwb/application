@@ -7,7 +7,7 @@ use app\index\model\Topic as TopicModel;
 use app\index\model\Article;
 use \think\Validate;
 use \think\Session;
-
+use \think\Db;
 class Index extends Controller
 {
 	protected $user;
@@ -64,9 +64,15 @@ class Index extends Controller
 	public function status0Art()//通过ajax拿通过审核的博文进行瀑布流展示
 	{
 		$limit = $this->request->param('limit');
-		$list = $this->article->order('pubtime','desc')->where('public',1)->limit(6)->select();
-		$this->assign('list',$list);
-		return $this->fetch('artlist');
-		echo 1;
+		$list = Db::query("select * from wb_article where public = 1 order by pubtime desc limit $limit,6");
+		//$list = $this->article->order('pubtime','desc')->where('public',1)->limit($limit)->select();
+		//dump($list);die;
+		if(!$list){
+			echo 1;
+		}else{
+			$this->assign('list',$list);
+			return $this->fetch('artlist');
+		}
+		
 	}
 }

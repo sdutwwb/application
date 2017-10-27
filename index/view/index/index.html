@@ -98,7 +98,7 @@
                     	<ul>
                             {if !empty($topic)}
                             {foreach $topic as $value}
-                            <li><a href="">{$value['tname']}</a></li>
+                            <li><a id="tname" href="">{$value['tname']}</a></li>
                             {/foreach}
                             {/if}
                       	</ul>
@@ -186,28 +186,32 @@
        
         <div class="col1">
         	<!-- Featured Playlist -->
-        <a id="aa">11111111111</a>
+        
             <!-- Recent Videos -->
-                <ul class="display">
-                	<li>
-                        <div class="bigsec">
-                            <a href="#"><p class="txt">
-									博文内容
-                            </p></a>
-                            <div class="clear"></div>
-                        </div>
-                    </li>
-                </ul>
         </div>
         <script type="text/javascript">
             window.onload = function(){
-                createArt();
+                var num = 0;
+                 createArt();
                 function createArt(){
-                    $.post("{:url('index/status0Art')}",{name:'1'},function(data){
-                        $('.col1').append(data);
+                    $.post("{:url('index/status0Art')}",{limit:num},function(data){
+                        if(data == 1){
+                            window.onscroll = null;
+                        }else{
+                            $('.col1').append(data);
+                            num += 6;
+                            console.log(num);
+                        }  
                     },'json');
                 }
-                
+                $(window).scroll(function(){
+　　                   var scrollTop = $(this).scrollTop();
+　　                   var scrollHeight = $(document).height();
+　　                   var windowHeight = $(this).height();
+　　                   if(scrollTop + windowHeight == scrollHeight){
+                             createArt();   
+　　                      }
+                      });
             };
            
         </script>

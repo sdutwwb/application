@@ -31,6 +31,7 @@
      <th>注册日期</th>
      <th>最近登陆时间</th>
      <th>锁定状态</th>
+     <th>操作</th>
    </tr>
    {foreach $list as $vo}
 	   <tr>
@@ -47,6 +48,12 @@
 		<td class="center">{$vo.rtime}</td>
 		<td class="center">{$vo.datetime}</td>
 		<td class="center">{$vo.islock}</td>
+		{if $vo.islock == '未锁定用户'}
+			<td class="center"><a href="{:url('user/lockUser')}?uid={$vo.uid}&member={$vo.member}&islock=1">锁定用户</a></td>
+		{else}
+			<td class="center"><a href="{:url('user/lockUser')}?uid={$vo.uid}&member={$vo.member}&islock=0">解锁用户</a></td>
+		{/if}
+		
 	   </tr>
 	{/foreach}
   </table>
