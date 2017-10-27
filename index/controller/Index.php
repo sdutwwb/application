@@ -64,7 +64,7 @@ class Index extends Controller
 	public function status0Art()//通过ajax拿通过审核的博文进行瀑布流展示
 	{
 		$limit = $this->request->param('limit');
-		$list = $this->article->order('pubtime','desc')->where('public',1)->limit($limit)->select();
+		$list = $this->article->order('pubtime','desc')->where('public',1)->limit(6)->select();
 		$this->assign('list',$list);
 		return $this->fetch('artlist');
 		echo 1;

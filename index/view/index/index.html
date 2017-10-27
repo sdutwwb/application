@@ -200,13 +200,15 @@
                 </ul>
         </div>
         <script type="text/javascript">
-            $('#aa').click(function(){
-                alert(1);
-                $.post("{:url('index/status0Art')}",{name:'1'},function(data){
-                      $('.col1').append(data);
-                },'json');
-
-            });
+            window.onload = function(){
+                createArt();
+                function createArt(){
+                    $.post("{:url('index/status0Art')}",{name:'1'},function(data){
+                        $('.col1').append(data);
+                    },'json');
+                }
+                
+            };
            
         </script>
         <!-- Column 2 -->
@@ -379,10 +381,6 @@
         <!-- Footer - Search - Share -->
         <div class="foot_search_share">
         	<!-- Footer - search -->
-        	<div class="foot_search">
-            	<input type="text" value="Enter keyword to search" id="searchBox2" name="s" onblur="if(this.value == '') { this.value = 'Enter keyword to search'; }" onfocus="if(this.value == 'Enter keyword to search') { this.value = ''; }" class="bar" />
-            	<a href="#" class="searchbtn buttonone right"><span>Search</span></a>
-            </div>
             <!-- Footer -share -->
             <div class="share">
             	<a href="#"><img src="__IMG__/facebook.png" alt="" /></a>
