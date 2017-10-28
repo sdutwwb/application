@@ -6,6 +6,6 @@ class Reply extends Model
 {
 	public function getReply($pid)
 	{
-		return $this->where('pid', $pid)->order('replytime', 'asc')->select();
+		return $this->where('pid', $pid)->order('replytime', 'desc')->select();
 	}
 }

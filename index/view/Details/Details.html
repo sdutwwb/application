@@ -55,36 +55,43 @@
                             <input type="hidden" name="aid" value="{$value['aid']}">
                             </form>
                         </li>
-                            <span class="chakanAll">点击查看更多</span> 
-                            <div style="width: 658px;" class="hidden1">  
+                            
+                            <div style="width: 658px;" class="chakanAll"> 
+                            <span><img src="__IMG__/arrow_right.gif" style="width: 10px;height: 25px;position: relative;top: -75px;left: -39px;"></span>  
                             {if !empty($value['reply'])}
                                 {foreach $value['reply'] as $v}
                             <!-- 回复区 --> 
-                            <li class="level2">
+                            <li class="level2 hidden1">
                                 <img src="{$v['uimage']}" style="width: 55px;height: 55px;float: left;">
-                                <form action="{:url('details/reply')}" onsubmit="return replys();">
-                                <div class="desc">
+                                <div class="desc" style="width: 500px;">
+                                    <form action="{:url('details/reply')}" onsubmit="return replys();">
                                     <input type="hidden" name="pid" value="{$value['pid']}">
                                     <input type="hidden" name="ruid" value="{$v['uid']}">
-                                    <div class="commentlinks singlebtn">
-                                        <a href="javascript:void(0);" class="reply" >回复</a>
-                                    </div>
+                                    
                                    <a href="#" class="colr">{$v['uname']}</a>
                                     <p class="time" style="margin-top: 0px;height: 16px;">{$v['replytime']}</p>
                                     <div class="clear"></div>
                                     <p class="txt">
                                        {$v['replycontent']}
                                     </p>
-                                </div>
-                                
                                     <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
                                 
                                     <button style="cursor: pointer;" class="hidden1">回复</button>
                                 
-                                <input type="hidden" name="aid" value="{$value['aid']}">
-                                </form>
+                                    <input type="hidden" name="aid" value="{$value['aid']}">
+                                    </form>
+                                </div>
+                                
+                                    
                             </li>
-                            <script type="text/javascript">
+                                {/foreach}
+                            {/if}
+                            <!-- <span class="shouqi">点击收起</span> -->
+                            </div>
+                        {/foreach}
+                    </ul>
+                    
+                    <script type="text/javascript">
                                 function replys()
                                 {
                                     if ($('.replys').val() =='') {
@@ -94,30 +101,41 @@
                                     }
                                 }
                             </script>
-                                {/foreach}
-                            {/if}
-                            </div>
-                        {/foreach}
-                        
-                       
-                    </ul>
-                    
+
                 </div>
+               
+                
                 <div class="clear"></div>
                 <br /><br />
                 <!-- Pagination -->
                
             </div>
+             <div class="blog">
+                    {if !empty($list)}
+                    {$page}
+                {/if}
+                </div>
+            <form action="{:url('details/insertComment')}">
+                <a class="span1">来一手最新评论吧</a>
+                <input type="hidden" name="aid" value="{$details['aid']}">
+                <input type="text" name="ccontent" style="width: 280px;height: 20px;border-top: 0px;"><button style="cursor: pointer;margin-left: 55px;">评论</button>
+            </form>
             <div class="clear"></div>
         </div>
         <script type="text/javascript">
             $('.reply').click(function(){
                 $(this).parent().parent().nextAll().removeClass('hidden1').end();
             });
-            $('.chakanAll').click(function(){
-                $(this).next().fadeIn().end().fadeOut();
+            $('.shouqi').click(function(){
+                $(this).parent().fadeOut();
             })
-        </script>
+            $(function(){
+            $('.chakanAll').click(function(){
+                $(this).children('li').slideToggle().end().siblings().children('li').slideUp();
+                })
+            })
+            </script>
+
         <!-- Column 2 -->
         {/block}
         {block name="content_right"}

@@ -83,4 +83,15 @@ class Details extends Controller
 		$this->reply->allowField(true)->save();
 		$this->redirect('details/details', ['aid'=>$aid], 1, '回复成功');
 	}
+	//提交评论
+	public function insertComment()
+	{
+		$uid = Session::get('uid');
+		$data = $this->request->param();
+		$data['uid'] = $uid;
+		$aid = $data['aid'];
+		$this->comment->data($data);
+		$this->comment->save();
+		$this->redirect('details/details', ['aid'=>$aid], 1, '回复成功');
+	}
 }
