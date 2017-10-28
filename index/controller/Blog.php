@@ -54,7 +54,7 @@ class Blog extends Controller
 		}
 		return $this->fetch();
 	}
-	public function postblog()
+	public function postblog()//发表博文
 	{
 		$data = $this->request->param();
 		$info = $this->article->insertArt($data);
@@ -65,6 +65,15 @@ class Blog extends Controller
 			$this->success('发表成功', 'blog/blog');
 		}else {
 			$this->error('发表失败', 'blog/blog');
+		}
+	}
+	public function uploadHead()//上传头像
+	{
+		$uid = Session::get('uid');
+		$fileimg = request()->file('image');
+		$img = $this->user->getLoad($fileimg);
+		if($this->user->save(['uimage'=>$img],['uid'=>$uid])){
+			$this->success('上传头像成功','blog/blog','',1);
 		}
 	}
 }

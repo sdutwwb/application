@@ -131,7 +131,30 @@
         <div class="col2">
         	<!-- Categories -->
             <div class="categories">
-                <div class="txgr"><img src="{$data['uimage']}" style="width:50px;float: left;"></div>
+                <div class="txgr">
+                    <form action="{:url('blog/uploadHead')}" method="post" enctype="multipart/form-data" style="width:auto;">
+                    <a href="javascript:void(0);"  onclick="updatefile()">
+                        <img src="__UPLOAD__{$data['uimage']}" style="width:60px;float: left;" title="更换头像">
+                    </a>
+
+                     <input type="file" name="image[]" id="fileToUpload" onchange="fileSelected();" style="display:none;cusor:pointer;">
+                     <input id="submit" type="submit" value="确认上传" style="display:none;color:red" onclock="displaysubmit()">
+                </form>
+
+                </div>
+                <script type="text/javascript">
+                    function updatefile(){
+                        document.getElementById("fileToUpload").click(); 
+                           $('#submit').css('display','none');   
+                    }
+                    function fileSelected() {
+                      $('#submit').css('display','block'); 
+                    }
+                    function displaysubmit(){
+                        $('#submit').css('display','none'); 
+                    }
+                </script>
+                <span id="sp" style="display:non;">点击头像可以更换，温馨头像不能超过2M</span>
             	<span><a>{$data['uname']}</a></span>
                 <ul>
                     <!-- 关注,粉丝,微博 -->
