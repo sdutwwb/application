@@ -50,6 +50,7 @@ class User extends Model
 				$data = $this->where('uid', $value['uid'])->find();
 				$list[$key]['uname'] = $data['uname'];
 				$list[$key]['uimage'] = $data['uimage'];
+				$list[$key]['uid'] = $data['uid'];
 			}
 		}
 		return $list;

@@ -35,9 +35,12 @@
                         {foreach $list as $value}
                         <li class="level1">
                             <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
+                            <form action="{:url('details/reply')}" onsubmit="return replys();">
                             <div class="desc">
+                                <input type="hidden" name="pid" value="{$value['pid']}">
+                                <input type="hidden" name="ruid" value="{$value['uid']}">
                             	<div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">回复</a>
+                                    <a href="javascript:void(0);" class="reply">回复</a>
                                 </div>
                             	<a href="#" class="colr">{$value['uname']}</a>
                                 <p class="time" style="margin-top: 0px;height: 16px;">{$value['comtime']}</p>
@@ -45,26 +48,55 @@
                                 <p class="txt">
                                 	{$value['ccontent']}
                                 </p>
+                                
                             </div>
+                            <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
+                            <button style="cursor: pointer;" class="hidden1">回复</button>
+                            <input type="hidden" name="aid" value="{$value['aid']}">
+                            </form>
                         </li>
+                            <span class="chakanAll">点击查看更多</span> 
+                            <div style="width: 658px;" class="hidden1">  
                             {if !empty($value['reply'])}
                                 {foreach $value['reply'] as $v}
-                        <li class="level2">
-                            <img src="{$v['uimage']}" style="width: 55px;height: 55px;float: left;">
-                            <div class="desc">
-                                <div class="commentlinks singlebtn">
-                                    <a href="#" class="reply">回复</a>
+                            <!-- 回复区 --> 
+                            <li class="level2">
+                                <img src="{$v['uimage']}" style="width: 55px;height: 55px;float: left;">
+                                <form action="{:url('details/reply')}" onsubmit="return replys();">
+                                <div class="desc">
+                                    <input type="hidden" name="pid" value="{$value['pid']}">
+                                    <input type="hidden" name="ruid" value="{$v['uid']}">
+                                    <div class="commentlinks singlebtn">
+                                        <a href="javascript:void(0);" class="reply" >回复</a>
+                                    </div>
+                                   <a href="#" class="colr">{$v['uname']}</a>
+                                    <p class="time" style="margin-top: 0px;height: 16px;">{$v['replytime']}</p>
+                                    <div class="clear"></div>
+                                    <p class="txt">
+                                       {$v['replycontent']}
+                                    </p>
                                 </div>
-                               <a href="#" class="colr">{$v['uname']}</a>
-                                <p class="time" style="margin-top: 0px;height: 16px;">{$v['replytime']}</p>
-                                <div class="clear"></div>
-                                <p class="txt">
-                                   {$v['replycontent']}
-                                </p>
-                            </div>
-                        </li>
+                                
+                                    <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
+                                
+                                    <button style="cursor: pointer;" class="hidden1">回复</button>
+                                
+                                <input type="hidden" name="aid" value="{$value['aid']}">
+                                </form>
+                            </li>
+                            <script type="text/javascript">
+                                function replys()
+                                {
+                                    if ($('.replys').val() =='') {
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }
+                                }
+                            </script>
                                 {/foreach}
                             {/if}
+                            </div>
                         {/foreach}
                         
                        
@@ -78,6 +110,14 @@
             </div>
             <div class="clear"></div>
         </div>
+        <script type="text/javascript">
+            $('.reply').click(function(){
+                $(this).parent().parent().nextAll().removeClass('hidden1').end();
+            });
+            $('.chakanAll').click(function(){
+                $(this).next().fadeIn().end().fadeOut();
+            })
+        </script>
         <!-- Column 2 -->
         {/block}
         {block name="content_right"}
