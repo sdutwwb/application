@@ -92,7 +92,6 @@ class User extends Auth
 		}else{
 			$member = 1;
 		}
-		//dump($member);
 		$this->user->where('uid',$uid)->update(['islock'=>$islock]);
 		$this->success('修改成功',url('user/user_list',array('member'=>$member)),'',1);
 	}

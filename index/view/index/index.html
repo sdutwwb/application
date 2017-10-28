@@ -27,20 +27,6 @@
 <script type="text/javascript" src="__JS__/font.js"></script>
 <script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
 <script type="text/javascript">
-        window.onload = function(){
-            var oXi = document.getElementById('xiding');
-            oXioffsetTop = oXi.offsetTop;//当前元素距离顶部的偏移量
-            console.log(oXioffsetTop);
-            window.onscroll = function() {
-                console.log(document.body.scrollTop);
-                if (oXioffsetTop <= document.body.scrollTop) {
-                    oXi.style.position = 'fixed';
-                } else {
-                    oXi.style.position = '';
-                }
-                
-            }
-        }
 </script>
 </head>
 <body>
@@ -61,7 +47,17 @@
         </div>
         <!-- Top Section right Links -->
         <div class="links_icons">
-        	<ul>
+			<ul>
+				<li>
+				<form action="{}">
+					<div>
+						<input type="text" value="输入你要搜素的内容或者标题" name="like" onblur="if(this.value == '') { this.value = '输入你要搜素的内容或者标题'; }" onfocus="if(this.value == '输入你要搜素的内容或者标题') { this.value = ''; }"/>
+						<button>发 现</button>
+					</div>
+				</form>	
+						
+                
+				</li>
             	{if $islog ==0}
                     <li><a href="{:url('index/index')}" class="index">首页</a></li>
                     <li><a href="{:url('log/log')}" class="user">登录</a></li>
@@ -87,30 +83,30 @@
         <div class="navigation">
         	<div id="smoothmenu1" class="ddsmoothmenu">
                 <ul>
-                    <li><a href="{:url('index')}" class="staticlinks">首页</a></li>
-                    <li><a href="{:url('listing/listing')}" class="staticlinks">发现</a></li>
-                    <li><a href="{:url('news/news')}" class="staticlinks">最新新闻</a></li>
                     {if $islog ==1}
-                    <li><a href="{:url('blog/blog')}" >个人中心</a>
+                    <li><a href="{:url('blog/blog')}" >个人中心</a></li>
                     {/if}
-                    </li>
-                    <li><a href="#">话题</a>
-                    	<ul>
-                            {if !empty($topic)}
-                            {foreach $topic as $value}
-                            <li><a id="tname" href="">{$value['tname']}</a></li>
-                            {/foreach}
-                            {/if}
-                      	</ul>
-                    </li>
-                </ul>
+                    	
+                      {if !empty($topic)}
+                        {foreach $topic as $value}
+                     <li><a href="">{$value['tname']}</a></li>
+                           {/foreach}
+                       {/if}
+					   {if !empty($topic)}
+                        {foreach $topic as $value}
+                     <li><a href="">{$value['tname']}</a></li>
+                           {/foreach}
+                       {/if}
+					   {if !empty($topic)}
+                        {foreach $topic as $value}
+                     <li><a href="">{$value['tname']}</a></li>
+                           {/foreach}
+                       {/if}
+					   
+				</ul>  
+				
             	<div class="clear"></div>
             </div>
-        </div>
-	<form action="{}">
-        <div class="search">
-        	<input type="text" value="输入你要搜素的内容或者标题" id="searchBox" name="like" onblur="if(this.value == '') { this.value = '输入你要搜素的内容或者标题'; }" onfocus="if(this.value == '输入你要搜素的内容或者标题') { this.value = ''; }" class="bar" />
-            <a href="#" class="go">&nbsp;</a>
         </div>
     </div>
 </div>
@@ -119,65 +115,27 @@
     <div class="clear"></div>
     <!-- Banner -->
     <div id="banner">
-    	<div id="slider2" class="leftsecbanner">
-            <div class="contentdiv">
-                <object type="application/x-shockwave-flash" style="width:660px; height:348px;" data="http://t.cn/RWCUiTQ">
-                	<param name="movie" value="http://t.cn/RWCUiTQ" />
-                	<param value="application/x-shockwave-flash" name="type" /> 
-                    <param value="true" name="allowfullscreen" /> 
-                    <param value="always" name="allowscriptaccess" /> 
-                    <param value="opaque" name="wmode" />
-                </object>
-            </div>
-        </div>
-        <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
-        <div id="paginate-slider2">
-        	<div class="usual">
-                <ul class="idTabs">
-                  <li><a href="#idTab1" class="selected"><span>新鲜事</span></a></li>
-                  <li><a href="#idTab2"><span>时实热点</span></a></li>
-                  <li><a href="#idTab3"><span>热门段子</span></a></li>
-                </ul>
-                <div id="idTab1" class="tabssection">
-                    <div class="css-scrollbar simple">
-                        <a href="#" class="toc">
-                            <span class="thumb"><img src="__IMG__/video_small5.gif" alt="" /></span>
-                            <span class="desc">
-                                <span class="title">Tonight (I'm Lovin' You)</span>
-                                <span class="time">04:59</span>
-                                <span class="channel">Enrique Iglesias</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div id="idTab2" class="tabssection">
-                    <div class="css-scrollbar simple">
-                        <a href="#" class="toc">
-                            <span class="thumb"><img src="__IMG__/video_small4.gif" alt="" /></span>
-                            <span class="desc">
-                                <span class="title">Rihanna - Only Girl (In The World) </span>
-                                <span class="time">04:11</span>
-                                <span class="channel">RihannaVEVO</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div id="idTab3" class="tabssection">
-                    <div class="css-scrollbar simple">
-                        <a href="#" class="toc">
-                            <span class="thumb"><img src="__IMG__/video_small3.gif" alt="" /></span>
-                            <span class="desc">
-                                <span class="title">ENRIQUE IGLESIAS - Bailamos </span>
-                                <span class="time">03:52</span>
-                                <span class="channel">Enrique Iglesias</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-          	</div>
-			<div class="clear"></div>
-        </div>
-        <script type="text/javascript" src="__JS__/banner.js"></script>
+    	<!-- <div id="slider2" class="leftsecbanner"> -->
+            <!-- <div class="contentdiv"> -->
+                <!-- <object type="application/x-shockwave-flash" style="width:660px; height:348px;" data="http://t.cn/RWCUiTQ"> -->
+                	<!-- <param name="movie" value="http://t.cn/RWCUiTQ" /> -->
+                	<!-- <param value="application/x-shockwave-flash" name="type" />  -->
+                    <!-- <param value="true" name="allowfullscreen" />  -->
+                    <!-- <param value="always" name="allowscriptaccess" />  -->
+                    <!-- <param value="opaque" name="wmode" /> -->
+                <!-- </object> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div> -->
+        <!-- <div id="paginate-slider2"> -->
+        	<!-- <div class="usual"> -->
+                
+              
+             
+          	<!-- </div> -->
+			<!-- <div class="clear"></div> -->
+        <!-- </div> -->
+        <!-- <script type="text/javascript" src="__JS__/banner.js"></script> -->
     </div>
     <div class="clear"></div>
     <!-- Content Section -->
@@ -191,6 +149,25 @@
         </div>
         <script type="text/javascript">
             window.onload = function(){
+			//吸顶条头部
+				var oXi = document.getElementById('xiding');
+            oXioffsetTop = oXi.offsetTop;//当前元素距离顶部的偏移量
+            console.log(oXioffsetTop);
+            window.onscroll = function() {
+                console.log(document.body.scrollTop);
+                if (oXioffsetTop <= document.body.scrollTop) {
+                    oXi.style.position = 'fixed';
+                } else {
+                    oXi.style.position = '';
+                }
+                
+            }
+			
+			
+			
+			
+			
+			//瀑布流
                 var num = 0;
                  createArt();
                 function createArt(){

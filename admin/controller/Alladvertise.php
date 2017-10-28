@@ -43,19 +43,22 @@ class Alladvertise extends Auth
 	public function advertising()//增加广告
 	{
 		$data = $this->request->param();
-		$files = request()->file('adverimage');
+		$fileimg = request()->file('adverimage');
+		$filevideo = request()->file('advervideo');
 		if(!empty($data['advername'])&&!empty($data['advercontent'])){
-			if(!empty($files)){
-				$image = $this->advertise->uploadImg($files);
+			if(!empty($fileimg)){
+				$image = $this->advertise->uploadImg($fileimg);
 				$data['adverimage'] = $image;
+			}
+			if(!empty($filevideo)){
+				$video = $this->advertise->uploadImg($filevideo);
+				$data['advervideo'] = $video;
 			}
 			$this->advertise->data($data);
 			if($this->advertise->save()){
 				$this->success('添加成功',url('alladvertise/advertising_list'));
 			}
 		}
-		
-		
 		return $this->fetch();
 	}
 }
