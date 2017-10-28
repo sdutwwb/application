@@ -148,6 +148,7 @@ return [
         '__IMG__' => '/static/img',
         '__index__'=>'/static/index',
         '__EDITOR__'=>'/static/editor',
+        '__UPLOAD__'=>'/uploads/',
         
     ],
     // 默认跳转页面对应的模板文件

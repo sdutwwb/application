@@ -25,6 +25,8 @@
    <tr>
     <th>广告名称</th>
     <th>广告内容</th>
+    <th>广告视频</th>
+    <th>广告图片</th>
     <th>添加的时间</th>
 	<th>广告类型</th>
     <th>删除操作</th>
@@ -33,10 +35,14 @@
    <tr>
     <td class="center">{$vo.advername}</td>
     <td class="center">{$vo.advercontent}</td>
+    <td class="center">
+	<video src="__UPLOAD__{:trim($vo.advervideo,'&')}" width="100" height="100" controls  loop ></video>
+	</td>
+	 <td><img src="__UPLOAD__{:trim($vo.adverimage,'&')}" width="400" height="200" /></td>
     <td class="center">{$vo.adveraddtime}</td>
     <td class="center">{$vo.adverstatus}</td>
-    <td class="center">
-     <a href="{:url('alladvertise/reduce_adver')}?adverid={$vo.adverid}" title="删除"><img src="__IMG__/icon_drop.gif"/></a>
+	<td>
+     <a href="{:url('alladvertise/reduce_adver')}?adverid={$vo.adverid}" class="center" title="删除"><img src="__IMG__/icon_drop.gif"/></a>
     </td>
    </tr>
   {/foreach}
