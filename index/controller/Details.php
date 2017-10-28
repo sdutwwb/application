@@ -16,6 +16,7 @@ class Details extends Controller
 	public function _initialize()
 	{
 		$this->user = new UserModel();
+		$this->reply = new ReplyModel();
 		$this->topic = new TopicModel();
 		$this->reply = new ReplyModel();
 		$this->article = new  ArticleModel();
@@ -33,9 +34,11 @@ class Details extends Controller
 			$data      = $this->user->where('uid', $uid)->find();
 			$details   = $this->article->getDetails($aid);//得到微博的详情
 			$topicname = $this->topic->topicname($details['tid']);//得到微博所属话题名字
-			$comments  = $this->article->comment($aid);//得到微博的所有评论(分页形式)
+			$info = $this->article->get($aid);
+			$comments  = $info->comment();//得到微博的所有评论(分页形式)
 			$list      = $comments['list'];
 			$list      = $this->user->getUserAll($list);//将评论人昵称和头像拿到
+			
 			if (!empty($list)) {
 				foreach ($list as $key => $value) {
 					$list[$key]['reply'] = $this->user->getUserAll($this->reply->getReply($value['pid']));
@@ -68,5 +71,16 @@ class Details extends Controller
 		} else {
 			$this->error('删除失败', 'blog/blog');
 		}
+	}
+	//提交回复
+	public function reply()
+	{
+		$uid = Session::get('uid');
+		$data = $this->request->param();
+		$data['uid'] = $uid;
+		$aid = $data['aid'];
+		$this->reply->data($data);
+		$this->reply->allowField(true)->save();
+		$this->redirect('details/details', ['aid'=>$aid], 1, '回复成功');
 	}
 }
