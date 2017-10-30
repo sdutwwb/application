@@ -5,6 +5,7 @@ use \think\Controller;
 use app\index\model\User as UserModel;
 use app\index\model\Topic as TopicModel;
 use app\index\model\Article;
+use app\index\model\Category;
 use \think\Validate;
 use \think\Session;
 use \think\Db;
@@ -18,9 +19,13 @@ class Index extends Controller
 		$this->user = new UserModel();
 		$this->topic = new TopicModel();
 		$this->article = new Article();
+		$this->category = new Category();
 	}
 	public function index()
 	{
+		$list = $this->category->select();
+		$data = $this->category->tree($list);
+		$this->assign('data',$data);
 		$topic = $this->topic->getAlltopic();
 		$this->assign(['topic'=>$topic, 'location'=>'最新新闻']);
 		if (session('?uid')) {
@@ -30,6 +35,39 @@ class Index extends Controller
 		} else {
 			$this->assign(['islog'=> 0]);
 		}
+
+		//板块查询和模糊查询
+		$like = $this->request->param();
+		if(isset($like['like'])){
+			$where['uname'] = ['like',$like];
+			$result = $this->user->where($where)->find();
+			if(!empty($result)){
+				$data = $this->user->get($result['uid']);
+				$result = $data->userToArt;
+			}else{
+				$result = $this->article->getTopicArt($like);
+			}
+			//dump($result);
+			foreach ($result as $key => $value) {
+				$data = $this->article->get($value['aid']);
+				$result[$key]['uname'] = $data->belongsToUname->uname;
+				$result[$key]['uimage'] = $data->belongsToUname->uimage;
+			}
+			$this->assign('result',$result);
+
+		}
+		if(isset($like['tid'])){
+			$result = $this->article->getTopicArt($like);
+			//dump($result);
+			foreach ($result as $key => $value) {
+				$data = $this->article->get($value['aid']);
+				$result[$key]['uname'] = $data->belongsToUname->uname;
+				$result[$key]['uimage'] = $data->belongsToUname->uimage;
+			}
+			$this->assign('result',$result);
+		}
+		
+		
 		return $this->fetch();
 	}
 	//验证码验证
@@ -65,14 +103,17 @@ class Index extends Controller
 	{
 		$limit = $this->request->param('limit');
 		$list = Db::query("select * from wb_article where public = 1 order by pubtime desc limit $limit,6");
-		//$list = $this->article->order('pubtime','desc')->where('public',1)->limit($limit)->select();
-		//dump($list);die;
-		if(!$list){
+		
+		if(empty($list)){
 			echo 1;
 		}else{
+			foreach ($list as $key => $value) {
+				$data = $this->article->get($value['aid']);
+				$list[$key]['uname'] = $data->belongsToUname->uname;
+				$list[$key]['uimage'] = $data->belongsToUname->uimage;
+			}
 			$this->assign('list',$list);
 			return $this->fetch('artlist');
 		}
-		
 	}
 }

@@ -21,7 +21,7 @@ class Alladvertise extends Auth
 	public function advertising_list()//广告列表
 	{
 		$status = $this->request->param('status');
-		if(empty($status)){
+		if(is_null($status)){
 			$list = $this->advertise->paginate(10);
 		}else{
 			$list = $this->advertise->where('adverstatus',$status)->paginate(10);

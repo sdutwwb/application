@@ -49,7 +49,7 @@
         <div class="links_icons">
 			<ul>
 				<li>
-				<form action="{}">
+				<form action="{:url('index/index')}" method="post">
 					<div>
 						<input type="text" value="输入你要搜素的内容或者标题" name="like" onblur="if(this.value == '') { this.value = '输入你要搜素的内容或者标题'; }" onfocus="if(this.value == '输入你要搜素的内容或者标题') { this.value = ''; }"/>
 						<button>发 现</button>
@@ -89,20 +89,9 @@
                     	
                       {if !empty($topic)}
                         {foreach $topic as $value}
-                     <li><a href="">{$value['tname']}</a></li>
+                     <li><a href="{:url('index/index')}?tid={$value['tid']}">{$value['tname']}</a></li>
                            {/foreach}
-                       {/if}
-					   {if !empty($topic)}
-                        {foreach $topic as $value}
-                     <li><a href="">{$value['tname']}</a></li>
-                           {/foreach}
-                       {/if}
-					   {if !empty($topic)}
-                        {foreach $topic as $value}
-                     <li><a href="">{$value['tname']}</a></li>
-                           {/foreach}
-                       {/if}
-					   
+                       {/if}  
 				</ul>  
 				
             	<div class="clear"></div>
@@ -115,6 +104,9 @@
     <div class="clear"></div>
     <!-- Banner -->
     <div id="banner">
+	{foreach $data as $value}
+			<pre>{$value.id}; {$value.name};</pre>
+	{/foreach}
     	<!-- <div id="slider2" class="leftsecbanner"> -->
             <!-- <div class="contentdiv"> -->
                 <!-- <object type="application/x-shockwave-flash" style="width:660px; height:348px;" data="http://t.cn/RWCUiTQ"> -->
@@ -141,12 +133,43 @@
     <!-- Content Section -->
     <div id="content_sec" style="height:0">
     	<!-- Column 1 -->
-       
-        <div class="col1">
+       {if !empty($result)}
+			<div class="col1">
+					
+<div class="blog">
+                <ul class="bloglisting">
+                    {foreach $result as $value}
+                    <li>
+                         <div class="desc">
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="display: block;float: left;"><img src="{$value['uimage']}" style="width: 35px"></a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="articleuser">{$value['uname']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="biaoti">{$value['atitle']}</a> 
+                            
+                            
+                            <p class="time">{$value['pubtime']}</p>
+                            <a class="comments_bubble" href="{:url('details/details',['aid'=>$value['aid']])}">阅读{$value['readcount']}</a>
+                            <p class="txt">
+                                {$value['acontent']}
+                            </p>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore zhuanfa">{$value['copy']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore pinglun">{$value['reply']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore zan">{$value['favour']}</a>
+                        </div>
+                    </li>
+                    {/foreach}
+
+                </ul>
+                <!-- Pagination -->
+</div>
+			</div>
+	   {else}
+        <div class="col1" id="col2">
         	<!-- Featured Playlist -->
         
             <!-- Recent Videos -->
         </div>
+		{/if}
+		
         <script type="text/javascript">
             window.onload = function(){
 			//吸顶条头部
@@ -175,9 +198,8 @@
                         if(data == 1){
                             window.onscroll = null;
                         }else{
-                            $('.col1').append(data);
+                            $('#col2').append(data);
                             num += 6;
-                            console.log(num);
                         }  
                     },'json');
                 }
@@ -271,7 +293,7 @@
             <div class="clear"></div>
             <!-- Categories -->
             <div class="categories">
-            	<h5>menu</h5>
+            	<h5>活动</h5>
                 <ul>
                 	<li><a href="#" class="colr">活动</a></li>
                     <li><a href="#" class="colr">艺术</a></li> 
@@ -282,7 +304,6 @@
                     <li><a href="#" class="colr">交通</a></li>
                     <li><a href="#" class="colr">书城</a></li>
                     <li><a href="#" class="colr">友谊二手汽车</a></li>
-					 <li><a href="#" class="colr">娱乐电视节目</a></li>
                 </ul>
                 <ul>
                 	<li><a href="#" class="colr">动物</a></li>
@@ -301,34 +322,9 @@
             <!-- Top Searches -->
             <div class="topsearches">
             	<h5>Top</h5>
-                <ul>
-                	<li><a href="#" class="colr">Anne Roumanoff</a></li>
-                    <li><a href="#" class="colr">Caméra caché</a></li>
-                    <li><a href="#" class="colr">Cauet</a></li>
-                    <li><a href="#" class="colr">Eric et Ramzy</a></li>
-                    <li><a href="#" class="colr">Florence</a></li>
-                    <li><a href="#" class="colr">Foresti</a></li>
-                    <li><a href="#" class="colr">Franck Dubosc</a></li>
-                    <li><a href="#" class="colr">Francois</a></li>
-                    <li><a href="#" class="colr">Damiens</a></li>
-                    <li><a href="#" class="colr">Anthony</a></li>
-                    <li><a href="#" class="colr">Kavanagh</a></li>
-                    <li><a href="#" class="colr">Jamel</a></li>
-                    <li><a href="#" class="colr">Debbouze</a></li>
-                    <li><a href="#" class="colr">Laurent</a></li>
-                    <li><a href="#" class="colr">Ruquier</a></li>
-                    <li><a href="#" class="colr">Les Nuls</a></li>
-                    <li><a href="#" class="colr">Michaël Youn</a></li>
-                    <li><a href="#" class="colr">Omar et Fred</a></li>
-                    <li><a href="#" class="colr">Patrick Timsit</a></li>
-                    <li><a href="#" class="colr">Rémi Gaillard</a></li>
-                    <li><a href="#" class="colr">Gad ElMaleh</a></li>
-                    <li><a href="#" class="colr">Stéphane Guillon</a></li>
-                    <li><a href="#" class="colr">TF1 Replay</a></li>
-                    <li><a href="#" class="colr">chatroulette</a></li>
-                </ul>
-                <a href="#" class="buttonone"><span>工作别忘长回家看看</span></a>
-                <a href="#" class="buttonone"><span>关爱关注山区儿童</span></a>
+         
+                <a href="#" class="buttonone"><span>回家</span></a>
+                <a href="#" class="buttonone"><span>关爱</span></a>
             </div>
         </div>
 	

@@ -5,6 +5,7 @@ use  \think\Controller;
 use app\admin\model\User as UserModel;
 use app\admin\model\Article;
 use app\admin\model\Usermessage;
+use app\admin\model\Websites;
 use app\admin\model\Admin;
 use \think\Validate;
 use \think\Session;
@@ -20,10 +21,23 @@ class Website extends Auth
 		$this->user = new UserModel;
 		$this->usermessage = new Usermessage;
 		$this->admin = new Admin;
+		$this->websites = new Websites;
 	}
 	public function basic_settings()
-	{
-		return $this->fetch();
+	{	
+		$data = $this->request->param();
+		if(empty($data)){
+			$website = $this->websites->find();
+			$this->assign('website',$website);
+			return $this->fetch();
+		}else{
+			$result = $this->websites->save($data,['id'=>1]);
+			if($result){
+				$this->success('修改成功','Website/basic_settings','',1);
+			}else{
+				$this->error('修改成功','Website/basic_settings','',1);
+			}
+		}
 	}
 	public function change_admin_ajaxname()//检测管理员nameajax处理
 	{

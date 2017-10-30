@@ -48,7 +48,7 @@ class Main extends Auth
 		$member1 = $this->user->getMemberCount(1);//会员
 
 		$newmember1 = $this->user->getNewCount(0);//每日新增和每月新增会员数
-		$newmember0 = $this->user->getNewCount(0);//每日新增和每月新增普通用户数
+		$newmember0 = $this->user->getNewCount(1);//每日新增和每月新增普通用户数
 		$this->assign([
 			'member1'=>$member1,
 			'member0'=>$member0,

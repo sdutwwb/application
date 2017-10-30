@@ -75,4 +75,8 @@ class User extends Model
 		}
 		return $str;
 	}
+	public function userToArt()
+	{
+		return $this->hasMany('Article','uid');
+	}
 }

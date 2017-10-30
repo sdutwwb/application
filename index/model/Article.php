@@ -50,4 +50,25 @@ class Article extends Model
 		$page = $list->render();
 		return ['list'=>$list, 'page'=>$page];
 	}
+	public function getTopicArt($like)//得到所有的管理员 可以模糊查询  并分页
+	{
+		if(empty($like['like'])){
+			$tid = $like['tid'];
+			$result = $this->where('tid',$tid)->order('pubtime','desc')->select();
+			//dump($this->getlastsql());
+		}else{
+			$like = $like['like'];
+			$where1['atitle'] = ['like',"%"."$like"."%"];  
+			$where2['acontent'] = ['like',"%"."$like"."%"];  
+			$result = $this->where($where1)->select();
+			if(empty($result)){
+				$result =  $this->where($where2)->order('pubtime','desc')->select();
+			}
+		}
+		return $result;
+	}
+	public function belongsToUname()
+	{
+		return $this->belongsTo('User','uid');
+	}
 }

@@ -9,12 +9,13 @@
                     {foreach $list as $value}
                     <li>
                          <div class="desc">
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="display: block;float: left;"><img src="" style="width: 35px"></a>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="articleuser"></a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="display: block;float: left;"><img src="{$value['uimage']}" style="width: 35px"></a>
+                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="articleuser">{$value['uname']}</a>
                             <a href="{:url('details/details',['aid'=>$value['aid']])}" class="biaoti">{$value['atitle']}</a> 
                             
                             
                             <p class="time">{$value['pubtime']}</p>
+							
                             <a class="comments_bubble" href="{:url('details/details',['aid'=>$value['aid']])}">阅读{$value['readcount']}</a>
                             <p class="txt">
                                 {$value['acontent']}
