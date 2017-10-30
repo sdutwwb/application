@@ -84,24 +84,18 @@
         <div class="navigation">
         	<div id="smoothmenu1" class="ddsmoothmenu">
                 <ul>
-                    <li><a href="{:url('index/index')}" class="staticlinks">首页</a></li>
-                    <li><a href="{:url('listing/listing')}" class="staticlinks">发现</a></li>
-                    <li><a href="{:url('news/news')}" class="staticlinks">最新新闻</a></li>
                     {if $islog ==1}
-                    <li><a href="{:url('blog/blog')}">个人中心</a>
+                    <li><a href="{:url('blog/blog')}" >个人中心</a></li>
                     {/if}
-                    </li>
-                    <li><a href="#">话题</a>
-                        <ul>
-                            {if !empty($topic)}
-                            {foreach $topic as $value}
-                            <li><a href="">{$value['tname']}</a></li>
-                            {/foreach}
-                            {/if}
-                        </ul>
-                    </li>
-                </ul>
-            	<div class="clear"></div>
+                        
+                      {if !empty($topic)}
+                        {foreach $topic as $value}
+                     <li><a href="{:url('index/index')}?tid={$value['tid']}">{$value['tname']}</a></li>
+                           {/foreach}
+                       {/if}  
+                </ul>  
+                
+                <div class="clear"></div>
             </div>
         </div>
         <!-- Search -->

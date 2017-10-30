@@ -55,6 +55,21 @@ class User extends Model
 		}
 		return $list;
 	}
+	//将用户头像和用户名放到被关注者信息中去
+	public function attentioner($list)
+	{
+		if (!empty($list)) {
+			foreach ($list as $key => $value) {
+				$data = $this->where('uid', $value['attuid'])->find();
+				$list[$key]['uname']  = $data['uname'];
+				$list[$key]['uimage'] = $data['uimage'];
+				$list[$key]['score']  = $data['score'];
+				$article = new Article();
+				$list[$key]['atitle'] =$article->where('uid', $value['attuid'])->order('pubtime', 'desc')->find()['atitle'];
+			}
+		}
+		return $list;
+	}
 	public function getLoad($files)
 	{
 		$str = '';
