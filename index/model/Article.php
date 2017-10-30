@@ -38,10 +38,25 @@ class Article extends Model
 	{
 		return $this->where('uid', $uid)->count();
 	}
+	//微博转发数自增
+	public function addCopy($aid)
+	{
+		return $this->where('aid', $aid)->setInc('copy');
+	}
 	//微博阅读量自增
 	public function addSelf($aid)
 	{
 		return $this->where('aid', $aid)->setInc('readcount');
+	}
+	//微博评论数自增
+	public function addComment($aid)
+	{
+		return $this->where('aid', $aid)->setInc('reply');
+	}
+	//微博赞的数量自增
+	public function addZan($aid)
+	{
+		return $this->where('aid', $aid)->setInc('favour');
 	}
 	//一对多关系(微博对多条评论)
 	public function comment()
@@ -49,5 +64,10 @@ class Article extends Model
 		$list = $this->hasMany('Comment', 'aid')->order('comtime', 'desc')->paginate(3);
 		$page = $list->render();
 		return ['list'=>$list, 'page'=>$page];
+	}
+	//数据更新
+	public function updateReply($data)
+	{
+		return $this->update($data);
 	}
 }
