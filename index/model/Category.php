@@ -18,4 +18,14 @@ class Category extends Model
 	   		 }
 	    	return $tree;
 		}
+		public function diguiDelete($id)
+		{
+			$this->where('id',$id)->delete();
+			$list = $this->where('pid','id')->select();
+			if(!empty($list)){
+				$this->diguiDelete($list['id']);
+			}else{
+				return true;
+			}
+		}
 }

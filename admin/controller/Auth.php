@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 use app\admin\model\Admin;
+use \think\Session;
 class Auth extends Controller
 {
 	protected $is_login = [''];
@@ -60,5 +61,10 @@ class Auth extends Controller
 		}else{
 			$this->error('登录失败', url('auth/login'));	
 		}
+	}
+	public function clearSession()//安全退出，清空session
+	{
+		Session::clear();
+		$this->success('退出成功',url('admin/index/index'));
 	}
 }
