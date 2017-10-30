@@ -91,7 +91,8 @@ class Website extends Auth
 	}
 	public function deleteCache()
 	{
-		//php think clear --path C:\wamp\www\adovcate\tp5\runtime\temp\;
+		Cache::clear();
+		$this->success('清除缓存成功');
 	}
 	/*public function clearDir()//清除缓存
 	{

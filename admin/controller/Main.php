@@ -80,7 +80,7 @@ class Main extends Auth
 		fputs($fp,$entries);
 		flock($fp,LOCK_UN);
 		fclose($fp);
-		echo "当前在线".$users_online."人";
+		//echo "当前在线".$users_online."人";
 
 		//用户留言数
 
