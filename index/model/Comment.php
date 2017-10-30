@@ -12,6 +12,16 @@ class Comment extends Model
 	//一对多关系(一条评论对应多条回复)
 	public function reply()
 	{
-			return $this->hasMany('Reply', 'pid')->order('replytime', 'desc');
+		return $this->hasMany('Reply', 'pid')->order('replytime', 'desc');
+	}
+	//查询微博的所有评论数
+	public function commentCount($aid)
+	{
+		return $this->where('aid', $aid)->count();
+	}
+	//删除评论
+	public function deleteP($pid)
+	{
+		return $this->where('pid', $pid)->delete();
 	}
 }

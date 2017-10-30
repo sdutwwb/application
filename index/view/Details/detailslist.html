@@ -1,0 +1,69 @@
+<div class="comments">
+	<ul class="commentslist">
+                        {foreach $list as $value}
+                        <li class="level1">
+                            <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
+                            <form action="{:url('details/reply')}" onsubmit="return replys();">
+                            <div class="desc">
+                                
+                                <input type="hidden" name="ruid" value="{$value['uid']}">
+                                <div class="commentlinks singlebtn">
+                                    <a href="javascript:void(0);" class="reply">回复</a>
+                                </div>
+                                <a href="#" class="colr">{$value['uname']}</a>
+                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['comtime']}</p>
+                                <div class="clear"></div>
+                                <p class="txt">
+                                    {$value['ccontent']}
+                                </p>
+                                <a href="javascript:void(0);" class="deletep" style="color: #ea1010;font-weight: bold;">删除</a>
+                                <input type="hidden" name="pid" value="{$value['pid']}">
+                            </div>
+                            <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
+                            <button style="cursor: pointer;" class="hidden1">回复</button>
+                            <input type="hidden" name="aid" value="{$value['aid']}">
+                            </form>
+                        </li>
+                            
+                            <div style="width: 658px;" class="chakanAll"> 
+                            <span><img src="__IMG__/arrow_right.gif" style="width: 10px;height: 25px;position: relative;top: -75px;left: -39px;"></span>  
+                            {if !empty($value['reply'])}
+                                {foreach $value['reply'] as $v}
+                            <!-- 回复区 --> 
+                            <li class="level2 hidden1">
+                                <img src="{$v['uimage']}" style="width: 55px;height: 55px;float: left;">
+                                <div class="desc" style="width: 500px;">
+                                    <form action="{:url('details/reply')}" onsubmit="return replys();">
+                                    <input type="hidden" name="pid" value="{$value['pid']}">
+                                    <input type="hidden" name="ruid" value="{$v['uid']}">
+                                    
+                                   <a href="#" class="colr">{$v['uname']}</a>
+                                    <p class="time" style="margin-top: 0px;height: 16px;">{$v['replytime']}</p>
+                                    <div class="clear"></div>
+                                    <p class="txt">
+                                       {$v['replycontent']}
+                                    </p>
+                                    <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
+                                
+                                    <button style="cursor: pointer;" class="hidden1">回复</button>
+                                
+                                    <input type="hidden" name="aid" value="{$value['aid']}">
+                                    </form>
+                                </div>      
+                            </li>
+                                {/foreach}
+                            {/if}
+                            <!-- <span class="shouqi">点击收起</span> -->
+                            </div>
+                        {/foreach}
+                    </ul>
+                <div class="clear"></div>
+                <br /><br />
+                <!-- Pagination -->
+               
+            </div>
+            <div class="blogsline">
+                    {if !empty($list)}
+                    {$page}
+                {/if}
+                </div>

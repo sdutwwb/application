@@ -2,13 +2,13 @@
 namespace app\index\model;
 
 use think\Model;
-class Copy extends Model
+class Zan extends Model
 {
-	public function Copy($data)
+	public function Zan($data)
 	{
 		return $this->where($data)->find();
 	}
-	public function insertCopy($data)
+	public function insertZan($data)
 	{
 		$this->data($data);
 		return $this->save();
