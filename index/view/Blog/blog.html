@@ -184,9 +184,9 @@
             <div class="tabs">
             	<div class="tab_menu_container">
                     <ul id="tab_menu">  
-                        <li><a class="current" rel="tab_sidebar_recent">Recent</a></li>
-                        <li><a class="" rel="tab_sidebar_comments">Comments</a></li>
-                        <li><a class="" rel="tab_sidebar_tags">Tags</a></li>
+                        <li><a class="current" rel="tab_sidebar_recent">关注</a></li>
+                        <li><a class="" rel="tab_sidebar_comments">粉丝</a></li>
+                        <li><a class="" rel="tab_sidebar_tags">我的收藏</a></li>
                     </ul>
                     <div class="clear"></div>
                 </div>
@@ -194,49 +194,25 @@
                 <div class="tab_container">
                     <div class="tab_container_in">
                         <!-- Recent --> 
-                        <div style="display: none;" id="tab_sidebar_recent" class="tab_sidebar_list">					
-                        	<ul class="videolist">
+                        <div style="display: none;" id="tab_sidebar_recent" class="tab_sidebar_list">			{if empty($attentioner)}
+                            <span>该用户尚未关注任何人</span>
+                            {else}
+                            <ul class="videolist">
+                            {foreach $attentioner as $value}
                             	<li>
                                 	<div class="thumb">
-                            		<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video5.gif" alt="" /></a>
+                            		<a href="#"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">Brian</a></p>
+                                    	<a class="colr title" href="javascript:void(0);">{$value['uname']}</a>
+                                        <p class="viewscount">{$value['atitle']}</p>
+                                        <p class="postedby">积分 <a href="#">{$value['score']}</a></p>
                                     </div>
                                 </li>
-                                <li>
-                                	<div class="thumb">
-                            		<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video5.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">Brian</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                                    	<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video7.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                                    	<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video8.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
-                                    </div>
-                                </li>
-                            </ul>			
+                            {/foreach} 
+                            </ul>
+                            {/if}
+                            {$attentionpage}			
                         </div> 
                         <!-- END -->
                         <!-- Top Rated -->
@@ -250,36 +226,6 @@
                                     	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
                                         <p class="viewscount">2,061,785 Views</p>
                                         <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                                    	<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video7.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                            		<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video5.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">Brian</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                            		<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video5.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">Brian</a></p>
                                     </div>
                                 </li>
                             </ul>
@@ -296,36 +242,6 @@
                                     	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
                                         <p class="viewscount">2,061,785 Views</p>
                                         <p class="postedby">Posted By: <a href="#">Brian</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                            		<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video5.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">Brian</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                                    	<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video7.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                	<div class="thumb">
-                                    	<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video8.gif" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
                                     </div>
                                 </li>
                             </ul>

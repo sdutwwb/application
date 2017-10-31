@@ -33,6 +33,9 @@ class Blog extends Controller
 			$attentions   = $this->attention->attentions($uid);//得到关注的人数
 			$fans         = $this->attention->fans($uid);//得到粉丝的人数
 			$articlecount = $this->article->articleCount($uid);//得到用户发表的微博数
+			$attentionList= $this->attention->attentioned($uid)['list'];//得到用户关注的人id,关注时间list
+			$attentionPage= $this->attention->attentioned($uid)['page'];//得到用户关注的人id,关注时间page
+			$attentioner   = $this->user->attentioner($attentionList);//得到关注人的具体详情
 			$list         = $article['list'];
 			$page         = $article['page'];
 			foreach ($list as $key => $value) { 
@@ -48,6 +51,9 @@ class Blog extends Controller
 						'attentions'  =>$attentions,
 						'articlecount'=>$articlecount,
 						'dataintro'   =>$dataintro,
+						'attentions'  =>$attentions,
+						'attentioner'  =>$attentioner,
+						'attentionpage'=>$attentionPage,
 			]);
 		} else {
 			return $this->error('你还未登录', 'index/index');
@@ -75,5 +81,18 @@ class Blog extends Controller
 		if($this->user->save(['uimage'=>$img],['uid'=>$uid])){
 			$this->success('上传头像成功','blog/blog','',1);
 		}
+	}
+	public function attention()//关注的人
+	{
+		$uid = Session::get('uid');
+		$attentions = $this->attention->attentioned($uid);
+	}
+	public function fans()//粉丝
+	{
+
+	}
+	public function collect()//收藏
+	{
+
 	}
 }
