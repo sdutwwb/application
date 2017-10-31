@@ -65,6 +65,21 @@ class Article extends Model
 		$page = $list->render();
 		return ['list'=>$list, 'page'=>$page];
 	}
+	//得到收藏微博中的标题以及阅读量
+	public function getFavUser($data)
+	{
+		if (!empty($data)) {
+			foreach($data as $key => $value) {
+				$data[$key]['atitle']    = $this->getDetails($value['aid'])['atitle'];//收藏的标题
+				$data[$key]['readcount'] = $this->getDetails($value['aid'])['readcount'];//被收藏微博的阅读量
+				$user = new User;
+				$data[$key]['uname']     = $user->selectSingle($this->getDetails($value['aid'])['uid'])['uname'];//被收藏者的昵称
+				$data[$key]['uimage']    = $user->selectSingle($this->getDetails($value['aid'])['uid'])['uimage'];//被收藏者的头像
+				$data[$key]['ruid']      = $user->selectSingle($this->getDetails($value['aid'])['uid'])['uid'];//被收藏者的id
+			}
+		}
+		return $data;
+	}
 	public function getTopicArt($like)//得到所有的管理员 可以模糊查询  并分页
 	{
 		if(empty($like['like'])){

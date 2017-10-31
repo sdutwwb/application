@@ -170,8 +170,8 @@
                     </li>
                     {if $dataintro}
                         {foreach $dataintro as $k => $value}
-                            {if !empty($value)&&$k!='uid'}
-                            <li class="intro"><a href="#">{$value}</a></li> 
+                            {if $k!='uid'&&$value!=''}
+                            <li class="intro"><a href="#" style="width: 105px;">{$k}</a></a><a href="#">{$value}</a></li> 
                             {/if}
                         {/foreach} 
                     {else}
@@ -193,20 +193,20 @@
                 
                 <div class="tab_container">
                     <div class="tab_container_in">
-                        <!-- Recent --> 
+                        <!-- 关注 --> 
                         <div style="display: none;" id="tab_sidebar_recent" class="tab_sidebar_list">			{if empty($attentioner)}
                             <span>该用户尚未关注任何人</span>
                             {else}
                             <ul class="videolist">
                             {foreach $attentioner as $value}
-                            	<li>
-                                	<div class="thumb">
-                            		<a href="#"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
+                            	 <li>
+                                    <div class="thumb">
+                                    <a href="{:url('blog/other',['uid'=>$value['attuid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
-                                    	<a class="colr title" href="javascript:void(0);">{$value['uname']}</a>
-                                        <p class="viewscount">{$value['atitle']}</p>
-                                        <p class="postedby">积分 <a href="#">{$value['score']}</a></p>
+                                        <a class="colr title" href="{:url('details/details',['aid'=>$value['aid'],'uid'=>$value['attuid']])}">最新动态:{$value['atitle']}</a>
+                                        <p class="viewscount"><a>{$value['atttime']}</a></p>
+                                        <p class="postedby"><a href="{:url('blog/other',['uid'=>$value['attuid']])}">{$value['uname']}</a>&nbsp;积分:{$value['score']}</p>
                                     </div>
                                 </li>
                             {/foreach} 
@@ -215,75 +215,56 @@
                             {$attentionpage}			
                         </div> 
                         <!-- END -->
-                        <!-- Top Rated -->
+                        <!-- 粉丝 -->
                         <div style="display: none;" id="tab_sidebar_comments" class="tab_sidebar_list">  
+                           {if empty($fanser)}
+                            <span>尚未用户关注该用户</span>
+                            {else}
                             <ul class="videolist">
-                            	<li>
-                                	<div class="thumb">
-                                    	<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video8.gif" alt="" /></a>
+                            {foreach $fanser as $value}
+                                <li>
+                                    <div class="thumb">
+                                    <a href="{:url('blog/other',['uid'=>$value['uid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">RayWilliams</a></p>
+                                        <a class="colr title" href="{:url('details/details',['aid'=>$value['aid'],'uid'=>$value['uid']])}">最新动态:{if empty($value['atitle'])}无{else}{$value['atitle']}{/if}</a>
+                                        <p class="viewscount"><a>{$value['atttime']}</a></p>
+                                        <p class="postedby"><a href="{:url('blog/other',['uid'=>$value['uid']])}">{$value['uname']}</a>&nbsp;积分:{$value['score']}</p>
                                     </div>
                                 </li>
+                            {/foreach} 
                             </ul>
+                            {/if}
+                            {$fansPage}
                         </div> 
                         <!-- END -->
-                        <!-- Most Commented -->
+                        <!-- 收藏 -->
                         <div style="display: none;" id="tab_sidebar_tags" class="tab_sidebar_list"> 
+                            {if empty($selectFav)}
+                            <span>该用户尚未收藏任何微博</span>
+                            {else}
                             <ul class="videolist">
+                                {foreach $selectFav as $value}
                             	<li>
-                                	<div class="thumb">
-                            		<a href="#"><span class="add">&nbsp;</span><span class="rated">&nbsp;</span><img src="__IMG__/video5.gif" alt="" /></a>
+                                    <div class="thumb">
+                                    <a href="{:url('blog/other',['uid'=>$value['ruid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
-                                    	<h5><a class="colr title" href="detail.html">Lorem ipsum dolor sit</a></h5>
-                                        <p class="viewscount">2,061,785 Views</p>
-                                        <p class="postedby">Posted By: <a href="#">Brian</a></p>
+                                    	<a class="colr title" href="{:url('details/details',['aid'=>$value['aid'],'uid'=>$value['ruid']])}">最新动态:{$value['atitle']}</a>
+                                        <p class="viewscount">{$value['favtime']}</p>
+                                        <p class="postedby">作者: <a href="{:url('blog/other',['uid'=>$value['ruid']])}">{$value['uname']}</a>&nbsp;阅读量:{$value['readcount']}</p>
                                     </div>
                                 </li>
+                                {/foreach}
                             </ul>
+                            {$selectFavPage}
+                            {/if}
                         </div>
                         <!-- END -->
                         <div class="clear"></div>
                     </div>
                 </div>
                 <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        	<!-- Top Searches -->
-            <div class="topsearches">
-            	<h5>Top Searches</h5>
-                <ul>
-                	<li><a href="#" class="colr">Anne Roumanoff</a></li>
-                    <li><a href="#" class="colr">Caméra caché</a></li>
-                    <li><a href="#" class="colr">Cauet</a></li>
-                    <li><a href="#" class="colr">Eric et Ramzy</a></li>
-                    <li><a href="#" class="colr">Florence</a></li>
-                    <li><a href="#" class="colr">Foresti</a></li>
-                    <li><a href="#" class="colr">Franck Dubosc</a></li>
-                    <li><a href="#" class="colr">Francois</a></li>
-                    <li><a href="#" class="colr">Damiens</a></li>
-                    <li><a href="#" class="colr">Anthony</a></li>
-                    <li><a href="#" class="colr">Kavanagh</a></li>
-                    <li><a href="#" class="colr">Jamel</a></li>
-                    <li><a href="#" class="colr">Debbouze</a></li>
-                    <li><a href="#" class="colr">Laurent</a></li>
-                    <li><a href="#" class="colr">Ruquier</a></li>
-                    <li><a href="#" class="colr">Les Nuls</a></li>
-                    <li><a href="#" class="colr">Michaël Youn</a></li>
-                    <li><a href="#" class="colr">Omar et Fred</a></li>
-                    <li><a href="#" class="colr">Patrick Timsit</a></li>
-                    <li><a href="#" class="colr">Rémi Gaillard</a></li>
-                    <li><a href="#" class="colr">Gad ElMaleh</a></li>
-                    <li><a href="#" class="colr">Stéphane Guillon</a></li>
-                    <li><a href="#" class="colr">TF1 Replay</a></li>
-                    <li><a href="#" class="colr">chatroulette</a></li>
-                </ul>
-                <a href="#" class="buttonone"><span>Most Viewed Videos</span></a>
-                <a href="#" class="buttonone"><span>Recent Videos</span></a>
             </div>
             <div class="clear"></div>
             <!-- Advertisment -->

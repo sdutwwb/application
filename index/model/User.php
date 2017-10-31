@@ -46,7 +46,6 @@ class User extends Model
 	{
 		if (!empty($list)) {
 			foreach ($list as $key => $value) {
-
 				$data = $this->where('uid', $value['uid'])->find();
 				$list[$key]['uname'] = $data['uname'];
 				$list[$key]['uimage'] = $data['uimage'];
@@ -65,7 +64,27 @@ class User extends Model
 				$list[$key]['uimage'] = $data['uimage'];
 				$list[$key]['score']  = $data['score'];
 				$article = new Article();
-				$list[$key]['atitle'] =$article->where('uid', $value['attuid'])->order('pubtime', 'desc')->find()['atitle'];
+				$list[$key]['atitle'] =$article->where('uid', $value['attuid'])->order('pubtime', 'desc')->find()['atitle'];//得到最近发表的微博标题
+				$list[$key]['aid'] =$article->where('uid', $value['attuid'])->order('pubtime', 'desc')->find()['aid'];//得到最近发表的微博标题id
+			}
+		}
+		return $list;
+	}
+
+	//将用户头像和用户名放到粉丝信息中去
+	public function fanser($list)
+	{
+		if (!empty($list)) {
+			foreach ($list as $key => $value) {
+				$data = $this->where('uid', $value['uid'])->find();
+				$list[$key]['uname']  = $data['uname'];
+				$list[$key]['uimage'] = $data['uimage'];
+				$list[$key]['score']  = $data['score'];
+				$attention = new Attention();
+				$list[$key]['fans']   = $attention->fans($value['uid']);//得到粉丝的人数
+				$article = new Article();
+				$list[$key]['atitle'] =$article->where('uid', $value['uid'])->order('pubtime', 'desc')->find()['atitle'];//得到最近发表的微博标题
+				$list[$key]['aid'] =$article->where('uid', $value['uid'])->order('pubtime', 'desc')->find()['aid'];//得到最近发表的微博标题id
 			}
 		}
 		return $list;

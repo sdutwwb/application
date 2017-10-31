@@ -21,9 +21,11 @@ class Attention extends Model
 		$page = $list->render();
 		return ['list'=>$list, 'page'=>$page];	
 	}
-	//将用户人的头像名字压入到数组中
-	public function attentioner($data)
+	//粉丝的详情
+	public function attentioner($uid)
 	{
-
+		$list = $this->where('attuid', $uid)->order('atttime', 'desc')->paginate(1);
+		$page = $list->render();
+		return ['list'=>$list, 'page'=>$page];
 	}
 }
