@@ -15,7 +15,7 @@ class Allarticle extends Auth
 	public function order_list()//所有文章列表
 	{
 		//所有文章列表分页显示
-		 $list = $this->article->paginate(10);
+		 $list = $this->article->paginate(3);
 		 // 获取分页显示
 		 $page = $list->render();
 		 $this->assign('list', $list);
@@ -50,7 +50,7 @@ class Allarticle extends Auth
 		if(empty($status)){
 			$status = 0;
 		}
-		$list = $this->article->where('status',$status)->paginate(10);
+		$list = $this->article->where('status',$status)->paginate(2);
 		//dump($this->article->getlastsql());
 		 // 获取分页显示
 		 $page = $list->render();

@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 use app\admin\controller\Auth;
 use app\admin\model\Admin;
+use app\admin\model\Role;
 use \think\Session;
 class Index extends Auth
 {
@@ -15,6 +16,14 @@ class Index extends Auth
 	
 	public function menu()
 	{
+		$adminid = Session::get('adminid');
+		//用adminid去查询
+		$info = $this->admin->get($adminid);
+		$result = $info->adminTorole;
+		/*foreach ($result as $key => $value) {
+			dump($value['rid']);
+		}*/
+		$this->assign('result',$result);
 		return $this->fetch();
 	}
 	public function top()

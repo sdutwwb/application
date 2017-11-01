@@ -23,12 +23,15 @@ class Alladvertise extends Auth
 		$status = $this->request->param('status');
 		if(is_null($status)){
 			$list = $this->advertise->paginate(10);
+			$list = $this->advertise->getSimpleImage($list);
 		}else{
 			$list = $this->advertise->where('adverstatus',$status)->paginate(10);
+			$list = $this->advertise->getSimpleImage($list);
 		}
 		
 		//dump($this->article->getlastsql());
 		 // 获取分页显示
+		
 		 $page = $list->render();
 		 $this->assign('list', $list);
 		 $this->assign('page', $page);
