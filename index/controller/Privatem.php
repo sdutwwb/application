@@ -107,14 +107,11 @@ class Privatem extends Controller
 		}
 	}
 	//提交回复
-	public function reply()
+	public function preply()
 	{
 		$uid = Session::get('uid');
 		$data = $this->request->param();
-		$data['uid'] = $uid;
-		$aid = $data['aid'];
-		$this->reply->data($data);
-		$this->reply->allowField(true)->save();
+		dump($data);die;
 		
 
 		$this->redirect('details/details', ['aid'=>$aid], 1, '回复成功');
