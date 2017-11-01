@@ -1,6 +1,6 @@
 <div class="comments">
 	<ul class="commentslist">
-                        {foreach $list as $value}
+                        {foreach $privatem as $value}
                         <li class="level1">
                             <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
                             <form action="{:url('details/reply')}" onsubmit="return replys();">
@@ -11,17 +11,16 @@
                                     <a href="javascript:void(0);" class="reply">回复</a>
                                 </div>
                                 <a href="#" class="colr">{$value['uname']}</a>
-                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['comtime']}</p>
+                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['pmtime']}</p>
                                 <div class="clear"></div>
                                 <p class="txt">
-                                    {$value['ccontent']}
+                                    {$value['pmcontent']}
                                 </p>
                                 <a href="javascript:void(0);" class="deletep" style="color: #ea1010;font-weight: bold;">删除</a>
                                 <input type="hidden" name="pid" value="{$value['pid']}">
                             </div>
                             <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
                             <button style="cursor: pointer;" class="hidden1">回复</button>
-                            <input type="hidden" name="aid" value="{$value['aid']}">
                             </form>
                         </li>
                             <div style="width: 658px;" class="chakanAll"> 
@@ -45,8 +44,6 @@
                                     <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
                                 
                                     <button style="cursor: pointer;" class="hidden1">回复</button>
-                                
-                                    <input type="hidden" name="aid" value="{$value['aid']}">
                                     </form>
                                 </div>      
                             </li>
@@ -61,8 +58,3 @@
                 <!-- Pagination -->
                
             </div>
-            <div class="blogsline">
-                    {if !empty($list)}
-                    {$page}
-                {/if}
-                </div>

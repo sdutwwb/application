@@ -43,9 +43,13 @@ class Blog extends Controller
 		} else {
 			$this->assign(['islog'=> 0]);
 		}
-			$datas         = $this->user->selectSingle($uid);//得到用户的详情
-			$dataintro    = $this->userson->selectIntro($uid);//得到用户介绍信息
+		if ($private==1) {
 			$article      = $this->article->getAllart($uid);//得到用户发表过的所有文章时间排序
+		}else {
+			$article      = $this->article->getAllpublic($uid);//得到用户公开发表过的所有文章时间排序
+		}
+			$datas        = $this->user->selectSingle($uid);//得到用户的详情
+			$dataintro    = $this->userson->selectIntro($uid);//得到用户介绍信息
 			$attentions   = $this->attention->attentions($uid);//得到关注的人数
 			$fans         = $this->attention->fans($uid);//得到粉丝的人数
 			$articlecount = $this->article->articleCount($uid);//得到用户发表的微博数

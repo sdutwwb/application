@@ -70,7 +70,6 @@ class User extends Model
 		}
 		return $list;
 	}
-
 	//将用户头像和用户名放到粉丝信息中去
 	public function fanser($list)
 	{
