@@ -11,17 +11,20 @@
 <div class="menu-list">
  <a href="{:url('main/main')}" target="mainCont" class="block menu-list-title center" style="border:none;margin-bottom:8px;color:#fff;">捱写详情</a>
  <ul>
-  <li class="menu-list-title">
-   <span>审核文章</span>
-   <i>◢</i>
-  </li>
-  <li>
-   <ul class="menu-children">
-    <li><a href="{:url('allarticle/order_list')}" title="商品列表" target="mainCont">所有文章列表请审核</a></li>
-	<li><a href="{:url('allarticle/product_list')}" title="商品列表" target="mainCont">已经审核文章列表</a></li>
-   </ul>
-  </li>
- 
+{foreach $result as $vo}
+	{if $vo.rid == 4 || $vo.rid == 1}
+	  <li class="menu-list-title">
+	   <span>审核文章</span>
+	   <i>◢</i>
+	  </li>
+	  <li>
+	   <ul class="menu-children">
+		<li><a href="{:url('allarticle/order_list')}" title="商品列表" target="mainCont">所有文章列表请审核</a></li>
+		<li><a href="{:url('allarticle/product_list')}" title="商品列表" target="mainCont">已经审核文章列表</a></li>
+	   </ul>
+	  </li>
+	{/if}
+	{if $vo.rid == 3 || $vo.rid == 1}
   <li class="menu-list-title">
    <span>话题管理</span>
    <i>◢</i>
@@ -31,7 +34,8 @@
     <li><a href="{:url('alltopic/product_category')}" title="商品分类" target="mainCont">话题列表</a></li>
    </ul>
   </li>
-  
+	{/if}
+	{if $vo.rid == 2 || $vo.rid == 1}
   <li class="menu-list-title">
    <span>用户管理</span>
    <i>◢</i>
@@ -42,6 +46,7 @@
     <li><a href="{:url('user/user_message')}?member=0" title="用户留言" target="mainCont">用户留言</a></li>
    </ul>
   </li>
+
   <li class="menu-list-title">
    <span>会员管理</span>
    <i>◢</i>
@@ -52,6 +57,8 @@
     <li><a href="{:url('user/user_message')}?member=1" title="会员留言" target="mainCont">会员留言</a></li>
    </ul>
   </li>
+  {/if}
+  {if $vo.rid == 1}
   <li class="menu-list-title">
    <span>管理员管理</span>
    <i>◢</i>
@@ -63,6 +70,8 @@
     <li><a href="{:url('alladmin/admin_message')}" title="会员留言" target="mainCont">管理员留言</a></li>
    </ul>
   </li>
+  {/if}
+  {if $vo.rid == 6 || $vo.rid == 1}
   <li class="menu-list-title">
    <span>系统设置</span>
    <i>◢</i>
@@ -73,7 +82,8 @@
    <!--  <li><a href="{:url('website/revise_password')}" title="站点基本设置" target="mainCont">管理员密码修改</a></li> -->
 	</ul>
   </li>
-  
+  {/if}
+  {if $vo.rid == 5 || $vo.rid == 1}
   <li class="menu-list-title">
    <span>广告管理</span>
    <i>◢</i>
@@ -83,6 +93,8 @@
     <li><a href="{:url('alladvertise/advertising_list')}" title="站点基本设置" target="mainCont">广告列表</a></li>
    </ul>
   </li>
+  {/if}
+  {if $vo.rid == 1}
   <li class="menu-list-title">
    <span>菜单分级管理</span>
    <i>◢</i>
@@ -92,7 +104,8 @@
     <li><a href="{:url('categorys/add_category')}" title="站点基本设置" target="mainCont">分级列表</a></li>
    </ul>
   </li>
-    
+  {/if} 
+{/foreach}  
  </ul>
 </div>
 </body>
