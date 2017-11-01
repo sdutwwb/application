@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i></i><em>正能量网站</em></span>
+    <span class="modular fl"><i></i><em><a href="{:url('website/loving')}">返回列表</a></em></span>
+  </div>
+  <form action="{:url('website/updateLove')}" method="post">
+	<input type="hidden" name="lid" value="{$love.lid}">
+	  <table class="list-style">
+	   <tr>
+		<td style="text-align:right;">正能量关键词：</td>
+		<td>
+		 <input type="text" name="lovetitle" value="{$love.lovetitle}" class="textBox length-long"/>
+		</td>
+	   </tr>
+	   <tr>
+		<td style="text-align:right;">关联的url：</td>
+		<td>
+		 <input type="text" name="loveurl" value="{$love.loveurl}" class="textBox length-long"/>
+		</td>
+	   </tr>
+	   <tr>
+		<td style="text-align:right;"></td>
+		<td><input type="submit" value="修改" class="tdBtn"/></td>
+	   </tr>
+	  </table>
+ </div>
+</body>
+</html>

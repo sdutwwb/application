@@ -7,6 +7,7 @@ use app\admin\model\Article;
 use app\admin\model\Usermessage;
 use app\admin\model\Websites;
 use app\admin\model\Admin;
+use app\admin\model\Loving;
 use \think\Validate;
 use \think\Session;
 use \think\Cache;
@@ -22,6 +23,7 @@ class Website extends Auth
 		$this->usermessage = new Usermessage;
 		$this->admin = new Admin;
 		$this->websites = new Websites;
+		$this->loving = new Loving;
 	}
 	public function basic_settings()
 	{	
@@ -94,29 +96,28 @@ class Website extends Auth
 		Cache::clear();
 		$this->success('清除缓存成功');
 	}
-	/*public function clearDir()//清除缓存
+	public function loving()
 	{
-		$dir = 'runtime/temp';
-		$dir = rtrim($dir,'/') . '/';
-		$dp = opendir($dir);
-		while ($file = readdir($dp)) {
-
-			if ($file == '.' || $file == '..') {
-				continue;
-			}
-			$fileName = $dir . $file; 
-			//echo $fileName;
-			if (is_dir($fileName)) {
-				$this->clearDir($fileName);
-			} else {
-				unlink($fileName);
-			}
+		$data = $this->request->param();
+		if(!empty($data)){
+			$this->loving->data($data);
+			$this->loving->save();
 		}
-		closedir($dp);
-		if(rmdir($dir)){
-			$this->success('清除缓存成功');
-		}
-	}*/
-
-
+		$lovelist = $this->loving->select();
+		$this->assign('lovelist',$lovelist); 
+		return $this->fetch();
+	}
+	public function lovelist()
+	{
+		$lid = $this->request->param('lid');
+		$love = $this->loving->where('lid',$lid)->find();
+		$this->assign('love',$love);
+		return $this->fetch();
+	}
+	public function updateLove()
+	{
+		$data = $this->request->param();
+		$this->loving->isupdate(true)->save($data);
+		$this->success('修改成功',url('website/loving'),'',1);
+	}
 }

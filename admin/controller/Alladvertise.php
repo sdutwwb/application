@@ -48,7 +48,7 @@ class Alladvertise extends Auth
 		$data = $this->request->param();
 		$fileimg = request()->file('adverimage');
 		$filevideo = request()->file('advervideo');
-		if(!empty($data['advername'])&&!empty($data['advercontent'])){
+		if(!empty($data['advername'])&&!empty($data['adverurl'])){
 			if(!empty($fileimg)){
 				$image = $this->advertise->uploadImg($fileimg);
 				$data['adverimage'] = $image;

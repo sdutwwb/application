@@ -6,6 +6,8 @@ use app\index\model\User as UserModel;
 use app\index\model\Topic as TopicModel;
 use app\index\model\Article;
 use app\index\model\Category;
+use app\index\model\Advertise;
+use app\index\model\Loving;
 use \think\Validate;
 use \think\Session;
 use \think\Db;
@@ -20,9 +22,19 @@ class Index extends Controller
 		$this->topic = new TopicModel();
 		$this->article = new Article();
 		$this->category = new Category();
+		$this->advertise = new Advertise();
+		$this->loving = new Loving();
 	}
 	public function index()
 	{
+		//前台轮播图广告
+		$adver = $this->advertise->order('adveraddtime','desc')->find();
+		$adverOrder = $this->advertise->getSimpleImage($adver);
+		$this->assign('adverOrder',$adverOrder);
+		//底部友情关爱
+		$love = $this->loving->select();
+		$this->assign('love',$love);
+
 		$list = $this->category->select();//无限极分类
 		$data = $this->category->tree($list);
 		$this->assign('data',$data);
