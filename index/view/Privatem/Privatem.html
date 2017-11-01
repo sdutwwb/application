@@ -12,57 +12,51 @@
                 
                     <ul class="commentslist">
                         {foreach $privatem as $value}
+                        {if $value['pid']==0}
                         <li class="level1">
-                            <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
-                            <form action="{:url('details/reply')}" onsubmit="return replys();">
                             <div class="desc">
-                                
-                                <input type="hidden" name="ruid" value="{$value['uid']}">
-                                <div class="commentlinks singlebtn">
-                                    <a href="javascript:void(0);" class="reply">回复</a>
-                                </div>
-                                <a href="{:url('blog/blog',['uid'=>$value['uid']])}" class="colr">{$value['uname']}</a>
-                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['pmtime']}</p>
-                                <div class="clear"></div>
                                 <p class="txt">
-                                    {$value['pmcontent']}
+                                    与{$value['uname']}对话中
                                 </p>
-                                <a href="javascript:void(0);" class="deletep" style="color: #ea1010;font-weight: bold;">删除</a>
-                                <input type="hidden" name="pid" value="{$value['pid']}">
+                <form action="{:url('privatem/preply')}" onsubmit="return replys();">
+                	 <input type="text" name="pmcontent" id="pmcontent" style="width: 280px;height: 20px;border-top: 0px;">
+                	 {if $value['uid']==$Think.session.uid}
+                	 	<input type="hidden" name="uid" value="{$value['uid']}">
+                	 	<input type="hidden" name="ruid" value="{$value['ruid']}">
+                	 	{else}
+                	 	<input type="hidden" name="uid" value="{$value['ruid']}">
+                	 	<input type="hidden" name="ruid" value="{$value['uid']}">
+                	 {/if}
+                	 <input type="hidden" name="id" value="{$value['id']}">
+                <button style="cursor: pointer;margin-left: 55px;" id="pinglundj">确认回复</button>
+                </form>
                             </div>
-                            <input type="text" name="replycontent" class="hidden1 replys" placeholder="请输入回复内容">
-                            <button style="cursor: pointer;" class="hidden1">回复</button>
-                            <input type="hidden" name="aid" value="{$value['aid']}">
-                            </form>
                         </li>
-                            
-                            <div style="width: 658px;" class="chakanAll"> 
-                            <span><img src="__IMG__/arrow_right.gif" style="width: 10px;height: 25px;position: relative;top: -75px;left: -39px;"></span>  
-                            {if !empty($value['reply'])}
-                                {foreach $value['reply'] as $v}
-                            <!-- 回复区 --> 
-                            <li class="level2 hidden1">
-                                <img src="{$v['uimage']}" style="width: 55px;height: 55px;float: left;">
+                        {/if} 
+                            <!-- 回复区 -->
+                            {if $value['uid']==$Think.session.uid} 
+                            <li class="level2" >
+                            <img src="{$data['uimage']}" style="width: 55px;height: 55px;float: left;">
                                 <div class="desc" style="width: 500px;">
-                                    <form action="{:url('details/reply')}" onsubmit="return replys();">
-                                    <input type="hidden" name="pid" value="{$value['pid']}">
-                                    <input type="hidden" name="ruid" value="{$v['uid']}">
-                                    
-                                   <a href="{:url('blog/blog',['uid'=>$v['uid']])}" class="colr">{$v['uname']}</a>
-                                    <p class="time" style="margin-top: 0px;height: 16px;">{$v['replytime']}</p>
+                                   <a href="javascript:void(0);" class="colr">{$data['uname']}</a>	
+                            {else}
+                            <li class="level2" style="float: left;">
+                            <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
+                            <div class="desc" style="width: 500px;">
+                            <a href="javascript:void(0);" class="colr">{$value['uname']}</a>
+                            {/if}
+                                
+                                    <p class="time" style="margin-top: 0px;height: 16px;">{$value['pmtime']}</p>
                                     <div class="clear"></div>
                                     <p class="txt">
-                                       {$v['replycontent']}
+                                       {$value['pmcontent']}
                                     </p>
-                                    <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
-                                    <button style="cursor: pointer;" class="hidden1">回复</button>
-                                    </form>
                                 </div>      
                             </li>
-                                {/foreach}
-                            {/if}
+                           
                             <!-- <span class="shouqi">点击收起</span> -->
-                            </div>
+                            
+                            
                         {/foreach}
                     </ul>
                 <div class="clear"></div>
@@ -103,38 +97,17 @@
                         });
                         function replys()
                                 {
-                                    if ($('.private').val()==0) {
-                                        alert('你还没有登录');
-                                        return false;
-                                    }
-                                    if ($('.replys').val() =='') {
+                                    if ($('#pmcontent').val() =='') {
                                         return false;
                                     } else {
                                         return true;
                                     }
                                 }
                     </script>
-                <a class="span1">来一手最新评论吧</a>
-                <input type="text" name="ccontent" id="ccontent" style="width: 280px;height: 20px;border-top: 0px;">
-                <a style="cursor: pointer;margin-left: 55px;" href="javascript:void(0);" id="pinglundj">评论</a>
+               
             <div class="clear"></div>
         </div>
         <script type="text/javascript">
-            $('#pinglundj').click(function(){
-                 if ($('.private').val()==0) {
-                                alert('你还没有登录');
-                                return false;
-                            }
-                            if ($('#ccontent').val()=='') {
-                                return false;
-                            }
-                         $.post("{:url('privatem/insertComment')}",{ccontent:$('#ccontent').val(),aid:$('#aida').val()},function(obj){
-                                $('.comments').css('display','none');
-                                $('.blogsline').css('display','none');
-                                $('.zhuijia').append(obj);
-                            },'json');
-            });
-           
             $('.reply').click(function(){
                 $(this).parent().parent().nextAll().removeClass('hidden1').end();
             });
