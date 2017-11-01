@@ -29,12 +29,20 @@ class Details extends Controller
 	//文章详情
 	public function details()
 	{
+		$uid   = $this->request->param()['uid'];
+		$private  = 0;
 		$topic = $this->topic->getAlltopic();
 		$this->assign(['topic'=>$topic]);
 		$aid = $this->request->param()['aid'];
 		$this->article->addSelf($aid);//增加微博的阅读量一次
 		if (session('?uid')) {
-			$uid       = Session::get('uid');
+			if (Session::get('uid') == $uid) {
+				$private = 1;
+			}
+			$this->assign(['islog'=> 1]);
+		} else {
+			$this->assign(['islog'=> 0]);
+		}
 			$data      = $this->user->where('uid', $uid)->find();
 			$details   = $this->article->getDetails($aid);//得到微博的详情
 			$topicname = $this->topic->topicname($details['tid']);//得到微博所属话题名字
@@ -52,18 +60,14 @@ class Details extends Controller
 			}
 			$page      = $comments['page'];
 			$this->assign([
-				'islog'    =>1,
 				'data'     =>$data,
 				'location' =>'详情',
-				'private'  =>1,
+				'private'  =>$private,
 				'details'  =>$details,
 				'topicname'=>$topicname,
 				'list'     =>$list,
 				'page'     =>$page,
-		]);
-		} else {
-			$this->assign(['islog'=> 0]);
-		}
+			]);
 		return $this->fetch();
 	}
 	//文章删除

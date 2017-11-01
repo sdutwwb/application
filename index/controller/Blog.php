@@ -26,11 +26,25 @@ class Blog extends Controller
 	public function blog()
 	{
 		$topic = $this->topic->getAlltopic();
-		$this->assign(['topic'=>$topic]);
+		$private  = 0;
+		$uid = $this->request->param('uid');
 		if (session('?uid')) {
-			$uid          = Session::get('uid');
-			$data         = $this->user->selectSingle($uid);//得到用户的详情
-			$dataintro    = $this->userson->selectIntro($uid)->toArray();//得到用户介绍信息
+			$uuid = Session::get('uid');
+			$data = $this->user->selectSingle($uuid);//
+			$this->assign('data', $data);
+			if (Session::get('uid') == $uid) {
+				$private = 1;
+			}else {
+				if (empty($uid)) {
+					$uid = Session::get('uid');
+				}
+			}
+			$this->assign(['islog'=> 1]);
+		} else {
+			$this->assign(['islog'=> 0]);
+		}
+			$datas         = $this->user->selectSingle($uid);//得到用户的详情
+			$dataintro    = $this->userson->selectIntro($uid);//得到用户介绍信息
 			$article      = $this->article->getAllart($uid);//得到用户发表过的所有文章时间排序
 			$attentions   = $this->attention->attentions($uid);//得到关注的人数
 			$fans         = $this->attention->fans($uid);//得到粉丝的人数
@@ -52,9 +66,9 @@ class Blog extends Controller
 				$list[$key]['tname'] = $this->topic->topicname($value['tid']);
 			}
 			$this->assign([
-						'islog'        =>1,
-						'data'         =>$data,
-						'location'     =>'个人中心',
+						'topic'        =>$topic,
+						'datas'        =>$datas,
+						'private'      =>$private,
 						'list'         =>$list,
 						'page'         =>$page,
 						'fans'         =>$fans,
@@ -69,9 +83,6 @@ class Blog extends Controller
 						'selectFav'    =>$selectFav,
 						'selectFavPage'=>$selectFavPage,
 			]);
-		} else {
-			return $this->error('你还未登录', 'index/index');
-		}
 		return $this->fetch();
 	}
 	public function postblog()//发表博文

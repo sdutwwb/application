@@ -23,9 +23,10 @@ class Index extends Controller
 	}
 	public function index()
 	{
-		$list = $this->category->select();
+		$list = $this->category->select();//无限极分类
 		$data = $this->category->tree($list);
 		$this->assign('data',$data);
+
 		$topic = $this->topic->getAlltopic();
 		$this->assign(['topic'=>$topic, 'location'=>'最新新闻']);
 		if (session('?uid')) {
@@ -52,6 +53,7 @@ class Index extends Controller
 				$data = $this->article->get($value['aid']);
 				$result[$key]['uname'] = $data->belongsToUname->uname;
 				$result[$key]['uimage'] = $data->belongsToUname->uimage;
+				$result[$key]['uid'] = $data->belongsToUname->uid;
 			}
 			$this->assign('result',$result);
 
@@ -63,11 +65,11 @@ class Index extends Controller
 				$data = $this->article->get($value['aid']);
 				$result[$key]['uname'] = $data->belongsToUname->uname;
 				$result[$key]['uimage'] = $data->belongsToUname->uimage;
+				$result[$key]['uid'] = $data->belongsToUname->uid;
 			}
 			$this->assign('result',$result);
 		}
-		
-		
+
 		return $this->fetch();
 	}
 	//验证码验证
@@ -111,6 +113,7 @@ class Index extends Controller
 				$data = $this->article->get($value['aid']);
 				$list[$key]['uname'] = $data->belongsToUname->uname;
 				$list[$key]['uimage'] = $data->belongsToUname->uimage;
+				$list[$key]['uid'] = $data->belongsToUname->uid;
 			}
 			$this->assign('list',$list);
 			return $this->fetch('artlist');

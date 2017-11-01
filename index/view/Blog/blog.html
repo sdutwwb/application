@@ -13,9 +13,9 @@
                     {foreach $list as $value}
                 	<li>
                     	 <div class="desc">
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="display: block;float: left;"><img src="{$data['uimage']}" style="width: 35px"></a>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="articleuser">{$data['uname']}</a>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="biaoti">{$value['atitle']}</a> 
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" style="display: block;float: left;"><img src="{$datas['uimage']}" style="width: 35px"></a>
+                            <a href="{:url('blog/blog',['uid'=>$value['uid']])}" class="articleuser">{$datas['uname']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="biaoti">{$value['atitle']}</a> 
                             {if $value['public']==1}
                             <a href="javascript：void(0);" class="articlepower">所有人可见</a>
                             {else}
@@ -23,19 +23,21 @@
                             {/if}
                             <p class="time">{$value['pubtime']}</p>
                             <p class="postedby">{$value['tname']}</p>
-                            <a class="comments_bubble" href="{:url('details/details',['aid'=>$value['aid']])}">阅读{$value['readcount']}</a>
+                            <a class="comments_bubble" href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}">阅读{$value['readcount']}</a>
                             <p class="txt">
                                 {$value['acontent']}
                             </p>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore zhuanfa">{$value['copy']}</a>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore pinglun">{$value['reply']}</a>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" class="colr readmore zan">{$value['favour']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore zhuanfa">{$value['copy']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore pinglun">{$value['reply']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore zan">{$value['favour']}</a>
+                            {if $private==1}
                             <a href="{:url('details/delete',['aid'=>$value['aid']])}" style="width: 26px;" class="colr readmore ">
                                 删除
                             </a>
-                            <a href="{:url('details/details',['aid'=>$value['aid']])}" style="width: 26px;" class="colr readmore ">
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" style="width: 26px;" class="colr readmore ">
                                 编辑
                             </a>
+                            {/if}
                         </div>
                     </li>
                     {/foreach}
@@ -47,6 +49,7 @@
                 {$page}
                 {/if}
                 <div class="clear"></div>
+                {if $private ==1}
                 <div style="width: 697px;height: 152px;margin-top: 40px;">
             <form action="{:url('blog/postblog')}" onsubmit="return upload();" enctype="multipart/form-data">
                 <div style="width: 697px;height: 50px;text-align: center;">
@@ -122,6 +125,7 @@
                
            </script> -->
         </div>
+        {/if}
             </div>
             <div class="clear"></div>
         </div>
@@ -132,17 +136,17 @@
         	<!-- Categories -->
             <div class="categories">
                 <div class="txgr">
-                    <form action="{:url('blog/uploadHead')}" method="post" enctype="multipart/form-data" style="width:auto;">
+                {if $private==1}
+                <form action="{:url('blog/uploadHead')}" method="post" enctype="multipart/form-data" style="width:auto;">
+                    
                     <a href="javascript:void(0);"  onclick="updatefile()">
-                        <img src="__UPLOAD__{$data['uimage']}" style="width:50px;height:55px;float: left;" title="更换头像">
+                        <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;" title="更换头像">
                     </a>
-
+                    
+                    
                      <input type="file" name="image[]" id="fileToUpload" onchange="fileSelected();" style="display:none;cusor:pointer;">
                      <input id="submit" type="submit" value="确认上传" style="display:none;color:red" onclock="displaysubmit()">
-                </form>
-
-                </div>
-                <script type="text/javascript">
+                       <script type="text/javascript">
                     function updatefile(){
                         document.getElementById("fileToUpload").click(); 
                            $('#submit').css('display','none');   
@@ -154,8 +158,14 @@
                         $('#submit').css('display','none'); 
                     }
                 </script>
+                </form>
+                 {else}
+                     <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;">
+                {/if}
+                </div>
+              
                 <span id="sp" style="display:non;">点击头像可以更换，温馨头像不能超过2M</span>
-            	<span><a>{$data['uname']}</a></span>
+            	<span><a>{$datas['uname']}</a></span>
                 <ul>
                     <!-- 关注,粉丝,微博 -->
                 	<li class="sanxiang">

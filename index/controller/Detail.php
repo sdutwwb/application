@@ -21,12 +21,16 @@ class Detail extends Controller
 	{
 		$topic = $this->topic->getAlltopic();
 		$this->assign(['topic'=>$topic, 'location'=>'最新新闻']);
-		$this->assign([ 'location'=>'最新新闻']);
+		$data = $this->request->param();
+		dump($data)
 		if (session('?uid')) {
 			$uid = Session::get('uid');
 			$data = $this->user->where('uid', $uid)->find();
 			$this->assign(['islog'=>1, 'data'=>$data]);
 		} else {
+			if (isset(var)) {
+				# code...
+			}
 			$this->assign(['islog'=> 0]);
 		}
 		return $this->fetch();
