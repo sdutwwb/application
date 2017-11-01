@@ -67,7 +67,7 @@
                 {else}
                     <li><a href="{:url('index/index')}" class="index">首页</a></li>
                     <li><a href="{:url('blog/blog',['uid'=>$data['uid']])}" class="user">{$data['uname']}</a></li>
-                    <li><a href="{:url('user/regmail')}" class="message">消息</a></li>
+                    <li><a href="{:url('privatem/privatem')}" class="message">消息</a></li>
                     <li><a href="{:url('index/exit')}" class="exit">退出登录</a></li>
                 {/if}
             </ul>
@@ -121,10 +121,8 @@
                     
                         <li class="xiangq"><a href="#">{$data['uname']}</a></li>
                             <div class="private">
-                            <a href="#">我的微博</a>
-                            <a href="#">我的收藏</a>
-                            <a href="#">朋友圈</a>
-                            <a href="#">私信</a>
+                            <a href="{:url('blog/blog',['uid'=>$data['uid']])}">我的微博</a>
+                            <a href="{:url('privatem/privatem')}">私信</a>
                           </div>
                             </ul>
                     {/if}

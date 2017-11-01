@@ -160,7 +160,8 @@
                 </script>
                 </form>
                  {else}
-                     <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;">
+                    <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;">
+                    <a href="">取消关注</a>
                 {/if}
                 </div>
               
@@ -211,12 +212,12 @@
                             {foreach $attentioner as $value}
                             	 <li>
                                     <div class="thumb">
-                                    <a href="{:url('blog/other',['uid'=>$value['attuid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
+                                    <a href="{:url('blog/blog',['uid'=>$value['attuid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
                                         <a class="colr title" href="{:url('details/details',['aid'=>$value['aid'],'uid'=>$value['attuid']])}">最新动态:{$value['atitle']}</a>
                                         <p class="viewscount"><a>{$value['atttime']}</a></p>
-                                        <p class="postedby"><a href="{:url('blog/other',['uid'=>$value['attuid']])}">{$value['uname']}</a>&nbsp;积分:{$value['score']}</p>
+                                        <p class="postedby"><a href="{:url('blog/blog',['uid'=>$value['attuid']])}">{$value['uname']}</a>&nbsp;积分:{$value['score']}</p>
                                     </div>
                                 </li>
                             {/foreach} 
@@ -234,12 +235,12 @@
                             {foreach $fanser as $value}
                                 <li>
                                     <div class="thumb">
-                                    <a href="{:url('blog/other',['uid'=>$value['uid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
+                                    <a href="{:url('blog/blog',['uid'=>$value['uid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
                                         <a class="colr title" href="{:url('details/details',['aid'=>$value['aid'],'uid'=>$value['uid']])}">最新动态:{if empty($value['atitle'])}无{else}{$value['atitle']}{/if}</a>
                                         <p class="viewscount"><a>{$value['atttime']}</a></p>
-                                        <p class="postedby"><a href="{:url('blog/other',['uid'=>$value['uid']])}">{$value['uname']}</a>&nbsp;积分:{$value['score']}</p>
+                                        <p class="postedby"><a href="{:url('blog/blog',['uid'=>$value['uid']])}">{$value['uname']}</a>&nbsp;积分:{$value['score']}</p>
                                     </div>
                                 </li>
                             {/foreach} 
@@ -257,12 +258,12 @@
                                 {foreach $selectFav as $value}
                             	<li>
                                     <div class="thumb">
-                                    <a href="{:url('blog/other',['uid'=>$value['ruid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
+                                    <a href="{:url('blog/blog',['uid'=>$value['ruid']])}"><span class="rated">&nbsp;</span><img src="{$value['uimage']}" alt="{$value['uname']}" style="height: 66px;"/></a>
                                     </div>
                                     <div class="desc">
                                     	<a class="colr title" href="{:url('details/details',['aid'=>$value['aid'],'uid'=>$value['ruid']])}">最新动态:{$value['atitle']}</a>
                                         <p class="viewscount">{$value['favtime']}</p>
-                                        <p class="postedby">作者: <a href="{:url('blog/other',['uid'=>$value['ruid']])}">{$value['uname']}</a>&nbsp;阅读量:{$value['readcount']}</p>
+                                        <p class="postedby">作者: <a href="{:url('blog/blog',['uid'=>$value['ruid']])}">{$value['uname']}</a>&nbsp;阅读量:{$value['readcount']}</p>
                                     </div>
                                 </li>
                                 {/foreach}

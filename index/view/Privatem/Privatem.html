@@ -3,44 +3,15 @@
     	<!-- Column 1 -->
         <div class="col1" style="width: 1000px;">
             <div class="blog">
-            	<p class="heading">{$topicname}</p>
-                <ul class="bloglisting">
-                	<li>
-                        
-                        <div class="desc" style="width: 675px;">
-                            <img src="{$datas['uimage']}" style="width: 55px;height: 55px;float: left;">
-                        	<a class="comments_bubble" href="#">阅读{$details['readcount']}</a>
-                        	<p class="biaoti" style="width: 620px;float: right;">{$details['atitle']}</p>
-                            <p class="time">{$details['pubtime']}</p>
-                            <input type="hidden" id="cuid" value="{$details['uid']}">
-                            <input type="hidden" id="aida" value="{$details['aid']}">
-                            <input type="hidden" class="private" value="{$private}">
-                            <p class="postedby"><a href="{:url('blog/blog',['uid'=>$datas['uid']])}">{$datas['uname']}</a><script type="text/javascript">$.post</script></p>
-                            <div class="clear"></div>
-                        </div>
-                        <br />
-                        	{$details['acontent']}
-                        <ul class="xiaogongneng">
-                            <li style="width: 65px;">
-                                <a href="javascript:void(0);" class="zhuanfa">{$details['copy']}</a>
-                            </li>
-                            <li style="width: 65px;"><a href="javascript:void(0);" class="pinglun">{$details['reply']}</a></li>
-                            <li style="width: 65px;"> <a href="javascript:void(0);" class="zan">{$details['favour']}</a></li>
-                            {if $private ==1}
-                            <li style="width: 30px;"><a href="{:url('details/delete',['aid'=>$details['aid']])}" style="width: 26px;">
-                                删除
-                            </a></li>
-                            <li style="width: 30px;"><a href="{:url('details/details',['aid'=>$details['aid']])}" style="width: 26px;">编辑 </a> </li>
-                            {/if}
-                        </ul>        
-                <div class="clear"></div>
+            	<p class="heading">私信</p>
+               
                 <!-- 评论区 -->
                 <div class="zhuijia">
                     <div class="comments">
 
                 
                     <ul class="commentslist">
-                        {foreach $list as $value}
+                        {foreach $privatem as $value}
                         <li class="level1">
                             <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
                             <form action="{:url('details/reply')}" onsubmit="return replys();">
@@ -51,14 +22,12 @@
                                     <a href="javascript:void(0);" class="reply">回复</a>
                                 </div>
                                 <a href="{:url('blog/blog',['uid'=>$value['uid']])}" class="colr">{$value['uname']}</a>
-                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['comtime']}</p>
+                                <p class="time" style="margin-top: 0px;height: 16px;">{$value['pmtime']}</p>
                                 <div class="clear"></div>
                                 <p class="txt">
-                                    {$value['ccontent']}
+                                    {$value['pmcontent']}
                                 </p>
-                               {if $private ==1}
                                 <a href="javascript:void(0);" class="deletep" style="color: #ea1010;font-weight: bold;">删除</a>
-                                {/if}
                                 <input type="hidden" name="pid" value="{$value['pid']}">
                             </div>
                             <input type="text" name="replycontent" class="hidden1 replys" placeholder="请输入回复内容">
@@ -87,7 +56,6 @@
                                     </p>
                                     <input type="text" name="replycontent" class="hidden1" class="replys" placeholder="请输入回复内容">
                                     <button style="cursor: pointer;" class="hidden1">回复</button>
-                                    <input type="hidden" name="aid" value="{$value['aid']}">
                                     </form>
                                 </div>      
                             </li>
@@ -103,11 +71,6 @@
                 
            
             </div>
-             <div class="blogsline">
-                    {if !empty($list)}
-                    {$page}
-                {/if}
-                </div>
             </div>
                  <script type="text/javascript">
                         $('.zan').click(function(){
@@ -165,7 +128,7 @@
                             if ($('#ccontent').val()=='') {
                                 return false;
                             }
-                         $.post("{:url('details/insertComment')}",{ccontent:$('#ccontent').val(),aid:$('#aida').val()},function(obj){
+                         $.post("{:url('privatem/insertComment')}",{ccontent:$('#ccontent').val(),aid:$('#aida').val()},function(obj){
                                 $('.comments').css('display','none');
                                 $('.blogsline').css('display','none');
                                 $('.zhuijia').append(obj);
@@ -192,11 +155,10 @@
             <!-- Categories -->
             <div class="categories">
                 <div class="txgr">
-                {if $private==1}
                 <form action="{:url('blog/uploadHead')}" method="post" enctype="multipart/form-data" style="width:auto;">
                     
                     <a href="javascript:void(0);"  onclick="updatefile()">
-                        <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;" title="更换头像">
+                        <img src="{$data['uimage']}" style="width:50px;height:55px;float: left;" title="更换头像">
                     </a>
                     
                     
@@ -215,13 +177,10 @@
                     }
                 </script>
                 </form>
-                 {else}
-                     <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;">
-                {/if}
                 </div>
               
                 <span id="sp" style="display:non;">点击头像可以更换，温馨头像不能超过2M</span>
-                <span><a>{$datas['uname']}</a></span>
+                <span><a>{$data['uname']}</a></span>
                 <ul>
                     <!-- 关注,粉丝,微博 -->
                     <li class="sanxiang">

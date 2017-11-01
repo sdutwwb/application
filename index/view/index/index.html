@@ -140,7 +140,7 @@
         	<div id="smoothmenu1" class="ddsmoothmenu">
                 <ul>
                     {if $islog ==1}
-                    <li><a href="{:url('blog/blog')}" >个人中心</a></li>
+                    <li><a href="{:url('blog/blog', ['uid'=>$data['uid']])}" >个人中心</a></li>
                     {/if}
                     	
                       {if !empty($topic)}

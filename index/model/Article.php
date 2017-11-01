@@ -11,6 +11,13 @@ class Article extends Model
 		$page = $list->render();
 		return ['list'=>$list, 'page'=>$page];	
 	}
+	//遍历用户公开的微博
+	public function getAllpublic($uid)
+	{
+		$list = $this->where(['uid'=>$uid, 'public'=>1])->order('pubtime', 'desc')->paginate(5);
+		$page = $list->render();
+		return ['list'=>$list, 'page'=>$page];	
+	}
 	//遍历所有的微博
 	public function getAllarts($uid)
 	{
