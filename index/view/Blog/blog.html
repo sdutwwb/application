@@ -161,7 +161,17 @@
                 </form>
                  {else}
                     <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;">
-                    <a href="">取消关注</a>
+					<input type="hidden" name="islog" id="panduan" value="{$islog}">
+					{if $islog == 1}
+						{if $isAttention}
+						<a href="{:url('blog/setAttention')}?attuid={$datas['uid']}&lid=1" class="qu"><span style="width:50px">取消关注</span></a>
+						{else}
+						<a href="{:url('blog/setAttention')}?attuid={$datas['uid']}"><span style="width:50px">加关注</span></a>
+						{/if}
+					 {/if}
+					<script type="text/javascript">
+							
+					</script>
                 {/if}
                 </div>
               

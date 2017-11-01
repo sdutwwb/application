@@ -61,6 +61,8 @@ class Blog extends Controller
 			$fanser       = $this->user->fanser($fansList);//得到粉丝的具体详情
 			$selectFav    = $this->fav->selectFav($uid)['list'];//用户收藏的微博
 			$selectFavPage= $this->fav->selectFav($uid)['page'];//用户收藏的微博分页
+			//进入别人的微博判断关注与否
+			$isAttention  = $this->attention->where('attuid',$uid)->find();
 			if (!empty($selectFav)) {
 				$selectFav   = $this->article->getFavUser($selectFav);//将被收藏人的头像和昵称存入收藏中
 			}
@@ -86,6 +88,7 @@ class Blog extends Controller
 						'fansPage'     =>$fansPage,
 						'selectFav'    =>$selectFav,
 						'selectFavPage'=>$selectFavPage,
+						'isAttention'  =>$isAttention,
 			]);
 		return $this->fetch();
 	}
@@ -120,5 +123,23 @@ class Blog extends Controller
 	{
 		$data = $this->request->param();
 		dump($data);
+	}
+	public function setAttention()//处理关注
+	{
+		$uid = Session::get('uid');//取得用户的id
+		$data = $this->request->param();
+		$attuid = $data['attuid'];
+		if(isset($data['lid'])){//取消关注
+			$this->attention->destroy(['attuid'=>$attuid]);
+			$this->success('取消关注成功',url('blog/blog',array('uid'=>$attuid)),'',1);
+		}else{//加关注
+			$this->attention->data([
+					'uid'=>$uid,
+					'attuid'=>$attuid
+				]);
+			if($this->attention->save()){
+				$this->success('关注成功',url('blog/blog',array('uid'=>$attuid)),'',1);
+			}
+		}
 	}
 }
