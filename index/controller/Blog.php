@@ -8,6 +8,7 @@ use app\index\model\Fav as FavModel;
 use app\index\model\Topic as TopicModel;
 use app\index\model\Article as ArticleModel;
 use app\index\model\Attention as AttentionModel;
+use app\index\model\Advertise;
 use \think\Validate;
 use \think\Session;
 
@@ -22,6 +23,7 @@ class Blog extends Controller
 		$this->fav 	     = new FavModel();
 		$this->article 	 = new ArticleModel();
 		$this->attention = new AttentionModel();
+		$this->advertise = new Advertise();
 	}
 	public function blog()
 	{
@@ -142,4 +144,51 @@ class Blog extends Controller
 			}
 		}
 	}
+	public function advertising()//增加广告
+	{
+		$uid = Session::get('uid');
+		$data = $this->request->param();
+		$fileimg = request()->file('adverimage');
+		if(!empty($data['advername'])){
+			if(!empty($fileimg)){
+				$image = $this->advertise->uploadImg($fileimg);
+				$data['adverimage'] = $image;
+			}
+			$data['uid'] = $uid;
+			$this->advertise->data($data);
+			if($this->advertise->save()){
+				$this->success('添加成功',url('blog/blog',array('uid'=>$uid)),'',1);
+			}
+		}
+		return $this->fetch();
+	}
+	public function sendPayOrd()
+	{
+		include 'yeepayCommon.php';
+		$data = $this->request->param();
+		dump($data);die;
+		$data = array();
+		#业务类型
+		$data['p0_Cmd']				= "Buy";
+		#	商户订单号,选填.
+		$data['p1_MerId']     = $p1_MerId;
+		##若不为""，提交的订单号必须在自身账户交易中唯一;为""时，易宝支付会自动生成随机的商户订单号.
+		$data['p2_Order']			= $this->request->param('p2_Order');
+		#	支付金额,必填.
+		##单位:元，精确到分.
+		$data['p3_Amt']			  = $this->request->param('p3_Amt');
+		#	交易币种,固定值"CNY".
+		$data['p4_Cur']				= "CNY";
+		#	商户接收支付成功数据的地址,支付成功后易宝支付会向该地址发送两次成功通知.
+		$data['p8_Url']			  = '';	
+		#签名串
+		$hmac                         = HmacMd5(implode($data),$merchantKey);
+		$this->assign('data',$data);
+		$this->assign('reqURL_onLine',$reqURL_onLine);
+		$this->assign('hmac',$hmac);
+		$this->assign('p1_MerId',$p1_MerId);
+
+		return $this->fetch();
+	}
+
 }

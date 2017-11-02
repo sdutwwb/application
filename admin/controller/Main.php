@@ -58,7 +58,7 @@ class Main extends Auth
 
 
 		//当前后台在线人数
-		$online_log = "count.dat"; //保存人数的文件,
+		/*$online_log = "count.dat"; //保存人数的文件,
 		$timeout = 30;//30秒内没动作者,认为掉线
 		$entries = file($online_log);
 		$temp = array();
@@ -80,7 +80,7 @@ class Main extends Auth
 		fputs($fp,$entries);
 		flock($fp,LOCK_UN);
 		fclose($fp);
-		//echo "当前在线".$users_online."人";
+		//echo "当前在线".$users_online."人";*/
 
 		//用户留言数
 

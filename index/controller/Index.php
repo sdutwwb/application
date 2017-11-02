@@ -131,4 +131,8 @@ class Index extends Controller
 			return $this->fetch('artlist');
 		}
 	}
+	public function false()
+	{
+		return $this->fetch();
+	}
 }
