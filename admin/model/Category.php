@@ -28,4 +28,14 @@ class Category extends Model
 				return true;
 			}
 		}
+
+		/*public function demo($id)
+		{
+			$result = $this->category->where('pid',$id)->order()->find();
+			if(empty($result)){
+				return $id;
+			}else{
+				$this->demo($result['id']);
+			}
+		}*/
 }
