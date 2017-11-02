@@ -35,17 +35,27 @@ class Log extends Controller
 			$password = md5($data['password']);
 			if($email) {
 				if($email['password'] == $password){
-					session('uid', $email['uid']);
-					$this->user->updateDateTime($email['uid']);
-					$this->success('登录成功', url('index/index'));
+					if ($email['islock']==0) {
+						session('uid', $email['uid']);
+						$this->user->updateDateTime($email['uid']);
+						$this->success('登录成功', url('index/index'));
+					}else {
+						$this->error('你的账号已被锁定', url('index/index'));
+					}
+						
 				}else {
 					$this->error('密码错误,登录失败', url('log/log'));
 				}
 			}elseif($phone) {
 				if($phone['password'] == $password){
-					session('uid', $phone['uid']);
-					$this->user->updateDateTime($phone['uid']);
-					$this->success('登录成功', url('index/index'));
+					if ($phone['islock']==0) {
+						session('uid', $phone['uid']);
+						$this->user->updateDateTime($phone['uid']);
+						$this->success('登录成功', url('index/index'));
+					}else {
+						$this->error('你的账号已被锁定', url('index/index'));
+					}
+					
 				}else {
 					$this->error('密码错误,登录失败', url('log/log'));
 				}	

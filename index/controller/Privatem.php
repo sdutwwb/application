@@ -95,53 +95,13 @@ class Privatem extends Controller
 			]);
 		return $this->fetch();
 	}
-	//文章删除
-	public function delete()
-	{
-		$aid = $this->request->param('aid');
-		$info = $this->article->deleteArt($aid);
-		if ($info) {
-			$this->success('删除成功', 'blog/blog');
-		} else {
-			$this->error('删除失败', 'blog/blog');
-		}
-	}
 	//提交回复
 	public function preply()
 	{
 		$uid = Session::get('uid');
 		$data = $this->request->param();
-		dump($data);die;
-		
-
-		$this->redirect('details/details', ['aid'=>$aid], 1, '回复成功');
-	}
-	//提交评论
-	public function insertComment()
-	{
-		$uid = Session::get('uid');
-		$data = $this->request->param();
-		$data['uid'] = $uid;
-		$aid = $data['aid'];
-		if ($data['ccontent']!='') {
-			$this->comment->data($data);
-			$this->comment->save();
-		}
-		//异步刷新
-		$info = $this->article->get($aid);
-		$comments  = $info->comment();//得到微博的所有评论(分页形式)
-		$list      = $comments['list'];
-		$list      = $this->user->getUserAll($list);//将评论人昵称和头像拿到
-		if (!empty($list)) {
-				foreach ($list as $key => $value) {
-					$list[$key]['reply'] = $this->user->getUserAll($this->reply->getReply($value['pid']));
-					//将用户的昵称和头像压入$list
-				}
-			}
-		$page      = $comments['page'];
-		$reply = $this->comment->commentCount($aid);
-		$this->assign(['list'=>$list, 'page'=>$page]);
-		return $this->fetch('priList');
+		$this->primessage->insertPm($data);
+		$this->redirect('privatem/privatem', 1, '回复成功');
 	}
 	//赞
 	public function zan()

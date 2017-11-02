@@ -51,7 +51,7 @@ class Details extends Controller
 				}
 			}
 			$this->assign(['islog'=> 1]);
-		} else {
+		}else {
 			$this->assign(['islog'=> 0]);
 		}
 			$datas     = $this->user->selectSingle($uid);//得到用户的详情
@@ -127,8 +127,6 @@ class Details extends Controller
 		$aid = $data['aid'];
 		$this->reply->data($data);
 		$this->reply->allowField(true)->save();
-		
-
 		$this->redirect('details/details', ['aid'=>$aid], 1, '回复成功');
 	}
 	//提交评论
@@ -171,18 +169,18 @@ class Details extends Controller
 		$zan = $this->article->getDetails($aid)['favour'];//微博赞的数目
 		echo json_encode($zan);		
 	}
-	//转发
-	public function copy()
+	//收藏
+	public function fav()
 	{
 		$uid = Session::get('uid');
 		$data = $this->request->param();
 		$data['uid'] = $uid;
-		$info = $this->copy->copy($data);//查询是否转发过
+		$info = $this->fav->fav($data);//查询是否收藏过
 		if (!$info) {
-			$this->copy->insertCopy($data);//插入用户转发的微博
-			$this->article->addCopy($data['aid']);//微博转发的自增
+			$this->fav->insertFav($data);//插入用户收藏的微博
+			$this->article->addFav($data['aid']);//微博收藏的自增
 		}
-		$copy = $this->article->getDetails($data['aid'])['copy'];//微博转发
+		$copy = $this->article->getDetails($data['aid'])['fav'];//微博转发
 		echo json_encode($copy);		
 	}
 	//删除评论
