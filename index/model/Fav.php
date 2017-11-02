@@ -15,4 +15,13 @@ class Fav extends Model
 	{
 		return $this->belongsTo('user', 'uid');
 	}
+	public function fav($data)
+	{
+		return $this->where($data)->find();
+	}
+	public function insertFav($data)
+	{
+		$this->data($data);
+		return $this->save();
+	}
 }

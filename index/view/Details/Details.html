@@ -14,7 +14,7 @@
                             <p class="time">{$details['pubtime']}</p>
                             <input type="hidden" id="cuid" value="{$details['uid']}">
                             <input type="hidden" id="aida" value="{$details['aid']}">
-                            <input type="hidden" class="private" value="{$private}">
+                            <input type="hidden" id="private" value="{$islog}">
                             <p class="postedby"><a href="{:url('blog/blog',['uid'=>$datas['uid']])}">{$datas['uname']}</a><script type="text/javascript">$.post</script></p>
                             <div class="clear"></div>
                         </div>
@@ -22,7 +22,7 @@
                         	{$details['acontent']}
                         <ul class="xiaogongneng">
                             <li style="width: 65px;">
-                                <a href="javascript:void(0);" class="zhuanfa">{$details['copy']}</a>
+                                <a href="javascript:void(0);" class="zhuanfa">{$details['fav']}</a>
                             </li>
                             <li style="width: 65px;"><a href="javascript:void(0);" class="pinglun">{$details['reply']}</a></li>
                             <li style="width: 65px;"> <a href="javascript:void(0);" class="zan">{$details['favour']}</a></li>
@@ -111,7 +111,7 @@
             </div>
                  <script type="text/javascript">
                         $('.zan').click(function(){
-                            if ($('.private').val()==0) {
+                            if ($('#private').val()==0) {
                                 alert('你还没有登录');
                                 return false;
                             }
@@ -129,18 +129,18 @@
                             },'json');
                         });
                         $('.zhuanfa').click(function(){
-                            if ($('.private').val()==0) {
+                            if ($('#private').val()==0) {
                                 alert('你还没有登录');
                                 return false;
                             }
-                         $.post("{:url('details/copy')}",{cuid:$('#cuid').val(),aid:$('#aida').val()},
+                         $.post("{:url('details/fav')}",{aid:$('#aida').val()},
                             function(obj){
                                 $('.zhuanfa').html(obj);
                             },'json');
                         });
                         function replys()
                                 {
-                                    if ($('.private').val()==0) {
+                                    if ($('#private').val()==0) {
                                         alert('你还没有登录');
                                         return false;
                                     }
@@ -158,7 +158,7 @@
         </div>
         <script type="text/javascript">
             $('#pinglundj').click(function(){
-                 if ($('.private').val()==0) {
+                 if ($('#private').val()==0) {
                                 alert('你还没有登录');
                                 return false;
                             }

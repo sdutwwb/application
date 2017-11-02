@@ -19,4 +19,20 @@ class Primessage extends Model
 		}
 		return $data;
 	}
+	public function insertPm($data)
+		{
+			$result = $this->where('pid',$data['id'])->order('pmtime', 'desc')->find();
+			if(empty($result)){
+				$this->data([
+					'uid'=>$data['uid'],
+					'ruid'=>$data['ruid'],
+					'pid'=>$data['id'],
+					'pmcontent'=>$data['pmcontent']
+				]);
+				$this->save();
+			}else{
+				$data['id'] = $result['id'];
+				$this->insertPm($data);
+			}
+		}
 }

@@ -27,7 +27,7 @@
                             <p class="txt">
                                 {$value['acontent']}
                             </p>
-                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore zhuanfa">{$value['copy']}</a>
+                            <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore zhuanfa">{$value['fav']}</a>
                             <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore pinglun">{$value['reply']}</a>
                             <a href="{:url('details/details',['aid'=>$value['aid'], 'uid'=>$value['uid']])}" class="colr readmore zan">{$value['favour']}</a>
                             {if $private==1}
@@ -61,7 +61,6 @@
                        <option value="{$value['tid']}">{$value['tname']}</option>
                     {/foreach}
                    </select>
-                   <!-- 此功能有时间就做 -->
                    <select name="public">
                     <option selected="selected" value="1">公开</option>
                     <option value="0">尽自己可见</option>

@@ -45,10 +45,10 @@ class Article extends Model
 	{
 		return $this->where('uid', $uid)->count();
 	}
-	//微博转发数自增
-	public function addCopy($aid)
+	//微博收藏数自增
+	public function addFav($aid)
 	{
-		return $this->where('aid', $aid)->setInc('copy');
+		return $this->where('aid', $aid)->setInc('fav');
 	}
 	//微博阅读量自增
 	public function addSelf($aid)
