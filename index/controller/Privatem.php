@@ -40,19 +40,25 @@ class Privatem extends Controller
 	public function  privatem()
 	{
 		$topic = $this->topic->getAlltopic();
-		$aid   = 2;  
-		$private  = 1;
-		$ruid = 2;
-		$uid = $this->request->param('uid');
+		$ruid = $this->request->param('uid');
 		if (session('?uid')) {
 			$uid = Session::get('uid');
 		} else {
-			$this->error('index/index', '页面错误,正在返回首页');
+			$this->error('页面错误,正在返回首页', 'index/index');
+		}
+		if (!empty($ruid)) {
+			$single = 1;
+			$privatem    = $this->primessage->getSinglemess(['uid'=>$uid, 'ruid'=>$ruid]);//得到与某人的私信
+			if (empty($privatems)) {
+				$prim = $this->user->selectSingle($ruid);
+				$this->assign('prim', $prim);
+			}
+		}else {
+			$privatems    = $this->primessage->getMessage($uid);//得到用户的所有私信
+			$privatem     = $this->category->tree($privatems);
+			$single = 0;
 		}
 			$data         = $this->user->selectSingle($uid);    //得到用户的信息
-			$privatems     = $this->primessage->getMessage($uid);//得到用户的所有私信
-			$privatem = $this->category->tree($privatems);
-			$reply        = $this->comment->commentCount($aid);
 			$attentions   = $this->attention->attentions($uid); //得到关注的人数
 			$fans         = $this->attention->fans($uid);       //得到粉丝的人数
 			$articlecount = $this->article->articleCount($uid); //得到用户发表的微博数
@@ -68,7 +74,6 @@ class Privatem extends Controller
 			if (!empty($selectFav)) {
 				$selectFav   = $this->article->getFavUser($selectFav);//将被收藏人的头像和昵称存入收藏中
 			}
-			$this->article->updateReply(['aid'=>$aid, 'reply'=>$reply]);
 			if (!empty($list)) {
 				foreach ($list as $key => $value) {
 					$list[$key]['reply'] = $this->user->getUserAll($this->reply->getReply($value['pid']));
@@ -77,9 +82,9 @@ class Privatem extends Controller
 			}
 			$this->assign([
 				'islog'        =>1,
+				'single'       =>$single,
 				'privatem'     =>$privatem,
 				'data'         =>$data,
-				'private'      =>$private,
 				'topic'        =>$topic,
 				'fans'         =>$fans,
 				'attentions'   =>$attentions,
@@ -101,6 +106,15 @@ class Privatem extends Controller
 		$uid = Session::get('uid');
 		$data = $this->request->param();
 		$this->primessage->insertPm($data);
+		$this->redirect('privatem/privatem', 1, '回复成功');
+	}
+	//第一次回复
+	public function preplys()
+	{
+		$uid = Session::get('uid');
+		$data = $this->request->param();
+		dump($data);die;
+		$this->primessage->insertspm($data);
 		$this->redirect('privatem/privatem', 1, '回复成功');
 	}
 	//赞

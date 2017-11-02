@@ -167,6 +167,7 @@
 						{else}
 						<a href="{:url('blog/setAttention')}?attuid={$datas['uid']}"><span style="width:50px">加关注</span></a>
 						{/if}
+
 					 {/if}
 					<script type="text/javascript">
 							
@@ -176,6 +177,7 @@
               
                 <span id="sp" style="display:non;">点击头像可以更换，温馨头像不能超过2M</span>
             	<span><a>{$datas['uname']}</a></span>
+                <span><a href="{:url('privatem/privatem')}?uid={$datas['uid']}">私信</a></span>
                 <ul>
                     <!-- 关注,粉丝,微博 -->
                 	<li class="sanxiang">

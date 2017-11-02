@@ -4,8 +4,11 @@
         <div class="col1" style="width: 1000px;">
             <div class="blog">
             	<p class="heading">私信</p>
-               
-                <!-- 评论区 -->
+               {if $single==0}
+                    {if empty($privatem)}
+                        <span>暂无任何私信</span>
+                    {else}
+                <!-- 私信专区 -->
                 <div class="zhuijia">
                     <div class="comments">
 
@@ -23,7 +26,7 @@
                 	 {if $value['uid']==$Think.session.uid}
                 	 	<input type="hidden" name="uid" value="{$value['uid']}">
                 	 	<input type="hidden" name="ruid" value="{$value['ruid']}">
-                	 	{else}
+                	 {else}
                 	 	<input type="hidden" name="uid" value="{$value['ruid']}">
                 	 	<input type="hidden" name="ruid" value="{$value['uid']}">
                 	 {/if}
@@ -33,7 +36,7 @@
                             </div>
                         </li>
                         {/if} 
-                            <!-- 回复区 -->
+                            <!-- 私信聊天区 -->
                             {if $value['uid']==$Think.session.uid} 
                             <li class="level2" >
                             <img src="{$data['uimage']}" style="width: 55px;height: 55px;float: left;">
@@ -53,10 +56,6 @@
                                     </p>
                                 </div>      
                             </li>
-                           
-                            <!-- <span class="shouqi">点击收起</span> -->
-                            
-                            
                         {/foreach}
                     </ul>
                 <div class="clear"></div>
@@ -66,6 +65,77 @@
            
             </div>
             </div>
+                 {/if}
+            {else}
+                     <!-- 私信专区 -->
+                <div class="zhuijia">
+                    <div class="comments">
+                    {if empty($privatem)}
+                    <ul class="commentslist">
+                        <li class="level1">
+                            <div class="desc">
+                                 <p class="txt">
+                                    与{$prim['uname']}对话中
+                                 </p>
+                    <form action="{:url('privatem/preplys')}" onsubmit="return replys();">
+                        <input type="text" name="pmcontent" id="pmcontent" style="width: 280px;height: 20px;border-top: 0px;">
+                        <input type="hidden" name="uid" value="{$Think.session.uid}">
+                        <input type="hidden" name="ruid" value="{$prim['uid']}">
+                        <input type="hidden" name="pid" value="0">
+                        <button style="cursor: pointer;margin-left: 55px;" id="pinglundj">确认回复</button>
+                    </form>
+                             </div>
+                        </li>
+                     </ul>
+                    {else}
+                    <ul class="commentslist">
+                 {foreach $privatem as $value}
+                    {if $value['pid']==0}
+                        <li class="level1">
+                            <div class="desc">
+                                <p class="txt">
+                                    与{$value['uname']}对话中
+                                </p>
+                     {/if}
+                <form action="{:url('privatem/preply')}" onsubmit="return replys();">
+                     <input type="text" name="pmcontent" id="pmcontent" style="width: 280px;height: 20px;border-top: 0px;">
+                     {if $value['uid']==$Think.session.uid}
+                        <input type="hidden" name="uid" value="{$value['uid']}">
+                        <input type="hidden" name="ruid" value="{$value['ruid']}">
+                    {else}
+                        <input type="hidden" name="uid" value="{$value['ruid']}">
+                        <input type="hidden" name="ruid" value="{$value['uid']}">
+                     {/if}
+                     <input type="hidden" name="id" value="{$value['id']}">
+                <button style="cursor: pointer;margin-left: 55px;" id="pinglundj">确认回复</button>
+                </form>
+                        </li>
+                            <!-- 私信聊天区 -->
+                            {if $value['uid']==$Think.session.uid} 
+                            <li class="level2" >
+                            <img src="{$data['uimage']}" style="width: 55px;height: 55px;float: left;">
+                                <div class="desc" style="width: 500px;">
+                                   <a href="javascript:void(0);" class="colr">{$data['uname']}</a>  
+                            {else}
+                            <li class="level2" style="float: left;">
+                            <img src="{$value['uimage']}" style="width: 55px;height: 55px;float: left;">
+                            <div class="desc" style="width: 500px;">
+                            <a href="javascript:void(0);" class="colr">{$value['uname']}</a>
+                            {/if}
+                                
+                                    <p class="time" style="margin-top: 0px;height: 16px;">{$value['pmtime']}</p>
+                                    <div class="clear"></div>
+                                    <p class="txt">
+                                       {$value['pmcontent']}
+                                    </p>
+                                </div>      
+                            </li>
+                </ul>
+                {/foreach}
+                {/if}
+            </div>
+            </div>
+            {/if}
                  <script type="text/javascript">
                         $('.zan').click(function(){
                             if ($('.private').val()==0) {
@@ -106,7 +176,6 @@
                     </script>
                
             <div class="clear"></div>
-        </div>
         <script type="text/javascript">
             $('.reply').click(function(){
                 $(this).parent().parent().nextAll().removeClass('hidden1').end();
@@ -120,7 +189,7 @@
                 })
             })
         </script>
-
+        </div>
         <!-- Column 2 -->
         {/block}
         {block name="content_right"}
