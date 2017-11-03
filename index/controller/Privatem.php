@@ -46,17 +46,18 @@ class Privatem extends Controller
 		} else {
 			$this->error('页面错误,正在返回首页', 'index/index');
 		}
+		$privatems    = $this->primessage->getMessage($uid);//得到用户的所有私信
+		$privatem     = $this->category->tree($privatems);
+		$single = 0;
 		if (!empty($ruid)) {
 			$single = 1;
-			$privatem    = $this->primessage->getSinglemess(['uid'=>$uid, 'ruid'=>$ruid]);//得到与某人的私信
-			if (empty($privatems)) {
+			$privatem    = $this->primessage->getSinglemess($privatem, $ruid);//得到与某人的私信
+			if (empty($privatem)) {
 				$prim = $this->user->selectSingle($ruid);
 				$this->assign('prim', $prim);
 			}
 		}else {
-			$privatems    = $this->primessage->getMessage($uid);//得到用户的所有私信
-			$privatem     = $this->category->tree($privatems);
-			$single = 0;
+			
 		}
 			$data         = $this->user->selectSingle($uid);    //得到用户的信息
 			$attentions   = $this->attention->attentions($uid); //得到关注的人数
@@ -106,16 +107,16 @@ class Privatem extends Controller
 		$uid = Session::get('uid');
 		$data = $this->request->param();
 		$this->primessage->insertPm($data);
-		$this->redirect('privatem/privatem', 1, '回复成功');
+		$this->redirect('privatem/privatem', ['uid'=>$data['ruid']],1, '回复成功');
 	}
 	//第一次回复
 	public function preplys()
 	{
 		$uid = Session::get('uid');
 		$data = $this->request->param();
-		dump($data);die;
+		dump($data);
 		$this->primessage->insertspm($data);
-		$this->redirect('privatem/privatem', 1, '回复成功');
+		$this->redirect('privatem/privatem', ['uid'=>$data['ruid']], 1, '回复成功');
 	}
 	//赞
 	public function zan()

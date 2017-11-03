@@ -8,6 +8,7 @@ use app\index\model\Topic as TopicModel;
 use app\index\model\Zan as ZanModel;
 use app\index\model\Copy as CopyModel;
 use app\index\model\Fav as FavModel;
+use app\index\model\Advertise as AdvModel;
 use app\index\model\Reply as ReplyModel;
 use app\index\model\Comment as CommentModel;
 use app\index\model\Article as ArticleModel;
@@ -27,7 +28,9 @@ class Details extends Controller
 		$this->reply = new ReplyModel();
 		$this->topic = new TopicModel();
 		$this->reply = new ReplyModel();
+		$this->adv = new AdvModel();
 		$this->article = new  ArticleModel();
+		$this->advertise = new Advertise();
 		$this->comment = new CommentModel();
 		$this->fav 	     = new FavModel();
 		$this->attention = new AttentionModel();
@@ -55,6 +58,7 @@ class Details extends Controller
 			$this->assign(['islog'=> 0]);
 		}
 			$datas     = $this->user->selectSingle($uid);//得到用户的详情
+			$advertise = $this->adv->selectSingle($uid);//得到用户的广告
 			$details   = $this->article->getDetails($aid);//得到微博的详情
 			$topicname = $this->topic->topicname($details['tid']);//得到微博所属话题名字
 			$info      = $this->article->get($aid);
@@ -89,6 +93,7 @@ class Details extends Controller
 				'datas'        =>$datas,
 				'private'      =>$private,
 				'details'      =>$details,
+				'advertise'    =>$advertise,
 				'topic'        =>$topic,
 				'topicname'    =>$topicname,
 				'list'         =>$list,

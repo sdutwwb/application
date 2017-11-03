@@ -43,19 +43,18 @@ class Primessage extends Model
 		$this->save();
 	}
 	//查找与某个人的私信
-		public function getSinglemess($inf)
-		{
-			$data = $this->where(['uid'=>$inf['uid'], 'ruid'=>$inf['ruid']])->whereOr(['uid'=>$inf['ruid'], 'ruid'=>$inf['uid']])->select();
+		public function getSinglemess($data, $ruid)
+		{ 
+			$datas = [];
 			$user = new User;
 			foreach ($data as $key => $value) {
-				if ($value['uid']==$inf['uid']) {
-					$data[$key]['uname'] = $user->selectSingle($value['ruid'])['uname'];
-					$data[$key]['uimage'] = $user->selectSingle($value['ruid'])['uimage'];
-				}else {
-					$data[$key]['uname'] = $user->selectSingle($value['uid'])['uname'];
-					$data[$key]['uimage'] = $user->selectSingle($value['uid'])['uimage'];
+				if ($value['uid']==$ruid) {
+					$datas[$key] = $data[$key];
+					
+				}elseif ($value['ruid']==$ruid) {
+					$datas[$key] = $data[$key];
 				}
 			}
-			return $data;
+			return $datas;
 		}
 }

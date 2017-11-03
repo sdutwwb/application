@@ -33,4 +33,9 @@ class Advertise extends Model
 		}
 		return $str;
 	}
+	public function selectSingle($uid)
+	{
+		$data = $this->where('uid', $uid)->select();
+		return $data;
+	}
 }

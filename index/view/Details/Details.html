@@ -219,9 +219,11 @@
                      <img src="{$datas['uimage']}" style="width:50px;height:55px;float: left;">
                 {/if}
                 </div>
-              
                 <span id="sp" style="display:non;">点击头像可以更换，温馨头像不能超过2M</span>
                 <span><a>{$datas['uname']}</a></span>
+                 {if $private == 0}
+                <span><a href="{:url('privatem/privatem')}?uid={$datas['uid']}">私信</a></span>
+                {/if}
                 <ul>
                     <!-- 关注,粉丝,微博 -->
                     <li class="sanxiang">
@@ -335,7 +337,11 @@
             <div class="clear"></div>
             <!-- Advertisment -->
             <div class="adv">
-                <a href="#"><img src="__IMG__/adv1.gif" alt="" /></a>
+                {if $advertise}
+                {foreach $advertise as $v}
+                <a href="#"><img src="__UPLOAD__/{:trim($v['adverimage'], '&')}" width="286px" alt="" /></a>
+                {/foreach}
+                {/if}
             </div>
             <div class="clear"></div>
         </div>

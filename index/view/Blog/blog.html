@@ -121,28 +121,7 @@
             </form>
 
 
-            <form method="post" action="{:url('sendPayOrd')}" id="update-pwd">
-                <input type="hidden" >
-        <div class="register-main bor-btm">
-            <ul class="register">
-                <li>
-                    <label>金额：</label>
-                    <label style="font-size:18px;font-weight: bold;">￥：10.0</label>
-                    <input type="hidden" name="p3_Amt" value="0.01">
-                </li>
-                <li class="order">
-                    <label>订单号：</label>
-                    <input type="text" value="" id="adminName" class="form-control" name="username" maxlength="10" autocomplete="off" disabled="disabled" style="width:220px;height:30px;border-radius:5px;"/>
-                    <input type="hidden" name="p2_Order" value="" class="dingdanNum">
-                </li>
-            </ul>
-            <div class="btn-div">
-            <button name="" class="sure" style="width:120px;height:35px;background:#FF5A37;color:white;font-size:15px;border-radius:10px;margin-left:100px;">确认充值会员</button>
-                <button type="submit" name="" class="pay" style="width:120px;height:35px;background:#FF5A37;color:white;font-size:15px;border-radius:10px;margin-left:100px;display:none">前往支付</button>
-            </div>  
-        </div> 
-        </form>
-
+{/if}
         <script type="text/javascript">
 var is_pay = 0;
 $('.sure').click(function(){   
@@ -227,7 +206,9 @@ $('.pay').click(function(){
               
                 <span id="sp" style="display:non;">点击头像可以更换，温馨头像不能超过2M</span>
             	<span><a>{$datas['uname']}</a></span>
+                {if $private == 0}
                 <span><a href="{:url('privatem/privatem')}?uid={$datas['uid']}">私信</a></span>
+                {/if}
                 <ul>
                     <!-- 关注,粉丝,微博 -->
                 	<li class="sanxiang">
@@ -341,9 +322,39 @@ $('.pay').click(function(){
             <div class="clear"></div>
             <!-- Advertisment -->
         	<div class="adv">
-            	<a href="#"><img src="__IMG__/adv1.gif" alt="" /></a>
+            	 {if $advertise}
+                {foreach $advertise as $v}
+                <a href="#"><img src="__UPLOAD__/{:trim($v['adverimage'], '&')}" width="286px;" alt="" /></a>
+                {/foreach}
+                {/if}
             </div>
             <div class="clear"></div>
+            <form method="post" action="{:url('sendPayOrd')}" id="update-pwd" >
+                <input type="hidden" >
+        <div class="register-main bor-btm" style="width:286px;display: none" id="czhy">
+            <ul class="register" style="list-style: none">
+                <li>
+                    <label>金额：</label>
+                    <label style="font-size:18px;font-weight: bold;">￥：10.0</label>
+                    <input type="hidden" name="p3_Amt" value="0.01">
+                </li>
+                <li class="order">
+                    <label>订单号：</label>
+                    <input type="text" value="" id="adminName" class="form-control" name="username" maxlength="10" autocomplete="off" disabled="disabled" style="width:220px;height:30px;border-radius:5px;"/>
+                    <input type="hidden" name="p2_Order" value="" class="dingdanNum">
+                </li>
+            </ul >
+            <div class="btn-div">
+            <button name="" class="sure" style="width:120px;height:35px;background:#245BAA;color:white;font-size:15px;border-radius:5px;margin-left:100px;cursor: pointer;">确认充值会员</button>
+                <button type="submit" name="" class="pay" style="width:120px;height:35px;background:#FF5A37;color:white;font-size:15px;border-radius:10px;margin-left:100px;display:none">前往支付</button>
+            </div>  
+        </div> 
+        </form>
+        <script type="text/javascript">
+            $('.addmember').click(function(){
+                $('#czhy').css('display', 'block');
+            })
+        </script>
         </div>
     </div>
 </div>

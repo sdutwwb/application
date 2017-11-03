@@ -118,7 +118,11 @@
                             <div class="private">
                             <a href="{:url('blog/blog',['uid'=>$data['uid']])}">我的微博</a>
                             <a href="{:url('privatem/privatem')}">私信</a>
+                            {if $ismember == 1}
                             <a href="{:url('blog/advertising')}">添加广告</a>
+                            {else}
+                             <a href="javascript:void(0);" class="addmember">成为会员</a>
+                            {/if}
                           </div>
                             </ul>
                     {/if}

@@ -8,7 +8,7 @@ use app\index\model\Fav as FavModel;
 use app\index\model\Topic as TopicModel;
 use app\index\model\Article as ArticleModel;
 use app\index\model\Attention as AttentionModel;
-use app\index\model\Advertise;
+use app\index\model\Advertise as AdvModel;
 use \think\Validate;
 use \think\Session;
 
@@ -23,7 +23,7 @@ class Blog extends Controller
 		$this->fav 	     = new FavModel();
 		$this->article 	 = new ArticleModel();
 		$this->attention = new AttentionModel();
-		$this->advertise = new Advertise();
+		$this->advertise = new AdvModel();
 	}
 	public function blog()
 	{
@@ -60,9 +60,13 @@ class Blog extends Controller
 			$attentioner  = $this->user->attentioner($attentionList);//得到关注人的具体详情
 			$fansList     = $this->attention->attentioner($uid)['list'];//得到粉丝的id，关注时间list
 			$fansPage     = $this->attention->attentioner($uid)['page'];//得到粉丝的is，关注时间Page
+			$advertise    = $this->advertise->selectSingle($uid);//得到用户的广告
 			$fanser       = $this->user->fanser($fansList);//得到粉丝的具体详情
 			$selectFav    = $this->fav->selectFav($uid)['list'];//用户收藏的微博
 			$selectFavPage= $this->fav->selectFav($uid)['page'];//用户收藏的微博分页
+			//判断是否是会员
+			$ismember     = $this->user->where('uid',$uid)->find();
+			$ismember     = $ismember['member'];
 			//进入别人的微博判断关注与否
 			$isAttention  = $this->attention->where('attuid',$uid)->find();
 			if (!empty($selectFav)) {
@@ -74,6 +78,7 @@ class Blog extends Controller
 				$list[$key]['tname'] = $this->topic->topicname($value['tid']);
 			}
 			$this->assign([
+						'advertise'    =>$advertise,
 						'topic'        =>$topic,
 						'datas'        =>$datas,
 						'private'      =>$private,
@@ -91,6 +96,7 @@ class Blog extends Controller
 						'selectFav'    =>$selectFav,
 						'selectFavPage'=>$selectFavPage,
 						'isAttention'  =>$isAttention,
+						'ismember'     =>$ismember,
 			]);
 		return $this->fetch();
 	}
@@ -165,8 +171,11 @@ class Blog extends Controller
 	public function sendPayOrd()
 	{
 		include 'yeepayCommon.php';
+		$uid = Session::get('uid');
 		$data = $this->request->param();
-		dump($data);die;
+		if(!empty($data)){
+			$this->user->where('uid',$uid)->update(['member'=>1]);
+		}
 		$data = array();
 		#业务类型
 		$data['p0_Cmd']				= "Buy";

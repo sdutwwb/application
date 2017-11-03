@@ -89,27 +89,28 @@
                      </ul>
                     {else}
                     <ul class="commentslist">
-                 {foreach $privatem as $value}
-                    {if $value['pid']==0}
+                {foreach $privatem as $value}
+                        {if $value['pid']==0}
                         <li class="level1">
                             <div class="desc">
                                 <p class="txt">
                                     与{$value['uname']}对话中
                                 </p>
-                     {/if}
                 <form action="{:url('privatem/preply')}" onsubmit="return replys();">
                      <input type="text" name="pmcontent" id="pmcontent" style="width: 280px;height: 20px;border-top: 0px;">
                      {if $value['uid']==$Think.session.uid}
                         <input type="hidden" name="uid" value="{$value['uid']}">
                         <input type="hidden" name="ruid" value="{$value['ruid']}">
-                    {else}
+                     {else}
                         <input type="hidden" name="uid" value="{$value['ruid']}">
                         <input type="hidden" name="ruid" value="{$value['uid']}">
                      {/if}
                      <input type="hidden" name="id" value="{$value['id']}">
                 <button style="cursor: pointer;margin-left: 55px;" id="pinglundj">确认回复</button>
                 </form>
+                            </div>
                         </li>
+                        {/if} 
                             <!-- 私信聊天区 -->
                             {if $value['uid']==$Think.session.uid} 
                             <li class="level2" >
@@ -130,8 +131,10 @@
                                     </p>
                                 </div>      
                             </li>
-                </ul>
-                {/foreach}
+                        {/foreach}
+                    </ul>
+                    <div class="clear"></div>
+                <br /><br />
                 {/if}
             </div>
             </div>
